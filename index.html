@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BODY LOG — 시즌9</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #0c0c0c;
+  --surface: #131313;
+  --surface2: #1c1c1c;
+  --border: #252525;
+  --accent: #d4f54e;
+  --accent2: #4ef5a7;
+  --accent3: #f5a94e;
+  --red: #f54e4e;
+  --text: #efefef;
+  --muted: #888;
+  --dim: #444;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Noto Sans KR',sans-serif; }
+
+/* HEADER */
+header {
+  padding: 36px 48px 28px;
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: flex-end;
+  position: relative; overflow: hidden;
+}
+header::after {
+  content:'';
+  position:absolute; top:-80px; left:-60px;
+  width:400px; height:400px;
+  background:radial-gradient(circle, rgba(212,245,78,.06) 0%, transparent 70%);
+  pointer-events:none;
+}
+.logo { font-family:'Bebas Neue',sans-serif; letter-spacing:5px; }
+.logo-main { font-size:56px; color:var(--accent); line-height:1; }
+.logo-sub { font-size:14px; color:var(--dim); letter-spacing:10px; margin-top:-2px; }
+.header-right { text-align:right; }
+.season-badge {
+  font-family:'Space Mono',monospace; font-size:11px;
+  background:var(--accent); color:var(--bg);
+  padding:4px 12px; border-radius:2px; letter-spacing:2px;
+  display:inline-block; margin-bottom:8px;
+}
+.header-stats { font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); line-height:2; }
+.header-stats span { color:var(--accent); }
+
+/* NAV TABS */
+nav {
+  display:flex; border-bottom:1px solid var(--border);
+  background:var(--surface);
+}
+nav button {
+  font-family:'Space Mono',monospace; font-size:11px; letter-spacing:2px;
+  padding:16px 28px; background:none; border:none; color:var(--muted);
+  cursor:pointer; border-bottom:2px solid transparent;
+  transition: all .2s;
+}
+nav button.active, nav button:hover {
+  color:var(--accent); border-bottom-color:var(--accent);
+}
+
+/* PANELS */
+.panel { display:none; }
+.panel.active { display:block; }
+
+/* GRID */
+.grid {
+  display:grid; grid-template-columns: repeat(3,1fr);
+  gap:1px; background:var(--border);
+}
+.card {
+  background:var(--surface); padding:28px 32px;
+  animation: fadeUp .4s ease both;
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+.card-label {
+  font-family:'Space Mono',monospace; font-size:10px;
+  letter-spacing:3px; color:var(--dim); text-transform:uppercase; margin-bottom:14px;
+}
+.stat-val { font-family:'Bebas Neue',sans-serif; font-size:60px; line-height:1; letter-spacing:2px; }
+.stat-unit { font-family:'Space Mono',monospace; font-size:13px; color:var(--muted); margin-left:4px; }
+.stat-sub { font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); margin-top:6px; }
+.badge {
+  display:inline-block; font-family:'Space Mono',monospace; font-size:10px;
+  padding:3px 10px; border-radius:2px; margin-top:10px; letter-spacing:1px;
+}
+.badge-ok { background:rgba(78,245,167,.12); color:var(--accent2); }
+.badge-warn { background:rgba(245,169,78,.12); color:var(--accent3); }
+.badge-bad { background:rgba(245,78,78,.12); color:var(--red); }
+.span2 { grid-column:span 2; }
+.span3 { grid-column:span 3; }
+
+/* MOTIVATION BANNER */
+.banner {
+  grid-column:1/-1;
+  background:var(--accent); color:var(--bg);
+  padding:22px 32px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.banner-text { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:3px; }
+.banner-sub { font-family:'Space Mono',monospace; font-size:10px; opacity:.6; margin-top:2px; }
+.banner-streak { font-family:'Bebas Neue',sans-serif; font-size:56px; line-height:1; text-align:right; }
+.banner-streak-label { font-family:'Space Mono',monospace; font-size:10px; opacity:.6; text-align:right; letter-spacing:2px; }
+
+/* PROGRESS BAR */
+.prog-row { margin-bottom:16px; }
+.prog-header { display:flex; justify-content:space-between; margin-bottom:6px; font-size:12px; }
+.prog-label { color:var(--text); }
+.prog-val { font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); }
+.prog-track { height:3px; background:var(--border); border-radius:2px; overflow:hidden; }
+.prog-fill { height:100%; border-radius:2px; transition:width 1s cubic-bezier(.16,1,.3,1); }
+
+/* CHART */
+.chart-wrap { height:200px; margin-top:8px; position:relative; }
+
+/* STREAK */
+.streak-grid {
+  display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin-top:8px;
+}
+.streak-day { aspect-ratio:1; border-radius:2px; background:var(--border); }
+.streak-day.done { background:var(--accent); }
+.streak-day.today { background:var(--accent2); box-shadow:0 0 8px rgba(78,245,167,.4); }
+.streak-day.rest { background:var(--surface2); }
+.streak-legend { display:flex; gap:14px; margin-top:12px; font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); }
+.streak-legend span { display:inline-block; width:8px; height:8px; border-radius:1px; margin-right:4px; }
+
+/* MEAL LOG */
+.meal-row {
+  display:flex; align-items:flex-start; gap:14px;
+  padding:12px 0; border-bottom:1px solid var(--border);
+}
+.meal-row:last-child { border-bottom:none; }
+.meal-dot { width:7px; height:7px; border-radius:50%; background:var(--accent); flex-shrink:0; margin-top:4px; }
+.meal-time { font-family:'Space Mono',monospace; font-size:11px; color:var(--accent); min-width:50px; }
+.meal-name { font-size:13px; line-height:1.5; }
+.meal-macro { font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); margin-top:3px; }
+
+/* WORKOUT LOG */
+.ex-row { padding:10px 0; border-bottom:1px solid var(--border); }
+.ex-row:last-child { border-bottom:none; }
+.ex-name { font-size:13px; margin-bottom:6px; }
+.set-chips { display:flex; flex-wrap:wrap; gap:5px; }
+.chip {
+  font-family:'Space Mono',monospace; font-size:10px;
+  padding:3px 8px; border-radius:2px;
+  background:var(--surface2); border:1px solid var(--border); color:var(--muted);
+}
+.chip.main { border-color:var(--accent); color:var(--accent); }
+
+/* RAW LOG */
+.raw-block {
+  background:#0a0a0a; border:1px solid var(--border);
+  border-radius:4px; padding:20px 24px;
+  font-family:'Space Mono',monospace; font-size:11px;
+  color:var(--muted); line-height:1.9; white-space:pre-wrap;
+  margin-top:12px;
+}
+.raw-date {
+  font-family:'Space Mono',monospace; font-size:10px;
+  color:var(--accent); letter-spacing:2px; margin-top:20px; margin-bottom:6px;
+}
+
+/* TABLE */
+table { width:100%; border-collapse:collapse; font-size:12px; }
+th {
+  font-family:'Space Mono',monospace; font-size:10px; letter-spacing:2px;
+  color:var(--muted); border-bottom:1px solid var(--border);
+  padding:8px 12px; text-align:left;
+}
+td { padding:10px 12px; border-bottom:1px solid var(--border); }
+tr:last-child td { border-bottom:none; }
+.ok { color:var(--accent2); } .warn { color:var(--accent3); } .bad { color:var(--red); }
+
+/* FEEDBACK CARD */
+.fb-item { padding:12px 0; border-bottom:1px solid var(--border); font-size:13px; line-height:1.7; }
+.fb-item:last-child { border-bottom:none; }
+.fb-tag {
+  font-family:'Space Mono',monospace; font-size:10px;
+  padding:2px 8px; border-radius:2px; margin-right:8px;
+}
+.fb-diet { background:rgba(78,245,167,.1); color:var(--accent2); }
+.fb-workout { background:rgba(212,245,78,.1); color:var(--accent); }
+.fb-sleep { background:rgba(245,169,78,.1); color:var(--accent3); }
+
+/* TABLET */
+@media(max-width:900px) {
+  .grid { grid-template-columns: 1fr 1fr; }
+  .span3 { grid-column: span 2; }
+  header { padding:24px 28px; }
+}
+
+/* MOBILE */
+@media(max-width:600px) {
+  header { padding:20px 16px; flex-direction:column; align-items:flex-start; gap:10px; }
+  .logo-main { font-size:36px; }
+  .logo-sub { font-size:12px; letter-spacing:6px; }
+  .season-badge { font-size:10px; }
+  .header-stats { font-size:10px; line-height:1.8; }
+  nav { overflow-x:auto; -webkit-overflow-scrolling:touch; white-space:nowrap; }
+  nav button { padding:12px 14px; font-size:10px; flex-shrink:0; }
+  .grid { grid-template-columns:1fr; gap:1px; }
+  .span2,.span3 { grid-column:span 1; }
+  .card { padding:20px 16px; }
+  .banner { padding:16px 20px; }
+  .banner-text { font-size:18px; letter-spacing:2px; }
+  .banner-streak { font-size:40px; }
+  .stat-val { font-size:44px; }
+  .chart-wrap { height:160px; }
+  /* 단백질 카드 모바일 */
+  .protein-nums { flex-direction:column; gap:8px; }
+  .protein-nums .divider { display:none; }
+  /* 레이더+바 모바일 레이아웃 */
+  .radar-wrap { flex-direction:column; align-items:center; }
+  .radar-wrap canvas-box { width:100% !important; height:220px !important; }
+  /* 오늘 식단 모바일 */
+  .meal-time { min-width:40px; font-size:10px; }
+  .meal-name { font-size:12px; }
+  .meal-macro { font-size:10px; }
+  /* 원문 패널 */
+  #diet > div, #workout > div, #analysis > div, #rawlog > div { padding:20px 16px; }
+  table { font-size:11px; }
+  th, td { padding:7px 8px; }
+  .raw-block { font-size:10px; padding:14px 16px; }
+  footer { padding:14px 16px; flex-direction:column; gap:4px; }
+}
+
+/* FOOTER */
+footer {
+  padding:20px 48px;
+  border-top:1px solid var(--border);
+  display:flex; justify-content:space-between;
+  font-family:'Space Mono',monospace; font-size:10px; color:var(--dim);
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">
+      <div class="logo-main">BODY LOG</div>
+      <div class="logo-sub">시즌 9 — 2026.05</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="season-badge">SEASON 9 ACTIVE</div>
+    <div class="header-stats">
+      남성 · 만43세 · 174cm · <span>74kg</span><br>
+      목표 — 리컴포지션<br>
+      체지방 감량 + 근비대<br>
+      마운틴독 스타일
+    </div>
+  </div>
+</header>
+
+<nav>
+  <button class="active" onclick="showPanel('dashboard')">대시보드</button>
+  <button onclick="showPanel('diet')">식단 원문</button>
+  <button onclick="showPanel('workout')">운동 원문</button>
+  <button onclick="showPanel('analysis')">분석</button>
+  <button onclick="showPanel('rawlog')">전체 로그</button>
+</nav>
+
+<!-- ===== DASHBOARD ===== -->
+<div id="dashboard" class="panel active">
+<div class="grid">
+
+  <div class="banner">
+    <div>
+      <div class="banner-text">기록이 몸을 만든다</div>
+      <div class="banner-sub">SEASON 9 — CONSISTENCY IS THE ONLY STRATEGY</div>
+    </div>
+    <div>
+      <div class="banner-streak">6</div>
+      <div class="banner-streak-label">DAY STREAK</div>
+    </div>
+  </div>
+
+  <!-- 오늘 단백질 — 크게 강조 -->
+  <div class="card span2" style="position:relative;overflow:hidden;">
+    <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle, rgba(78,245,167,.07) 0%, transparent 70%);pointer-events:none;"></div>
+    <div class="card-label">오늘 단백질 — 5/8</div>
+    <div class="protein-nums" style="display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap;">
+      <!-- 섭취량 -->
+      <div style="text-align:center;">
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:4px;">섭취</div>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--accent2);letter-spacing:2px;line-height:1;">73</span>
+        <span style="font-family:'Space Mono',monospace;font-size:14px;color:var(--muted);">g</span>
+      </div>
+      <div class="divider" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--dim);">/</div>
+      <!-- 목표량 -->
+      <div style="text-align:center;">
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:4px;">목표</div>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--dim);letter-spacing:2px;line-height:1;">148</span>
+        <span style="font-family:'Space Mono',monospace;font-size:14px;color:var(--muted);">g</span>
+      </div>
+      <div style="margin-left:8px;">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--red);margin-bottom:4px;">▲ 75g 더 필요</div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">49% 달성</div>
+      </div>
+    </div>
+    <!-- 두꺼운 진행바 -->
+    <div style="margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:8px;">
+        <span>0g</span><span style="color:var(--accent2);font-weight:700;">73g (49%)</span><span>148g</span>
+      </div>
+      <div style="height:20px;background:var(--border);border-radius:4px;overflow:hidden;">
+        <div style="width:49%;height:100%;background:linear-gradient(90deg,var(--accent2),#2dd4a0);border-radius:4px;transition:width 1s ease;box-shadow:0 0 12px rgba(78,245,167,.4);"></div>
+      </div>
+    </div>
+    <div class="badge badge-warn">오후 운동 후 WPH + 저녁 단백질 보충 필요</div>
+  </div>
+
+  <!-- 오늘 칼로리 -->
+  <div class="card" style="position:relative;overflow:hidden;">
+    <div style="position:absolute;top:0;right:0;width:150px;height:150px;background:radial-gradient(circle, rgba(245,169,78,.07) 0%, transparent 70%);pointer-events:none;"></div>
+    <div class="card-label">오늘 칼로리 — 5/8</div>
+    <div>
+      <span class="stat-val" style="color:var(--accent3);">975</span>
+      <span class="stat-unit">kcal</span>
+    </div>
+    <div class="stat-sub" style="margin-top:8px;">목표 2,200~2,300 kcal</div>
+    <div style="margin-top:12px;">
+      <div style="height:4px;background:var(--border);border-radius:2px;overflow:hidden;">
+        <div style="width:43%;height:100%;background:var(--accent3);border-radius:2px;"></div>
+      </div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;">43% 달성 · 약 1,300kcal 남음</div>
+    </div>
+    <div class="badge badge-warn" style="margin-top:8px;">저녁 식사 필요</div>
+  </div>
+
+  <!-- 이번 달 스트릭 -->
+  <div class="card">
+    <div class="card-label">5월 운동 스트릭</div>
+    <div class="streak-grid" id="streakGrid"></div>
+    <div class="streak-legend">
+      <div><span style="background:var(--accent)"></span>운동</div>
+      <div><span style="background:var(--accent2)"></span>오늘</div>
+      <div><span style="background:var(--surface2)"></span>휴식</div>
+    </div>
+  </div>
+
+  <!-- 지난 5일 부위별 세트수 — 레이더 -->
+  <div class="card span2">
+    <div class="card-label">지난 5일 누적 부위별 세트수 — 오늘 운동 결정용</div>
+    <div class="radar-wrap" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+      <div style="position:relative;width:260px;height:260px;flex-shrink:0;min-width:200px;">
+        <canvas id="bodyPartChart"></canvas>
+      </div>
+      <div style="flex:1;">
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:16px;letter-spacing:1px;">5일 누적 세트수</div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
+              <span style="color:var(--accent)">● 등</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">28세트</span>
+            </div>
+            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:93%;height:100%;background:var(--accent);border-radius:2px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
+              <span style="color:var(--accent2)">● 어깨</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">26세트</span>
+            </div>
+            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:87%;height:100%;background:var(--accent2);border-radius:2px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
+              <span style="color:var(--accent3)">● 가슴</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">26세트</span>
+            </div>
+            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:87%;height:100%;background:var(--accent3);border-radius:2px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
+              <span style="color:var(--red)">● 하체</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">11세트</span>
+            </div>
+            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:37%;height:100%;background:var(--red);border-radius:2px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
+              <span style="color:#a78bfa">● 팔</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">25세트</span>
+            </div>
+            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:83%;height:100%;background:#a78bfa;border-radius:2px;"></div></div>
+          </div>
+        </div>
+        <div style="margin-top:16px;padding:12px;background:var(--surface2);border-radius:3px;border-left:3px solid var(--red);">
+          <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--red);letter-spacing:1px;margin-bottom:4px;">TODAY 추천</div>
+          <div style="font-size:12px;line-height:1.7;">하체 11세트 — 가장 적음<br>등 28세트 — 5일 경과, 회복 완료<br>→ <strong style="color:var(--accent)">등 메인 + 하체 보조</strong> 추천</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 볼륨 차트 -->
+  <div class="card span2">
+    <div class="card-label">시즌9 운동 볼륨 추이</div>
+    <div class="chart-wrap"><canvas id="volumeChart"></canvas></div>
+  </div>
+
+  <!-- 단백질 추이 -->
+  <div class="card">
+    <div class="card-label">단백질 달성 추이</div>
+    <div class="chart-wrap"><canvas id="proteinChart"></canvas></div>
+  </div>
+
+  <!-- 오늘 식단 -->
+  <div class="card">
+    <div class="card-label">오늘 식단 — 5/8</div>
+    <div class="meal-row">
+      <div class="meal-dot"></div>
+      <div class="meal-time">08:20</div>
+      <div>
+        <div class="meal-name">계란 후라이 2.5개<br>부대찌개 건더기 200g<br>오렌지 반 개</div>
+        <div class="meal-macro">≈365kcal · 단백질 27g · 국물 없음</div>
+      </div>
+    </div>
+    <div class="meal-row">
+      <div class="meal-dot" style="background:var(--accent3)"></div>
+      <div class="meal-time">11:20</div>
+      <div>
+        <div class="meal-name">바나나 1개</div>
+        <div class="meal-macro">≈90kcal · 운동 전 에너지</div>
+      </div>
+    </div>
+    <div class="meal-row">
+      <div class="meal-dot" style="background:var(--accent2)"></div>
+      <div class="meal-time">12:20</div>
+      <div>
+        <div class="meal-name">훈제연어 150g + 계란 후라이 2개<br>공기밥 1/3</div>
+        <div class="meal-macro">≈520kcal · 단백질 45g</div>
+      </div>
+    </div>
+    <div class="meal-row" style="opacity:.4">
+      <div class="meal-dot" style="background:var(--dim)"></div>
+      <div class="meal-time">운동후</div>
+      <div>
+        <div class="meal-name">WPH + 크레아틴 예정</div>
+        <div class="meal-macro">예정</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 피드백 누적 -->
+  <div class="card span2">
+    <div class="card-label">피드백 누적</div>
+    <div class="fb-item"><span class="fb-tag fb-diet">식단</span>5/3 단백질 80g — WPH 없이 초밥으로만 보충, 부족. 운동일 단백질 관리 강화 필요</div>
+    <div class="fb-item"><span class="fb-tag fb-diet">식단</span>5/6 깍두기 과다 — 나트륨 주의. 부대찌개 선택 시 두부/고기 건더기 우선</div>
+    <div class="fb-item"><span class="fb-tag fb-diet">식단</span>포카리 600ml — 풋살 78분 후 전해질 보충 목적 허용. 당류 35g 있으나 운동량 대비 OK</div>
+    <div class="fb-item"><span class="fb-tag fb-workout">운동</span>5/5 역대 최고 볼륨 36세트 ≈10,800kg — 마운틴독 스타일 완성형. 가슴+하체 동시 공략</div>
+    <div class="fb-item"><span class="fb-tag fb-workout">운동</span>집 바벨 25/15kg 두 가지뿐 — 드롭폭 큼. 짐에서 18~20kg 활용 권장</div>
+    <div class="fb-item"><span class="fb-tag fb-workout">운동</span>5/7 16세트 — 풋살 후 피로 감안한 자연 조절. 현명한 판단 ✅</div>
+    <div class="fb-item"><span class="fb-tag fb-sleep">수면</span>취침 시각 기록 누락 다수 — 수면 추적 위해 취침/기상 시각 매일 기록 필요</div>
+  </div>
+
+  <!-- 개선 방향 -->
+  <div class="card">
+    <div class="card-label">개선 방향</div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.6;">
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--accent);flex-shrink:0;">01</span>
+        <span>수면 기록 습관화 — 취침/기상 시각 매일 첫 메시지에 포함</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.6;">
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--accent);flex-shrink:0;">02</span>
+        <span><strong style="color:var(--red)">하체 주 2회 목표</strong> — 레그익스텐션/레그컬 중심 (현재 5일간 11세트만)</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.6;">
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--accent);flex-shrink:0;">03</span>
+        <span>가슴 전담 날 구성 — 현재 다른 부위 보조 수준</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.6;">
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--accent);flex-shrink:0;">04</span>
+        <span><strong style="color:var(--accent2)">단백질 80g 이하 날 없애기</strong> — 운동일엔 WPH + 본식 단백질 확보</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.6;">
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--accent);flex-shrink:0;">05</span>
+        <span>운동하는 날 식단 기록 빠짐없이 — 5/4 공백 있음</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ===== 식단 원문 ===== -->
+<div id="diet" class="panel">
+<div style="padding:32px 48px; max-width:900px;">
+  <h2 style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:3px;color:var(--muted);margin-bottom:24px;">DIET RAW LOG — 원문 그대로</h2>
+
+  <div class="raw-date">▶ 2026-05-03 (일)</div>
+  <div class="raw-block">운동직후에 wph원샷함
+오전11시16분 연어초밥 8피스 간장없이 와사비만
+오후: 서브웨이 로티세리 더블미트 샐러드</div>
+
+  <div class="raw-date">▶ 2026-05-05 (화) — 대전</div>
+  <div class="raw-block">5시40분 딸기 여섯 개랑 포도 세알 정도 먹었다.
+
+06:20 소고기 국밥
+건더기만 젓가락으로
+공기밥은 1/3만 먹었어
+반찬: 검정콩 간장조림 / 미역줄기 식초무침 / 김치
+
+이미 배가 다 꺼졌는데, 배고픔을 느끼고 있지만 이따가 운동가기 전까지는 맹물만 마실거 같아
+
+10:20 딸기 전부 + 오렌지 1/2 (허기 방어)
+11:45 포도 + 포도당 캔디 분할 (운동 중)
+
+운동마치고 쉐이커가 없어서 wph는 못먹었고
+초밥이랑 크레아틴 5g 먹을거야
+
+초밥은
+계란초밥하나
+연어초밥8개
+간장없이 초생강없이
+와사비만.
+
+연어초밥 총9개
+묵은지 흰살생선초밥 하나
+계란초밥하나
+이만큼이 오늘점심 먹은 전체양이야
+
+저녁: 서브웨이 로티세리 샐러드
+로테세리 동일패티 추가, 피클,할라피뇨,올리브 제외
+소스는 올리브오일,식초, 후추
+
+집에 10시30분에 도착해서 WPI 1.5스쿱
+(수정: WPH가 아니고 WPI 였어)</div>
+
+  <div class="raw-date">▶ 2026-05-06 (수)</div>
+  <div class="raw-block">7시 20분 기상. 어제 자기전에 마그네슘 먹고 잤음
+오늘 아침에 기상 직후 냉수 300ml 원샷
+
+지금시각 오전7시50분. 아침식사를 마침.
+공기밥 1/3 계란후라이4개. 이중에 노란자3개. 후추, 핫소스
+두유도 같이 마시고 있는데 밥먹는동안 반절 먹었고 나머지 천천히 마시는중
+딸기 두개 오랜지 1/8개
+
+오후5:40
+순댓국을 시켜서
+고기건더기다먹고
+순대는4개먹고
+공기밥은 1/10 정도 먹음
+국물 안먹었지
+깍두기는 좀 많이 먹었오
+
+밤10-12시동안 풋살을 했고
+실제로 뛰믄시간은13분짜리 쿼터를 6개를 했지
+마치고 wpi하나 바로 원샷
+포카리스웨트 총 600ml (wpi랑 일부 섞음)
+
+집에가서 마그네슘2알 먹고 샤워하고 자는거야</div>
+
+  <div class="raw-date">▶ 2026-05-07 (목)</div>
+  <div class="raw-block">오늘아침에여덟시에기상하고 물삼백밀리리터마셨고
+계란후라이세개 노른자두개 공기밥은사분의일
+소스는 후후랑 타바스코
+딸기 두개 오랜지 1/8개
+8:20식사 종료
+
+오전11시20분에 바나나 먹는중
+
+닭껍질 제외 / 쌀국수면 절반 / 국물 안먹음
+닭고기소스는 핫소스
+오후2시20분에 섭취 (트레이더스 푸드코트 쌀국수+닭 반마리)
+
+오후5시에
+훈제연어130그람 와사비소스만
+부대찌개에서 햄 소시지 콩나물 만 건져 먹었고
+건져먹은 양은 10조각 정도
+공기밥은 안먹음
+
+지금 7:30분이고 물만 마시고 있는상태
+오늘저녁에 wpi 천천히 한잔 채우고
+마그네슘 먹고 취침 아마도 10시면 잘것 같다
+(와인 한컵 마시고 취침)</div>
+
+  <div class="raw-date">▶ 2026-05-08 (금) — 진행중</div>
+  <div class="raw-block">어제밤에 10시반 정도에 일찍 잤고, 와인 한컵 먹고 잤고, 마그네슘 먹고 잤고
+오늘은 8시 20분에 기상해서
+계란 후라이2.5개. 부대찌개 콩나물과 햄 소시지 건더기 약 200g.
+국물은 먹지 않았고. 오랜지 반개 먹었고
+
+11:20 바나나 1개
+
+오후12시20분에 점심을 먹었어
+공기밥 1/3. 훈제 연어 150g. 계란후라이2개
+
+[이후 기록 추가 예정]</div>
+
+</div>
+</div>
+
+<!-- ===== 운동 원문 ===== -->
+<div id="workout" class="panel">
+<div style="padding:32px 48px; max-width:900px;">
+  <h2 style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:3px;color:var(--muted);margin-bottom:24px;">WORKOUT RAW LOG — 원문 그대로</h2>
+
+  <div class="raw-date">▶ 2026-05-03 (일) — 등 | 대전 짐</div>
+  <div class="raw-block">친업
+1세트: 7회 / 2세트: 7회 / 3세트: 7회 / 4세트: 6회
+
+랫풀다운
+1세트: 40kg 10회 / 2세트: 40kg 10회 / 3세트: 40kg 10회
+4세트: 40kg 10회 / 5세트: 50kg 12회
+
+시티드 케이블 로우
+1세트: 32kg 13회 / 2세트: 32kg 13회 / 3세트: 40kg 12회
+4세트: 40kg 12회 / 5세트: 47kg 10회 / 6세트: 47kg 10회
+
+레터럴 와이드 풀다운
+1세트: 10kg 10회 / 2세트: 15kg 10회 / 3세트: 10kg 10회
+4세트: 10kg 10회 / 5세트: 10kg 10회
+
+케이블 암 풀다운
+1세트: 25kg 10회 / 2세트: 25kg 13회 / 3세트: 25kg 10회
+4세트: 25kg 10회 / 5세트: 25kg 10회
+
+펙덱 플라이 머신
+1세트: 30kg 10회 / 2세트: 30kg 13회 / 3세트: 35kg 12회</div>
+
+  <div class="raw-date">▶ 2026-05-04 (월) — 어깨/이두 | 홈</div>
+  <div class="raw-block">덤벨 레터럴 레이즈
+1세트: 5kg 20회 / 2세트: 5kg 21회 / 3세트: 5kg 21회
+4세트: 5kg 21회 / 5세트: 5kg 21회
+
+시티드 덤벨 숄더 프레스
+1세트: 10kg 10회 / 2세트: 10kg 15회 / 3세트: 14kg 12회 / 4세트: 14kg 11회
+
+오버헤드 프레스
+1세트: 25kg 9회 / 2세트: 25kg 8회 / 3세트: 25kg 3회
+4세트: 15kg 15회 / 5세트: 15kg 15회
+
+덤벨 인클라인 리어 레터럴 레이즈
+1세트: 5kg 20회 × 5세트
+
+덤벨 레터럴 레이즈
+1세트: 5kg 20회 / 2세트: 5kg 20회 / 3세트: 5kg 21회
+
+이지바 컬
+1세트: 15kg 19회 / 2세트: 15kg 20회</div>
+
+  <div class="raw-date">▶ 2026-05-05 (화) — 가슴/하체/팔 | 대전 짐 | ★역대 최고 볼륨 36세트</div>
+  <div class="raw-block">펙덱 플라이 머신
+1세트: 25kg 20회 / 2세트: 30kg 20회 / 3세트: 35kg 20회
+4세트: 40kg 14회 / 5세트: 40kg 13회
+
+체스트 프레스 머신
+1세트: 40kg 20회 / 2세트: 45kg 12회 / 3세트: 50kg 10회
+4세트: 40kg 14회 / 5세트: 35kg 12회
+
+스탠딩 케이블 플라이
+1세트: 15kg 10회 / 2세트: 15kg 13회 / 3세트: 15kg 13회 / 4세트: 15kg 13회
+
+케이블 암 풀다운
+1세트: 25kg 21회 / 2세트: 25kg 21회 / 3세트: 25kg 13회
+4세트: 20kg 10회 / 5세트: 20kg 17회
+
+케이블 컬
+1세트: 15kg 20회 / 2세트: 20kg 20회 / 3세트: 25kg 15회
+
+케이블 로프 푸시 다운
+1세트: 20kg 10회 / 2세트: 20kg 15회 / 3세트: 20kg 15회
+
+레그 익스텐션
+1세트: 15kg 40회 / 2세트: 25kg 25회 / 3세트: 30kg 20회
+4세트: 35kg 15회 / 5세트: 35kg 7회 / 6세트: 30kg 10회 / 7세트: 25kg 6회
+
+레그 컬
+1세트: 15kg 20회 / 2세트: 20kg 13회 / 3세트: 15kg 10회 / 4세트: 15kg 10회
+
+포도당 캔디: 운동 시작할때 두개, 중반에 두개
+운동마치고 wph 원샷과 크레아틴5그람</div>
+
+  <div class="raw-date">▶ 2026-05-06 (수) — 후면어깨/이두/삼두 | 홈</div>
+  <div class="raw-block">덤벨 인클라인 리어 레터럴 레이즈
+1세트: 5kg 20회 / 2세트: 5kg 20회 / 3세트: 8kg 20회 / 4세트: 8kg 20회
+5세트: 5kg 20회 / 6세트: 5kg 20회 / 7세트: 5kg 20회 / 8세트: 5kg 20회
+
+덤벨 해머 컬
+1세트: 8kg 20회 / 2세트: 8kg 20회 / 3세트: 10kg 10회
+4세트: 10kg 12회 / 5세트: 10kg 12회 / 6세트: 10kg 12회 / 7세트: 10kg 12회
+
+이지바 컬
+1세트: 25kg 8회 / 2세트: 15kg 12회 / 3세트: 15kg 12회
+
+이지바 업라이트 로우
+1세트: 25kg 8회 / 2세트: 15kg 12회 / 3세트: 15kg 12회
+
+바벨 라잉 트라이셉 익스텐션
+1세트: 25kg 7회 / 2세트: 15kg 12회 / 3세트: 15kg 12회
+
+운동시작할때 포도당 캔디 두개, 중반에 두개
+운동마치고 wph 원샷과 크레아틴5그람
+
+[집 바벨 25kg/15kg 두 가지뿐 — 드롭폭 장비 한계]</div>
+
+  <div class="raw-date">▶ 2026-05-07 (목) — 가슴/이두 | 홈 | 약 40분</div>
+  <div class="raw-block">덤벨 플라이
+1세트: 8kg 12회 / 2세트: 8kg 15회 / 3세트: 8kg 13회 / 4세트: 10kg 12회
+
+덤벨 벤치프레스
+1세트: 10kg 14회 / 2세트: 14kg 14회 / 3세트: 14kg 14회 / 4세트: 14kg 12회
+
+인클라인 덤벨 벤치프레스
+1세트: 14kg 12회 / 2세트: 14kg 12회 / 3세트: 14kg 12회 / 4세트: 10kg 20회
+
+인클라인 덤벨 해머 컬
+1세트: 10kg 10회 / 2세트: 10kg 12회 / 3세트: 10kg 12회 / 4세트: 10kg 12회
+
+마치고wph원샷 이랑 크레아틴 섭취</div>
+
+  <div class="raw-date">▶ 2026-05-08 (금) — 어깨 워밍업 | 홈 | 약 15분</div>
+  <div class="raw-block">시티드 덤벨 레터럴 레이즈
+1세트: 5kg 21회 / 2세트: 5kg 20회 / 3세트: 5kg 21회
+4세트: 5kg 21회 / 5세트: 5kg 21회 / 6세트: 5kg 21회 / 7세트: 5kg 21회
+
+11:30에 함. 메인 운동은 오후에 할건데 지금 짬이나서 했어
+오후 수업 16:00~19:00 예정
+[오후 메인 운동 기록 추가 예정]</div>
+
+</div>
+</div>
+
+<!-- ===== 분석 ===== -->
+<div id="analysis" class="panel">
+<div class="grid">
+
+  <div class="card span3" style="background:var(--surface)">
+    <div class="card-label">단백질 달성 현황</div>
+    <table>
+      <tr><th>날짜</th><th>단백질</th><th>목표 148g</th><th>칼로리</th><th>평가</th></tr>
+      <tr><td>5/3</td><td>≈80g</td><td class="bad">❌ 68g 부족</td><td>≈700</td><td class="bad">부족</td></tr>
+      <tr><td>5/4</td><td>미기록</td><td>?</td><td>미기록</td><td class="warn">미기록</td></tr>
+      <tr><td>5/5</td><td>≈139g</td><td class="warn">🟡 9g 부족</td><td>≈1,800</td><td class="warn">근접</td></tr>
+      <tr><td>5/6</td><td>≈164g</td><td class="ok">✅ 달성</td><td>≈1,870</td><td class="ok">달성</td></tr>
+      <tr><td>5/7</td><td>≈151g</td><td class="ok">✅ 달성</td><td>≈1,315</td><td class="ok">달성</td></tr>
+      <tr><td>5/8</td><td>≈73g</td><td class="warn">진행중</td><td>≈975</td><td class="warn">진행중</td></tr>
+    </table>
+  </div>
+
+  <div class="card span3">
+    <div class="card-label">수면 현황</div>
+    <table>
+      <tr><th>날짜</th><th>취침</th><th>기상</th><th>수면</th><th>평가</th></tr>
+      <tr><td>5/2→3</td><td>01:00</td><td>06:00</td><td>5시간</td><td class="bad">❌ 부족</td></tr>
+      <tr><td>5/5→6</td><td>미기록</td><td>07:20</td><td>?</td><td class="warn">미기록</td></tr>
+      <tr><td>5/6→7</td><td>미기록</td><td>08:00</td><td>?</td><td class="warn">미기록</td></tr>
+      <tr><td>5/7→8</td><td>22:30</td><td>08:20</td><td class="ok">9.5시간</td><td class="ok">✅ 충분</td></tr>
+    </table>
+  </div>
+
+  <div class="card span3">
+    <div class="card-label">피드백 누적</div>
+    <div class="fb-item"><span class="fb-tag fb-diet">식단</span>5/3 단백질 80g — WPH 없이 초밥으로만 보충, 부족. 운동일 단백질 관리 강화 필요</div>
+    <div class="fb-item"><span class="fb-tag fb-diet">식단</span>5/6 깍두기 과다 — 나트륨 주의. 부대찌개 건더기 선택 시 두부/고기 우선 권장</div>
+    <div class="fb-item"><span class="fb-tag fb-diet">식단</span>포카리 600ml — 풋살 78분 후 전해질 보충 목적 허용. 당류 35g 있으나 운동량 대비 OK</div>
+    <div class="fb-item"><span class="fb-tag fb-workout">운동</span>5/5 역대 최고 볼륨 36세트 ≈10,800kg — 마운틴독 스타일 완성형. 가슴+하체 동시 공략</div>
+    <div class="fb-item"><span class="fb-tag fb-workout">운동</span>집 바벨 25/15kg 두 가지뿐 — 드롭폭 큼. 짐에서 18~20kg 활용 권장</div>
+    <div class="fb-item"><span class="fb-tag fb-workout">운동</span>5/7 16세트 — 풋살 후 피로 감안한 자연 조절. 현명한 판단 ✅</div>
+    <div class="fb-item"><span class="fb-tag fb-sleep">수면</span>취침 시각 기록 누락 다수 — 수면 추적을 위해 취침/기상 시각 매일 기록 필요</div>
+  </div>
+
+  <div class="card span3">
+    <div class="card-label">개선 방향</div>
+    <div class="fb-item">① 수면 기록 습관화 — 취침/기상 시각을 매일 첫 메시지에 포함</div>
+    <div class="fb-item">② 하체 주 2회 목표 — 레그익스텐션/레그컬 중심 (관절 보호 유지)</div>
+    <div class="fb-item">③ 가슴 전담 날 구성 — 현재 보조 역할, 별도 세션 필요</div>
+    <div class="fb-item">④ 단백질 80g 이하 날 없애기 — 운동일엔 WPH + 본식 단백질 반드시 확보</div>
+    <div class="fb-item">⑤ 5/4 식단 기록 공백 — 번핏 운동 기록 있을 때 식단도 같이 기록</div>
+  </div>
+
+</div>
+</div>
+
+<!-- ===== 전체 로그 ===== -->
+<div id="rawlog" class="panel">
+<div style="padding:32px 48px; max-width:900px;">
+  <h2 style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:3px;color:var(--muted);margin-bottom:8px;">FULL CONTEXT LOG</h2>
+  <p style="font-family:'Space Mono',monospace;font-size:10px;color:var(--dim);margin-bottom:24px;">새 대화창에서 이 섹션의 내용을 Claude에게 주면 맥락을 이어갈 수 있습니다.</p>
+
+  <div class="raw-block">## 프로필
+이름: 최성훈 | 1983년생 만43세 | 남성 | 174cm | 74kg
+목표: 리컴포지션 (체지방 감량 + 근비대)
+운동 스타일: 마운틴독 (존 메도우즈) — 선피로, 고볼륨, 근육 고립
+직업: 물리학 강사 (서울↔대전 정기 이동)
+
+## 건강 특이사항 [필수]
+오른쪽 무릎: 연골 거의 없음, 20대 이전 연골제거 수술 2회
+관절염 4기 + 류마티스 4기 판정
+스쿼트/레그프레스 완전 불가
+하체 운동: 레그익스텐션, 레그컬, 힙어덕션만 가능
+
+## 집 장비
+덤벨: 5, 8, 10, 14kg
+이지바: 15kg / 25kg (중간 무게 없음)
+바벨: 20kg / 40kg
+벤치: 30/45/60/90도
+
+## 보충제
+WPH: 운동 직후 전용 + 크레아틴 5g 세트 (하루 1회만)
+WPI: 일반 보충 / 취침 전
+크레아틴: 5g/day
+마그네슘: 2알 취침 전
+
+## 식단 원칙
+- 국물류: 붉은 국물 금지, 건더기만
+- 초밥: 간장/초생강 제외, 와사비만
+- 서브웨이: 로티세리 샐러드 + 동일패티 + 피클/올리브 제외 + 소금/식초/후추
+- 야간 탄수화물: 제로
+- 견과류: 매우 제한
+- 소스(마요/데리야끼 등): 금지
+
+## 시즌9 현황 (5/3~)
+Day1 5/3: 등 (대전 짐)
+Day2 5/4: 어깨/이두 (홈)
+Day3 5/5: 가슴/하체/팔 36세트 역대최고 (대전 짐)
+Day4 5/6: 후면어깨/이두/삼두 (홈) + 풋살 78분
+Day5 5/7: 가슴/이두 (홈)
+Day6 5/8: 어깨 워밍업 + 메인 예정 (홈)</div>
+</div>
+</div>
+
+<footer>
+  <div>BODY LOG — 시즌9 | 최성훈</div>
+  <div id="lastUpdated"></div>
+</footer>
+
+<script>
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// 날짜 업데이트
+document.getElementById('lastUpdated').textContent =
+  'UPDATED: ' + new Date().toLocaleDateString('ko-KR', {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+
+// 스트릭 그리드
+const workoutDays = [3,4,5,6,7];
+const today = 8;
+const grid = document.getElementById('streakGrid');
+for (let d=1; d<=31; d++) {
+  const div = document.createElement('div');
+  div.className = 'streak-day';
+  if (d === today) div.className += ' today';
+  else if (workoutDays.includes(d)) div.className += ' done';
+  else if (d < today) div.className += ' rest';
+  grid.appendChild(div);
+}
+
+// 부위별 누적 레이더 차트 (5일 합계)
+const bCtx = document.getElementById('bodyPartChart').getContext('2d');
+new Chart(bCtx, {
+  type: 'radar',
+  data: {
+    labels: ['등', '어깨', '가슴', '하체', '팔'],
+    datasets: [{
+      data: [28, 26, 26, 11, 25],
+      backgroundColor: 'rgba(212,245,78,.15)',
+      borderColor: 'rgba(212,245,78,.8)',
+      borderWidth: 2,
+      pointBackgroundColor: ['#d4f54e','#4ef5a7','#f5a94e','#f54e4e','#a78bfa'],
+      pointBorderColor: 'transparent',
+      pointRadius: 5,
+      pointHoverRadius: 7,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: true,
+    plugins: { legend: { display: false },
+      tooltip: { backgroundColor:'#1c1c1c', titleColor:'#d4f54e', bodyColor:'#888',
+        callbacks: { label: ctx => ` ${ctx.parsed.r}세트` }
+      }
+    },
+    scales: {
+      r: {
+        min: 0, max: 35,
+        grid: { color: 'rgba(255,255,255,.07)' },
+        angleLines: { color: 'rgba(255,255,255,.07)' },
+        pointLabels: { color: '#888', font: { family: 'Space Mono', size: 11 } },
+        ticks: { display: false, stepSize: 10 },
+      }
+    }
+  }
+});
+
+// 볼륨 차트
+const vCtx = document.getElementById('volumeChart').getContext('2d');
+new Chart(vCtx, {
+  type: 'bar',
+  data: {
+    labels: ['5/3 등', '5/4 어깨', '5/5 가슴/하체', '5/6 어깨/팔', '5/7 가슴', '5/8 어깨'],
+    datasets: [{
+      data: [4800, 2800, 10800, 3200, 2400, 735],
+      backgroundColor: ctx => {
+        const v = ctx.parsed.y;
+        if (v > 8000) return 'rgba(212,245,78,.85)';
+        if (v > 3000) return 'rgba(212,245,78,.5)';
+        return 'rgba(212,245,78,.2)';
+      },
+      borderRadius: 2,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display:false },
+      tooltip: { backgroundColor:'#1c1c1c', titleColor:'#d4f54e', bodyColor:'#888',
+        callbacks: { label: ctx => ` ${ctx.parsed.y.toLocaleString()}kg` }
+      }
+    },
+    scales: {
+      x: { grid:{color:'#1c1c1c'}, ticks:{color:'#444',font:{family:'Space Mono',size:10}} },
+      y: { grid:{color:'#1c1c1c'}, ticks:{color:'#444',font:{family:'Space Mono',size:10},
+        callback: v => v.toLocaleString()+'kg'} }
+    }
+  }
+});
+
+// 단백질 차트
+const pCtx = document.getElementById('proteinChart').getContext('2d');
+new Chart(pCtx, {
+  type: 'line',
+  data: {
+    labels: ['5/3', '5/4', '5/5', '5/6', '5/7', '5/8'],
+    datasets: [
+      { label:'단백질', data:[80, null, 139, 164, 151, 73],
+        borderColor:'#4ef5a7', backgroundColor:'rgba(78,245,167,.08)',
+        borderWidth:2, pointBackgroundColor:'#4ef5a7', pointRadius:4,
+        fill:true, tension:.4, spanGaps:true },
+      { label:'목표 148g', data:[148,148,148,148,148,148],
+        borderColor:'rgba(212,245,78,.3)', borderWidth:1,
+        borderDash:[4,4], pointRadius:0, fill:false }
+    ]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false},
+      tooltip:{backgroundColor:'#1c1c1c',titleColor:'#4ef5a7',bodyColor:'#888'}
+    },
+    scales:{
+      x:{grid:{color:'#1c1c1c'},ticks:{color:'#444',font:{family:'Space Mono',size:10}}},
+      y:{grid:{color:'#1c1c1c'},ticks:{color:'#444',font:{family:'Space Mono',size:10}},min:0,max:200}
+    }
+  }
+});
+</script>
+</body>
+</html>
