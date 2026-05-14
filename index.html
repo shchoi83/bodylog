@@ -285,12 +285,12 @@ footer {
   <!-- 오늘 단백질 — 크게 강조 -->
   <div class="card span2" style="position:relative;overflow:hidden;">
     <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle, rgba(78,245,167,.07) 0%, transparent 70%);pointer-events:none;"></div>
-    <div class="card-label">오늘 단백질 — 5/13</div>
+    <div class="card-label">오늘 단백질 — 5/14</div>
     <div class="protein-nums" style="display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap;">
       <!-- 섭취량 -->
       <div style="text-align:center;">
         <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:4px;">섭취</div>
-        <span style="font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--accent2);letter-spacing:2px;line-height:1;">143</span>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--accent2);letter-spacing:2px;line-height:1;">28</span>
         <span style="font-family:'Space Mono',monospace;font-size:14px;color:var(--muted);">g</span>
       </div>
       <div class="divider" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--dim);">/</div>
@@ -301,38 +301,38 @@ footer {
         <span style="font-family:'Space Mono',monospace;font-size:14px;color:var(--muted);">g</span>
       </div>
       <div style="margin-left:8px;">
-        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent2);margin-bottom:4px;">▲ 5g 남음</div>
-        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">97% 달성</div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--red);margin-bottom:4px;">▲ 120g 더 필요</div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">19% 달성</div>
       </div>
     </div>
     <!-- 두꺼운 진행바 -->
     <div style="margin-bottom:10px;">
       <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:8px;">
-        <span>0g</span><span style="color:var(--accent2);font-weight:700;">143g (97%)</span><span>148g</span>
+        <span>0g</span><span style="color:var(--accent2);font-weight:700;">28g (19%)</span><span>148g</span>
       </div>
       <div style="height:20px;background:var(--border);border-radius:4px;overflow:hidden;">
-        <div style="width:97%;height:100%;background:linear-gradient(90deg,var(--accent2),#2dd4a0);border-radius:4px;transition:width 1s ease;box-shadow:0 0 12px rgba(78,245,167,.4);"></div>
+        <div style="width:19%;height:100%;background:linear-gradient(90deg,var(--accent2),#2dd4a0);border-radius:4px;transition:width 1s ease;box-shadow:0 0 12px rgba(78,245,167,.4);"></div>
       </div>
     </div>
-    <div class="badge badge-ok">오늘 97% 달성 ✅</div>
+    <div class="badge badge-warn">이비인후과 후 점심 단백질 챙기기</div>
   </div>
 
   <!-- 오늘 칼로리 -->
   <div class="card" style="position:relative;overflow:hidden;">
     <div style="position:absolute;top:0;right:0;width:150px;height:150px;background:radial-gradient(circle, rgba(245,169,78,.07) 0%, transparent 70%);pointer-events:none;"></div>
-    <div class="card-label">오늘 칼로리 — 5/13</div>
+    <div class="card-label">오늘 칼로리 — 5/14</div>
     <div>
-      <span class="stat-val" style="color:var(--accent3);">1,920</span>
+      <span class="stat-val" style="color:var(--accent3);">310</span>
       <span class="stat-unit">kcal</span>
     </div>
     <div class="stat-sub" style="margin-top:8px;">목표 1,800 kcal (운동일)</div>
     <div style="margin-top:12px;">
       <div style="height:4px;background:var(--border);border-radius:2px;overflow:hidden;">
-        <div style="width:100%;height:100%;background:var(--accent3);border-radius:2px;"></div>
+        <div style="width:17%;height:100%;background:var(--accent3);border-radius:2px;"></div>
       </div>
-      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;">목표 초과 달성 ✅</div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;">17% · 코막힘 컨디션 회복 우선</div>
     </div>
-    <div class="badge badge-ok" style="margin-top:8px;">칼로리 목표 달성</div>
+    <div class="badge badge-warn" style="margin-top:8px;">점심 식사 필요</div>
   </div>
 
   <!-- 이번 달 스트릭 -->
@@ -417,51 +417,35 @@ footer {
     <div class="card-label">체중 추이 (측정값)</div>
     <div class="chart-wrap"><canvas id="weightChart"></canvas></div>
     <div style="margin-top:8px;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">
-      시작 75kg → 현재 <span style="color:var(--accent2);">72.5kg</span>
-      <span style="color:var(--accent);margin-left:8px;">▼ 2.5kg</span>
+      시작 75kg → 현재 <span style="color:var(--accent2);">73.6kg</span>
+      <span style="color:var(--accent);margin-left:8px;">▼ 1.4kg</span>
     </div>
   </div>
 
   <!-- 오늘 식단 -->
   <div class="card">
-    <div class="card-label">오늘 식단 — 5/13 최종</div>
+    <div class="card-label">오늘 식단 — 5/14</div>
     <div class="meal-row">
       <div class="meal-dot"></div>
-      <div class="meal-time">08:30</div>
+      <div class="meal-time">08:20</div>
       <div>
-        <div class="meal-name">계란 후라이 4개 (노른자 전부)</div>
-        <div class="meal-macro">≈330kcal · 28g</div>
+        <div class="meal-name">훈제란 5개 (노른자 2개)<br>딸기 3개 + 오렌지 6조각</div>
+        <div class="meal-macro">≈310kcal · 28g · 크레아틴 ✅</div>
       </div>
     </div>
-    <div class="meal-row">
-      <div class="meal-dot" style="background:var(--accent2)"></div>
-      <div class="meal-time">12:30</div>
+    <div class="meal-row" style="opacity:.4">
+      <div class="meal-dot" style="background:var(--dim)"></div>
+      <div class="meal-time">예정</div>
       <div>
-        <div class="meal-name">제육쌈밥 1.5인분 + 공기밥 1/3<br>쌈야채 다량</div>
-        <div class="meal-macro">≈620kcal · 45g</div>
-      </div>
-    </div>
-    <div class="meal-row">
-      <div class="meal-dot" style="background:var(--accent3)"></div>
-      <div class="meal-time">18:00</div>
-      <div>
-        <div class="meal-name">냉동삼겹살 300g + 공기밥 1/3<br>맥주 1병</div>
-        <div class="meal-macro">≈850kcal · 45g</div>
-      </div>
-    </div>
-    <div class="meal-row">
-      <div class="meal-dot" style="background:var(--accent)"></div>
-      <div class="meal-time">22:10</div>
-      <div>
-        <div class="meal-name">WPH 원샷 (운동 후)</div>
-        <div class="meal-macro">≈120kcal · 25g</div>
+        <div class="meal-name">이비인후과 후 점심 예정</div>
+        <div class="meal-macro">코막힘 — 컨디션 회복 우선</div>
       </div>
     </div>
     <div style="margin-top:12px;padding:10px 12px;background:var(--surface2);border-radius:3px;font-family:'Space Mono',monospace;font-size:10px;">
-      <span style="color:var(--muted);">최종</span>
-      <span style="color:var(--accent2);margin-left:12px;">단백질 143g / 148g ✅</span>
+      <span style="color:var(--muted);">누계</span>
+      <span style="color:var(--accent2);margin-left:12px;">단백질 28g / 148g</span>
       <span style="color:var(--muted);margin-left:12px;">/</span>
-      <span style="color:var(--accent3);margin-left:12px;">칼로리 1,920kcal ✅</span>
+      <span style="color:var(--accent3);margin-left:12px;">310kcal</span>
     </div>
   </div>
 
@@ -601,7 +585,7 @@ footer {
 마그네슘 먹고 취침 아마도 10시면 잘것 같다
 (와인 한컵 마시고 취침)</div>
 
-  <div class="raw-date">▶ 2026-05-08 (금) — 진행중</div>
+  <div class="raw-date">▶ 2026-05-08 (금)</div>
   <div class="raw-block">어제밤에 10시반 정도에 일찍 잤고, 와인 한컵 먹고 잤고, 마그네슘 먹고 잤고
 오늘은 8시 20분에 기상해서
 계란 후라이2.5개. 부대찌개 콩나물과 햄 소시지 건더기 약 200g.
@@ -612,7 +596,112 @@ footer {
 오후12시20분에 점심을 먹었어
 공기밥 1/3. 훈제 연어 150g. 계란후라이2개
 
-[이후 기록 추가 예정]</div>
+오후3시반
+로티세리 샐러드
+
+풋살 22:30~24:00 / 포도당 캔디 4개 / WPI 원샷
+마그네슘 + 01:30 취침</div>
+
+  <div class="raw-date">▶ 2026-05-09 (토)</div>
+  <div class="raw-block">01:30 취침 / 06:20 기상 (수면 4시간 50분)
+06:20 생수 300ml
+07:51 바나나 1개
+
+09:10 로티세리 바비큐 치킨 샌드위치 (위트빵) 2/3 섭취
+동일미트 추가 / 아보카도 추가 / 치즈 제외
+양상추·오이·피클·올리브·할라피뇨 제외
+소스: 올리브오일 + 레드와인식초 + 후추
++ 아메리카노 350ml
+
+12:30 샌드위치 나머지 1/3 섭취
+갈비탕 — 고기 건더기 위주 / 당면 제외 / 공기밥 1/4 / 깍두기 소량
+
+연어초밥 10피스 / 간장없이 와사비만
+5피스 그대로 + 5피스 회만 (밥 제외)
+
+퇴근 후 WPH 원샷
+오늘 운동 없음 (수면 부족 + 수업 9시간)</div>
+
+  <div class="raw-date">▶ 2026-05-10 (일)</div>
+  <div class="raw-block">04:00 취침 / 08:00 기상 (수면 4시간)
+09:00 딸기 10개 + 오렌지 1개
+
+13:00 맥도날드 상하이버거
+감자 → 코울슬로 대체 / 콜라 → 아메리카노 대체
+
+16:00 WPI 1스쿱 천천히
+
+18:30 연어초밥 14피스
+8피스 그대로 + 6피스 회만 / 간장 없음 / 와사비만
+
+퇴근 후 WPI 1잔
+단백질 합계: ≈122g / 수업 13시간 / 운동 없음</div>
+
+  <div class="raw-date">▶ 2026-05-11 (월)</div>
+  <div class="raw-block">충분한 수면 후 14:00 기상 ✅
+
+14:00 육포 + 구운 오징어 50g
+조지아 맥스 캔커피 (121kcal / 카페인 138mg)
+
+15:45 운동 시작 / 포도당 캔디 운동 전·중 섭취
+운동 후 WPH 1스쿱 + 크레아틴 5g
+
+18:00 연어초밥 14피스
+8피스 그대로 + 6피스 회만 / 와사비만
+
+22:00 WPI 1스쿱 원샷
+단백질 합계: ≈112g</div>
+
+  <div class="raw-date">▶ 2026-05-12 (화)</div>
+  <div class="raw-block">13:30 기상
+14:40 바나나 1개
+
+16:40 연어초밥 16피스
+8피스 그대로 + 8피스 회만 / 와사비만 + 계란초밥 1피스
+(이후 설사 발생 — WPH 직후 생연어 다량 소화 부담 추정)
+
+운동 후 WPH + 크레아틴 5g
+
+19:40 찜닭 닭고기 + 계란 흰자 3개 + 당면
+(로티세리/WPI 대신 위장 부담 덜한 메뉴로 대체)
+
+02:30 미아리 우동집 김밥 1줄 + 뜨끈한 국물
+(서울 도착 후 야식 — 배고픔으로 섭취)</div>
+
+  <div class="raw-date">▶ 2026-05-13 (수)</div>
+  <div class="raw-block">02:30 취침 / 08:10 기상 (수면 약 5시간)
+
+08:30 계란 후라이 4개 (노른자 4개 전부)
+08:50 체중: 74.9kg / 서울 집
+
+12:30 제육쌈밥 (제육 1.5인분 / 공기밥 1/3 / 쌈야채 다량)
+
+18:00 냉동삼겹살 300g (수분·기름 많이 빠진 것)
+공기밥 1/3 / 맥주 1병
+
+22:10 운동 후 WPH 원샷
+단백질 합계: 143g / 148g ✅</div>
+
+  <div class="raw-date">▶ 2026-05-14 (목) — 진행중</div>
+  <div class="raw-block">00:40 취침 / 07:50 기상 (7시간 10분 ✅)
+09:10~09:30 성관계 / 09:30~11:50 추가 수면 (2시간 20분)
+총 수면: 약 9시간 30분 ✅
+체중: 73.6kg / 11:53 / 집
+
+08:20 훈제란 5개 (노른자 2개) + 딸기 3개 + 오렌지 6조각
+크레아틴 아침 식후 섭취 ✅
+
+13:30 스모크치킨 반마리 (껍질 제거) + 쌀국수 1/2인분 + 치킨마요 1/3인분
+
+16:30 이비인후과 링거 1시간 (노란색 — 비타민B 계열)
+16:40 처방약 1차 복용 (아침·저녁 식후 / 5일분)
+처방약: 제이알록시스로마이(항생제) / 엘도신캡슐(거담제) / 씨투스정50mg(알레르기) / 솔로젠정(스테로이드) / 레토르정2mg(위산억제)
+
+17:10 닭가슴살 (에어프라이어) + 아메리카노 / 소스 없음
+
+20:20 닭가슴살 (에어프라이어) + 공기밥 1/4 + 후추 + 핫소스
+
+[풋살 22:00~24:00 + WPI 예정]</div>
 
 </div>
 </div>
@@ -736,14 +825,110 @@ footer {
 
 마치고wph원샷 이랑 크레아틴 섭취</div>
 
-  <div class="raw-date">▶ 2026-05-08 (금) — 어깨 워밍업 | 홈 | 약 15분</div>
-  <div class="raw-block">시티드 덤벨 레터럴 레이즈
+  <div class="raw-date">▶ 2026-05-08 (금) — 어깨/삼두 | 홈+대치헬스장</div>
+  <div class="raw-block">[오전 워밍업] 11:30 / 약 15분 / 홈
+시티드 덤벨 레터럴 레이즈
 1세트: 5kg 21회 / 2세트: 5kg 20회 / 3세트: 5kg 21회
 4세트: 5kg 21회 / 5세트: 5kg 21회 / 6세트: 5kg 21회 / 7세트: 5kg 21회
 
-11:30에 함. 메인 운동은 오후에 할건데 지금 짬이나서 했어
-오후 수업 16:00~19:00 예정
-[오후 메인 운동 기록 추가 예정]</div>
+[오후 메인] 약 30분 / 대치헬스장
+리어 델토이드 플라이 머신
+1세트: 20kg 20회 / 2세트: 25kg 20회 / 3세트: 30kg 20회 / 4세트: 35kg 16회
+5세트: 35kg 12회 / 6세트: 30kg 12회 / 7세트: 25kg 15회 / 8세트: 20kg 21회
+
+숄더 프레스 머신
+1세트: 40kg 20회 / 2세트: 45kg 12회 / 3세트: 45kg 7회 / 4세트: 40kg 10회 / 5세트: 35kg 4회
+
+시티드 딥스 머신
+1세트: 60kg 20회 / 2세트: 67.5kg 18회 / 3세트: 67.5kg 18회 / 4세트: 67.5kg 17회 / 5세트: 75kg 10회
+
+시티드 케이블 로우: 1세트 35kg 21회
+
+총 26세트 / WPH + 크레아틴 / 풋살 22:30~24:00</div>
+
+  <div class="raw-date">▶ 2026-05-09 (토) — 어깨/이두/가슴 | 홈 | 23:15 시작 40분</div>
+  <div class="raw-block">덤벨 레터럴 레이즈: 8kg 20회 × 7세트
+
+덤벨 해머 컬
+1세트: 10kg 20회 / 2세트: 10kg 20회 / 3세트: 10kg 20회
+4세트: 10kg 20회 / 5세트: 10kg 14회
+
+푸시업: 15회 / 14회 / 12회 / 12회
+
+총 16세트 / WPH 원샷 (크레아틴 낮에 섭취)</div>
+
+  <div class="raw-date">▶ 2026-05-10 (일) — 휴식</div>
+  <div class="raw-block">수면 4시간 (이틀 연속) + 수업 13시간
+운동 없음</div>
+
+  <div class="raw-date">▶ 2026-05-11 (월) — 어깨/삼두/이두/등 | 대치헬스장 | 50분</div>
+  <div class="raw-block">리어 델토이드 플라이 머신
+1세트: 20kg 20회 / 2세트: 25kg 20회 / 3세트: 30kg 18회 / 4세트: 35kg 12회
+5세트: 30kg 10회 / 6세트: 25kg 8회 / 7세트: 20kg 12회 / 8세트: 15kg 23회
+
+숄더 프레스 머신
+1세트: 35kg 20회 / 2세트: 40kg 20회 / 3세트: 45kg 9회
+4세트: 40kg 10회 / 5세트: 40kg 9회 / 6세트: 35kg 9회
+
+원암 케이블 레터럴 레이즈: 5kg 12회 × 4세트
+
+케이블 로프 푸시 다운
+1세트: 20kg 20회 / 2세트: 25kg 20회 / 3세트: 30kg 9회
+4세트: 20kg 20회 / 5세트: 20kg 20회 / 6세트: 25kg 18회
+
+덤벨 해머 컬: 12kg 10회 × 4세트 (삼두와 슈퍼세트)
+
+케이블 암 풀다운: 25kg 18회 / 20kg 20회 / 20kg 18회
+랫풀다운: 35kg 10회 / 40kg 8회 / 45kg 10회 / 50kg 8회
+시티드 로우 머신: 30kg 15회
+
+총 36세트 / WPH + 크레아틴</div>
+
+  <div class="raw-date">▶ 2026-05-12 (화) — 등/어깨/하체 | 대전헬스장 | 55분 ★신기록</div>
+  <div class="raw-block">친업: 7회 × 4세트
+
+시티드 케이블 로우
+1세트: 32kg 20회 / 2세트: 40kg 20회 / 3세트: 47kg 12회
+4세트: 47kg 6회 / 5세트: 47kg 10회 / 6세트: 55kg 9회 ★
+
+랫풀다운
+1세트: 40kg 10회 / 2세트: 40kg 10회 / 3세트: 40kg 10회
+4세트: 45kg 8회 / 5세트: 50kg 8회 / 6세트: 55kg 8회 ★
+
+시티드 로우 머신: 35kg 10회 × 2세트
+
+리어 델토이드 플라이 머신
+1세트: 25kg 15회 / 2세트: 25kg 10회 / 3세트: 20kg 11회
+4세트: 20kg 11회 / 5세트: 15kg 14회
+
+숄더 프레스 머신
+1세트: 35kg 20회 / 2세트: 40kg 10회 / 3세트: 40kg 10회 / 4세트: 30kg 12회
+
+이지바 컬: 15kg 15회
+바벨 라잉 트라이셉 익스텐션: 15kg 15회
+
+레그 익스텐션
+1세트: 15kg 20회 / 2세트: 20kg 15회 / 3세트: 25kg 12회
+4세트: 25kg 12회 / 5세트: 30kg 12회 / 6세트: 35kg 12회
+
+총 35세트 / WPH + 크레아틴 / 랫풀다운·케이블로우 55kg 시즌 최고 중량</div>
+
+  <div class="raw-date">▶ 2026-05-13 (수) — 어깨 | 홈 | 22:10 시작 23분</div>
+  <div class="raw-block">덤벨 레터럴 레이즈
+1세트: 5kg 22회 / 2세트: 5kg 22회 / 3세트: 5kg 22회 / 4세트: 5kg 20회
+5세트: 5kg 22회 / 6세트: 8kg 14회 / 7세트: 8kg 20회 / 8세트: 8kg 20회
+9세트: 5kg 22회 / 10세트: 5kg 20회
+
+시티드 덤벨 숄더 프레스: 10kg 15회
+
+총 11세트 / WPH 원샷 / 풋살 취소</div>
+
+  <div class="raw-date">▶ 2026-05-14 (목) — Day 12 | 코막힘 / 이비인후과</div>
+  <div class="raw-block">00:40 취침 / 07:50 기상 (7시간 10분 ✅) + 09:30~11:50 추가수면
+체중: 73.6kg / 11:53 / 집
+크레아틴 아침 식후 ✅
+이비인후과 링거 + 처방약 5일분 (스테로이드 포함 — 운동 강도 조절 필요)
+풋살 22:00~24:00 예정 / [운동 기록 추가 예정]</div>
 
 </div>
 </div>
@@ -756,12 +941,18 @@ footer {
     <div class="card-label">단백질 달성 현황</div>
     <table>
       <tr><th>날짜</th><th>단백질</th><th>목표 148g</th><th>칼로리</th><th>평가</th></tr>
-      <tr><td>5/3</td><td>≈80g</td><td class="bad">❌ 68g 부족</td><td>≈700</td><td class="bad">부족</td></tr>
+      <tr><td>5/3</td><td>≈80g</td><td class="bad">❌ 부족</td><td>≈700</td><td class="bad">부족</td></tr>
       <tr><td>5/4</td><td>미기록</td><td>?</td><td>미기록</td><td class="warn">미기록</td></tr>
-      <tr><td>5/5</td><td>≈139g</td><td class="warn">🟡 9g 부족</td><td>≈1,800</td><td class="warn">근접</td></tr>
-      <tr><td>5/6</td><td>≈164g</td><td class="ok">✅ 달성</td><td>≈1,870</td><td class="ok">달성</td></tr>
+      <tr><td>5/5</td><td>≈139g</td><td class="warn">🟡 근접</td><td>≈1,800</td><td class="warn">근접</td></tr>
+      <tr><td>5/6</td><td>≈164g</td><td class="ok">✅ 초과</td><td>≈1,870</td><td class="ok">달성</td></tr>
       <tr><td>5/7</td><td>≈151g</td><td class="ok">✅ 달성</td><td>≈1,315</td><td class="ok">달성</td></tr>
-      <tr><td>5/8</td><td>≈73g</td><td class="warn">진행중</td><td>≈975</td><td class="warn">진행중</td></tr>
+      <tr><td>5/8</td><td>≈171g</td><td class="ok">✅ 초과</td><td>≈1,600</td><td class="ok">달성</td></tr>
+      <tr><td>5/9</td><td>≈132g</td><td class="warn">🟡 근접</td><td>≈1,480</td><td class="warn">근접</td></tr>
+      <tr><td>5/10</td><td>≈122g</td><td class="warn">🟡 부족</td><td>≈1,310</td><td class="warn">휴식일</td></tr>
+      <tr><td>5/11</td><td>≈112g</td><td class="warn">🟡 부족</td><td>≈1,400</td><td class="warn">부족</td></tr>
+      <tr><td>5/12</td><td>≈125g</td><td class="warn">🟡 부족</td><td>≈1,500</td><td class="warn">설사 변수</td></tr>
+      <tr><td>5/13</td><td>143g</td><td class="ok">✅ 97%</td><td>≈1,920</td><td class="ok">달성</td></tr>
+      <tr><td>5/14</td><td>128g+예정</td><td class="warn">진행중</td><td>≈1,350</td><td class="warn">풋살 후 WPI 예정</td></tr>
     </table>
   </div>
 
@@ -770,9 +961,12 @@ footer {
     <table>
       <tr><th>날짜</th><th>취침</th><th>기상</th><th>수면</th><th>평가</th></tr>
       <tr><td>5/2→3</td><td>01:00</td><td>06:00</td><td>5시간</td><td class="bad">❌ 부족</td></tr>
-      <tr><td>5/5→6</td><td>미기록</td><td>07:20</td><td>?</td><td class="warn">미기록</td></tr>
-      <tr><td>5/6→7</td><td>미기록</td><td>08:00</td><td>?</td><td class="warn">미기록</td></tr>
       <tr><td>5/7→8</td><td>22:30</td><td>08:20</td><td class="ok">9.5시간</td><td class="ok">✅ 충분</td></tr>
+      <tr><td>5/8→9</td><td>01:30</td><td>06:20</td><td>4시간 50분</td><td class="bad">❌ 부족</td></tr>
+      <tr><td>5/9→10</td><td>미기록</td><td>08:00</td><td>?</td><td class="warn">미기록</td></tr>
+      <tr><td>5/10→11</td><td>미기록</td><td>14:00</td><td>충분</td><td class="ok">✅ 충분</td></tr>
+      <tr><td>5/12→13</td><td>02:30</td><td>08:10</td><td>5시간 40분</td><td class="bad">❌ 부족</td></tr>
+      <tr><td>5/13→14</td><td>00:40</td><td>07:50</td><td class="ok">7시간 10분 + 낮잠 2.5h</td><td class="ok">✅ 충분</td></tr>
     </table>
   </div>
 
@@ -866,7 +1060,7 @@ document.getElementById('lastUpdated').textContent =
 
 // 스트릭 그리드
 const workoutDays = [3,4,5,6,7,8,9,11,12,13];
-const today = 13;
+const today = 14;
 const grid = document.getElementById('streakGrid');
 for (let d=1; d<=31; d++) {
   const div = document.createElement('div');
@@ -918,9 +1112,9 @@ const vCtx = document.getElementById('volumeChart').getContext('2d');
 new Chart(vCtx, {
   type: 'bar',
   data: {
-    labels: ['5/3 등', '5/4 어깨', '5/5 가슴/하체', '5/6 어깨/팔', '5/7 가슴', '5/8 어깨/삼두', '5/9 어깨/팔', '5/10 휴식', '5/11 어깨/등', '5/12 등/하체', '5/13 어깨'],
+    labels: ['5/3 등', '5/4 어깨', '5/5 가슴/하체', '5/6 어깨/팔', '5/7 가슴', '5/8 어깨/삼두', '5/9 어깨/팔', '5/10 휴식', '5/11 어깨/등', '5/12 등/하체', '5/13 어깨', '5/14'],
     datasets: [{
-      data: [4800, 2800, 10800, 3200, 2400, 4200, 1800, 0, 5200, 4800, 700],
+      data: [4800, 2800, 10800, 3200, 2400, 4200, 1800, 0, 5200, 4800, 700, 0],
       backgroundColor: ctx => {
         const v = ctx.parsed.y;
         if (v > 8000) return 'rgba(212,245,78,.85)';
@@ -950,14 +1144,14 @@ const wCtx = document.getElementById('weightChart').getContext('2d');
 new Chart(wCtx, {
   type: 'line',
   data: {
-    labels: ['5/8 20:00\n헬스장', '5/8 귀가\n집', '5/9 23:25\n집', '5/12 15:00\n대전헬스장'],
+    labels: ['5/8 20:00\n헬스장', '5/8 귀가\n집', '5/9 23:25\n집', '5/12 15:00\n대전헬스장', '5/13 23:21\n삼일사우나', '5/14 11:53\n집'],
     datasets: [{
       label: '체중 (kg)',
-      data: [73.25, 73.6, 73.6, 72.5],
+      data: [73.25, 73.6, 73.6, 72.5, 74.55, 73.6],
       borderColor: '#4ef5a7',
       backgroundColor: 'rgba(78,245,167,.08)',
       borderWidth: 2,
-      pointBackgroundColor: ['#4ef5a7','#4ef5a7','#4ef5a7','#d4f54e'],
+      pointBackgroundColor: ['#4ef5a7','#4ef5a7','#4ef5a7','#4ef5a7','#4ef5a7','#d4f54e'],
       pointRadius: 6,
       pointHoverRadius: 8,
       fill: true,
@@ -986,9 +1180,9 @@ new Chart(wCtx, {
 new Chart(pCtx, {
   type: 'line',
   data: {
-    labels: ['5/3', '5/4', '5/5', '5/6', '5/7', '5/8', '5/9', '5/10', '5/11', '5/12', '5/13'],
+    labels: ['5/3', '5/4', '5/5', '5/6', '5/7', '5/8', '5/9', '5/10', '5/11', '5/12', '5/13', '5/14'],
     datasets: [
-      { label:'단백질', data:[80, null, 139, 164, 151, 171, 132, 122, 112, 125, 143],
+      { label:'단백질', data:[80, null, 139, 164, 151, 171, 132, 122, 112, 125, 143, 28],
         borderColor:'#4ef5a7', backgroundColor:'rgba(78,245,167,.08)',
         borderWidth:2, pointBackgroundColor:'#4ef5a7', pointRadius:4,
         fill:true, tension:.4, spanGaps:true },
