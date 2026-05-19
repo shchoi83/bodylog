@@ -1210,6 +1210,9 @@ new Chart(wCtx, {
     }
   }
 });
+
+// 단백질 달성 추이 차트
+const pCtx = document.getElementById('proteinChart').getContext('2d');
 new Chart(pCtx, {
   type: 'line',
   data: {
@@ -1219,7 +1222,7 @@ new Chart(pCtx, {
         borderColor:'#4ef5a7', backgroundColor:'rgba(78,245,167,.08)',
         borderWidth:2, pointBackgroundColor:'#4ef5a7', pointRadius:4,
         fill:true, tension:.4, spanGaps:true },
-      { label:'목표 148g', data:[148,148,148,148,148,148],
+      { label:'목표 148g', data:[148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148],
         borderColor:'rgba(212,245,78,.3)', borderWidth:1,
         borderDash:[4,4], pointRadius:0, fill:false }
     ]
