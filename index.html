@@ -290,7 +290,7 @@ footer {
       <!-- 섭취량 -->
       <div style="text-align:center;">
         <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:4px;">섭취</div>
-        <span style="font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--accent2);letter-spacing:2px;line-height:1;">38</span>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--accent2);letter-spacing:2px;line-height:1;">142</span>
         <span style="font-family:'Space Mono',monospace;font-size:14px;color:var(--muted);">g</span>
       </div>
       <div class="divider" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--dim);">/</div>
@@ -301,20 +301,20 @@ footer {
         <span style="font-family:'Space Mono',monospace;font-size:14px;color:var(--muted);">g</span>
       </div>
       <div style="margin-left:8px;">
-        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--red);margin-bottom:4px;">▲ 110g 더 필요</div>
-        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">26% 달성</div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent3);margin-bottom:4px;">▲ 6g 남음</div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">96% 달성</div>
       </div>
     </div>
     <!-- 두꺼운 진행바 -->
     <div style="margin-bottom:10px;">
       <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:8px;">
-        <span>0g</span><span style="color:var(--accent2);font-weight:700;">38g (26%)</span><span>148g</span>
+        <span>0g</span><span style="color:var(--accent2);font-weight:700;">142g (96%)</span><span>148g</span>
       </div>
       <div style="height:20px;background:var(--border);border-radius:4px;overflow:hidden;">
-        <div style="width:26%;height:100%;background:linear-gradient(90deg,var(--accent2),#2dd4a0);border-radius:4px;transition:width 1s ease;box-shadow:0 0 12px rgba(78,245,167,.4);"></div>
+        <div style="width:96%;height:100%;background:linear-gradient(90deg,var(--accent2),#2dd4a0);border-radius:4px;transition:width 1s ease;box-shadow:0 0 12px rgba(78,245,167,.4);"></div>
       </div>
     </div>
-    <div class="badge badge-warn">점심부터 단백질 집중 필요</div>
+    <div class="badge badge-ok">오늘 96% 달성 ✅</div>
   </div>
 
   <!-- 오늘 칼로리 -->
@@ -322,17 +322,17 @@ footer {
     <div style="position:absolute;top:0;right:0;width:150px;height:150px;background:radial-gradient(circle, rgba(245,169,78,.07) 0%, transparent 70%);pointer-events:none;"></div>
     <div class="card-label">오늘 칼로리 — 5/21</div>
     <div>
-      <span class="stat-val" style="color:var(--accent3);">520</span>
+      <span class="stat-val" style="color:var(--accent3);">1,560</span>
       <span class="stat-unit">kcal</span>
     </div>
     <div class="stat-sub" style="margin-top:8px;">목표 1,800 kcal (운동일)</div>
     <div style="margin-top:12px;">
       <div style="height:4px;background:var(--border);border-radius:2px;overflow:hidden;">
-        <div style="width:29%;height:100%;background:var(--accent3);border-radius:2px;"></div>
+        <div style="width:87%;height:100%;background:var(--accent3);border-radius:2px;"></div>
       </div>
-      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;">29% · 점심 식사 필요</div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;">87% · 목표 근접</div>
     </div>
-    <div class="badge badge-warn" style="margin-top:8px;">점심 식사 필요</div>
+    <div class="badge badge-ok" style="margin-top:8px;">칼로리 목표 근접 ✅</div>
   </div>
 
   <!-- 이번 달 스트릭 -->
@@ -349,62 +349,97 @@ footer {
   <!-- 수면 정보 -->
   <div class="card span2">
     <div class="card-label">수면 정보 — 5/20→21 (애플 건강 앱)</div>
-    <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
-      <!-- 총 수면 -->
-      <div style="text-align:center;min-width:120px;">
-        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:6px;">총 수면</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:var(--accent3);line-height:1;">6<span style="font-size:28px;">h</span> 8<span style="font-size:28px;">m</span></div>
-        <div class="badge badge-warn" style="margin-top:6px;">목표 7~9h</div>
-      </div>
-      <!-- 수면 단계 바 -->
-      <div style="flex:1;min-width:180px;">
-        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:12px;">수면 단계</div>
-        <div class="prog-row">
-          <div class="prog-header">
-            <span class="prog-label" style="color:#6366f1;">● 깊은 수면</span>
-            <span class="prog-val">40분</span>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+
+      <!-- 왼쪽: 지난밤 상세 -->
+      <div style="border-right:1px solid var(--border);padding-right:24px;">
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:14px;letter-spacing:1px;">지난밤 상세</div>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+          <div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--accent3);line-height:1;">6<span style="font-size:24px;">h</span> 8<span style="font-size:24px;">m</span></div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px;">취침 ~23:30 → 기상 07:37</div>
           </div>
-          <div class="prog-track"><div class="prog-fill" style="width:11%;background:#6366f1;"></div></div>
+          <div class="badge badge-warn" style="align-self:flex-start;margin-top:8px;">목표 7~9h</div>
         </div>
-        <div class="prog-row">
-          <div class="prog-header">
-            <span class="prog-label" style="color:#3b82f6;">● 코어 수면</span>
-            <span class="prog-val">3시간 59분</span>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px;">
+              <span style="color:#6366f1;">● 깊은 수면</span><span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text);">40분</span>
+            </div>
+            <div style="height:4px;background:var(--border);border-radius:2px;"><div style="width:11%;height:100%;background:#6366f1;border-radius:2px;"></div></div>
           </div>
-          <div class="prog-track"><div class="prog-fill" style="width:65%;background:#3b82f6;"></div></div>
-        </div>
-        <div class="prog-row">
-          <div class="prog-header">
-            <span class="prog-label" style="color:#67e8f9;">● REM 수면</span>
-            <span class="prog-val">1시간 29분</span>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px;">
+              <span style="color:#3b82f6;">● 코어 수면</span><span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text);">3시간 59분</span>
+            </div>
+            <div style="height:4px;background:var(--border);border-radius:2px;"><div style="width:65%;height:100%;background:#3b82f6;border-radius:2px;"></div></div>
           </div>
-          <div class="prog-track"><div class="prog-fill" style="width:24%;background:#67e8f9;"></div></div>
-        </div>
-        <div class="prog-row" style="margin-bottom:0;">
-          <div class="prog-header">
-            <span class="prog-label" style="color:var(--dim);">● 비수면</span>
-            <span class="prog-val">12분</span>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px;">
+              <span style="color:#67e8f9;">● REM 수면</span><span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text);">1시간 29분</span>
+            </div>
+            <div style="height:4px;background:var(--border);border-radius:2px;"><div style="width:24%;height:100%;background:#67e8f9;border-radius:2px;"></div></div>
           </div>
-          <div class="prog-track"><div class="prog-fill" style="width:3%;background:var(--dim);"></div></div>
-        </div>
-        <div style="margin-top:12px;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">
-          취침 ~23:30 → 기상 07:37
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px;">
+              <span style="color:var(--dim);">● 비수면</span><span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text);">12분</span>
+            </div>
+            <div style="height:4px;background:var(--border);border-radius:2px;"><div style="width:3%;height:100%;background:var(--dim);border-radius:2px;"></div></div>
+          </div>
         </div>
       </div>
-      <!-- 최근 수면 추이 -->
-      <div style="min-width:130px;">
-        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:8px;">최근 수면</div>
-        <div style="display:flex;flex-direction:column;gap:6px;font-family:'Space Mono',monospace;font-size:10px;">
-          <div style="display:flex;justify-content:space-between;gap:12px;"><span style="color:var(--muted);">5/18→19</span><span style="color:var(--accent2);">충분 ✅</span></div>
-          <div style="display:flex;justify-content:space-between;gap:12px;"><span style="color:var(--muted);">5/19→20</span><span style="color:var(--red);">5h 7m ❌</span></div>
-          <div style="display:flex;justify-content:space-between;gap:12px;"><span style="color:var(--muted);">5/20→21</span><span style="color:var(--accent3);">6h 8m 🟡</span></div>
+
+      <!-- 오른쪽: 최근 7일 요약 및 평가 -->
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:14px;letter-spacing:1px;">최근 7일 요약</div>
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:11px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;background:var(--surface2);border-radius:3px;">
+            <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">5/15→16</span>
+            <span style="font-family:'Space Mono',monospace;font-size:10px;">5h 0m</span>
+            <span style="color:var(--red);font-size:12px;">❌</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;background:var(--surface2);border-radius:3px;">
+            <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">5/16→17</span>
+            <span style="font-family:'Space Mono',monospace;font-size:10px;">2h 0m</span>
+            <span style="color:var(--red);font-size:12px;">❌❌</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;background:var(--surface2);border-radius:3px;">
+            <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">5/17→18</span>
+            <span style="font-family:'Space Mono',monospace;font-size:10px;">10h 10m</span>
+            <span style="color:var(--accent2);font-size:12px;">✅</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;background:var(--surface2);border-radius:3px;">
+            <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">5/18→19</span>
+            <span style="font-family:'Space Mono',monospace;font-size:10px;">충분</span>
+            <span style="color:var(--accent2);font-size:12px;">✅</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;background:var(--surface2);border-radius:3px;">
+            <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">5/19→20</span>
+            <span style="font-family:'Space Mono',monospace;font-size:10px;">5h 7m</span>
+            <span style="color:var(--red);font-size:12px;">❌</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;background:var(--surface2);border-radius:3px;border:1px solid var(--accent3);">
+            <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent3);">5/20→21</span>
+            <span style="font-family:'Space Mono',monospace;font-size:10px;">6h 8m</span>
+            <span style="color:var(--accent3);font-size:12px;">🟡</span>
+          </div>
         </div>
-        <div style="margin-top:10px;padding:8px;background:var(--surface2);border-radius:3px;font-size:11px;border-left:3px solid var(--accent3);">
-          이번달 7h+ 달성<br>
-          <span style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--accent3);">3</span>
-          <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">/ 21일</span>
+        <div style="margin-top:12px;display:flex;gap:8px;">
+          <div style="flex:1;padding:8px;background:var(--surface2);border-radius:3px;text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">7일 평균</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--accent3);">6.1h</div>
+          </div>
+          <div style="flex:1;padding:8px;background:var(--surface2);border-radius:3px;text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">7h+ 달성</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--accent2);">2<span style="font-size:14px;color:var(--muted);">/7</span></div>
+          </div>
+          <div style="flex:1;padding:8px;background:var(--surface2);border-radius:3px;text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">이번달</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--accent3);">3<span style="font-size:14px;color:var(--muted);">/21</span></div>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 
@@ -441,9 +476,9 @@ footer {
           <div>
             <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
               <span style="color:var(--accent3)">● 가슴</span>
-              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">0세트</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">15세트</span>
             </div>
-            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:0%;height:100%;background:var(--accent3);border-radius:2px;"></div></div>
+            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:65%;height:100%;background:var(--accent3);border-radius:2px;"></div></div>
           </div>
           <div>
             <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
@@ -455,14 +490,14 @@ footer {
           <div>
             <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
               <span style="color:#a78bfa">● 팔</span>
-              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">8세트</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">18세트</span>
             </div>
-            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:35%;height:100%;background:#a78bfa;border-radius:2px;"></div></div>
+            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:78%;height:100%;background:#a78bfa;border-radius:2px;"></div></div>
           </div>
         </div>
-        <div style="margin-top:16px;padding:12px;background:var(--surface2);border-radius:3px;border-left:3px solid var(--accent3);">
-          <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent3);letter-spacing:1px;margin-bottom:4px;">TODAY 추천</div>
-          <div style="font-size:12px;line-height:1.7;">가슴 0세트 / 하체 0세트 — 5일간 완전 공백<br>부비동염 회복 중 — 강도 조절 필요<br>→ <strong style="color:var(--accent3)">가슴 or 하체 메인</strong> 추천</div>
+        <div style="margin-top:16px;padding:12px;background:var(--surface2);border-radius:3px;border-left:3px solid var(--red);">
+          <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--red);letter-spacing:1px;margin-bottom:4px;">TODAY 추천</div>
+          <div style="font-size:12px;line-height:1.7;">하체 0세트 — 5일간 완전 공백<br>등 4세트 — 부족<br>→ <strong style="color:var(--red)">하체 메인 + 등 보조</strong> 추천</div>
         </div>
       </div>
     </div>
@@ -486,28 +521,52 @@ footer {
 
   <!-- 오늘 식단 -->
   <div class="card">
-    <div class="card-label">오늘 식단 — 5/21</div>
+    <div class="card-label">오늘 식단 — 5/21 최종</div>
     <div class="meal-row">
       <div class="meal-dot"></div>
       <div class="meal-time">08:00</div>
       <div>
-        <div class="meal-name">공기밥 1/2 + 떡갈비 1개<br>닭가슴살 에어프라이어 + 만다린 + 조미김</div>
-        <div class="meal-macro">≈520kcal · 38g · 핫소스</div>
+        <div class="meal-name">공기밥 1/2 + 떡갈비 + 닭가슴살<br>만다린 + 조미김 / 핫소스</div>
+        <div class="meal-macro">≈520kcal · 38g</div>
       </div>
     </div>
-    <div class="meal-row" style="opacity:.4">
-      <div class="meal-dot" style="background:var(--dim)"></div>
-      <div class="meal-time">예정</div>
+    <div class="meal-row">
+      <div class="meal-dot" style="background:var(--accent3)"></div>
+      <div class="meal-time">11:40</div>
       <div>
-        <div class="meal-name">점심 예정</div>
-        <div class="meal-macro">단백질 집중 필요</div>
+        <div class="meal-name">구운계란 2개 (노른자 1개)</div>
+        <div class="meal-macro">≈120kcal · 12g</div>
+      </div>
+    </div>
+    <div class="meal-row">
+      <div class="meal-dot" style="background:var(--accent2)"></div>
+      <div class="meal-time">12:30</div>
+      <div>
+        <div class="meal-name">WPI 천천히</div>
+        <div class="meal-macro">≈120kcal · 25g</div>
+      </div>
+    </div>
+    <div class="meal-row">
+      <div class="meal-dot" style="background:var(--accent)"></div>
+      <div class="meal-time">13:00</div>
+      <div>
+        <div class="meal-name">제육쌈밥 1.3인분<br>공기밥 1/2 + 쌈야채 다량</div>
+        <div class="meal-macro">≈680kcal · 42g</div>
+      </div>
+    </div>
+    <div class="meal-row">
+      <div class="meal-dot" style="background:var(--accent2)"></div>
+      <div class="meal-time">16:32</div>
+      <div>
+        <div class="meal-name">WPH + 크레아틴 ✅</div>
+        <div class="meal-macro">≈120kcal · 25g</div>
       </div>
     </div>
     <div style="margin-top:12px;padding:10px 12px;background:var(--surface2);border-radius:3px;font-family:'Space Mono',monospace;font-size:10px;">
-      <span style="color:var(--muted);">누계</span>
-      <span style="color:var(--accent2);margin-left:12px;">38g / 148g</span>
+      <span style="color:var(--muted);">최종</span>
+      <span style="color:var(--accent2);margin-left:12px;">142g / 148g ✅</span>
       <span style="color:var(--muted);margin-left:12px;">/</span>
-      <span style="color:var(--accent3);margin-left:12px;">520kcal</span>
+      <span style="color:var(--accent3);margin-left:12px;">1,560kcal ✅</span>
     </div>
   </div>
 
@@ -1121,7 +1180,7 @@ document.getElementById('lastUpdated').textContent =
   'UPDATED: ' + new Date().toLocaleDateString('ko-KR', {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
 
 // 스트릭 그리드
-const workoutDays = [3,4,5,6,7,8,9,11,12,13,14,15,17,19,20];
+const workoutDays = [3,4,5,6,7,8,9,11,12,13,14,15,17,19,20,21];
 const today = 21;
 const grid = document.getElementById('streakGrid');
 for (let d=1; d<=31; d++) {
@@ -1140,7 +1199,7 @@ new Chart(bCtx, {
   data: {
     labels: ['등', '어깨', '가슴', '하체', '팔'],
     datasets: [{
-      data: [4, 23, 0, 0, 8],
+      data: [4, 23, 15, 0, 18],
       backgroundColor: 'rgba(212,245,78,.15)',
       borderColor: 'rgba(212,245,78,.8)',
       borderWidth: 2,
@@ -1176,7 +1235,7 @@ new Chart(vCtx, {
   data: {
     labels: ['5/3', '5/4', '5/5', '5/6', '5/7', '5/8', '5/9', '5/10', '5/11', '5/12', '5/13', '5/14', '5/15', '5/16', '5/17', '5/18', '5/19', '5/20', '5/21'],
     datasets: [{
-      data: [4800, 2800, 10800, 3200, 2400, 4200, 1800, 0, 5200, 4800, 700, 0, 3200, 0, 0, 0, 2400, 2600, 0],
+      data: [4800, 2800, 10800, 3200, 2400, 4200, 1800, 0, 5200, 4800, 700, 0, 3200, 0, 0, 0, 2400, 2600, 3800],
       backgroundColor: ctx => {
         const v = ctx.parsed.y;
         if (v > 8000) return 'rgba(212,245,78,.85)';
@@ -1234,7 +1293,7 @@ new Chart(wCtx, {
       y: {
         grid: {color:'#1c1c1c'},
         ticks: {color:'#555', font:{family:'Space Mono',size:10}, callback: v => v+'kg'},
-        min: 72, max: 76
+        min: 71.1, max: 75.6
       }
     }
   }
@@ -1247,7 +1306,7 @@ new Chart(pCtx, {
   data: {
     labels: ['5/3', '5/4', '5/5', '5/6', '5/7', '5/8', '5/9', '5/10', '5/11', '5/12', '5/13', '5/14', '5/15', '5/16', '5/17', '5/18', '5/19', '5/20', '5/21'],
     datasets: [
-      { label:'단백질', data:[80, null, 139, 164, 151, 171, 132, 122, 112, 125, 143, 153, 164, 134, 133, 68, 142, 142, 38],
+      { label:'단백질', data:[80, null, 139, 164, 151, 171, 132, 122, 112, 125, 143, 153, 164, 134, 133, 68, 142, 142, 142],
         borderColor:'#4ef5a7', backgroundColor:'rgba(78,245,167,.08)',
         borderWidth:2, pointBackgroundColor:'#4ef5a7', pointRadius:4,
         fill:true, tension:.4, spanGaps:true },
