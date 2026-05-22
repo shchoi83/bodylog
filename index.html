@@ -337,8 +337,11 @@ footer {
 
   <!-- 이번 달 스트릭 -->
   <div class="card">
-    <div class="card-label">5월 운동 스트릭</div>
+    <div class="card-label">5월~6월 운동 스트릭</div>
+    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:8px;letter-spacing:1px;">5월</div>
     <div class="streak-grid" id="streakGrid"></div>
+    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-top:12px;margin-bottom:8px;letter-spacing:1px;">6월</div>
+    <div class="streak-grid" id="streakGridJune"></div>
     <div class="streak-legend">
       <div><span style="background:var(--accent)"></span>운동</div>
       <div><span style="background:var(--accent2)"></span>오늘</div>
@@ -452,55 +455,55 @@ footer {
     <div class="chart-wrap"><canvas id="proteinChart"></canvas></div>
   </div>
 
-  <!-- 지난 5일 부위별 세트수 — 레이더 -->
+  <!-- 지난 7일 부위별 세트수 — 레이더 -->
   <div class="card span2">
-    <div class="card-label">지난 5일 누적 부위별 세트수 — 오늘 운동 결정용</div>
+    <div class="card-label">지난 7일 누적 부위별 세트수 — 오늘 운동 결정용</div>
     <div class="radar-wrap" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
       <div style="position:relative;width:260px;height:260px;flex-shrink:0;min-width:200px;">
         <canvas id="bodyPartChart"></canvas>
       </div>
       <div style="flex:1;">
-        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:16px;letter-spacing:1px;">최근 5일 누적 (5/18~5/22)</div>
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:16px;letter-spacing:1px;">최근 7일 누적 (5/16~5/22)</div>
         <div style="display:flex;flex-direction:column;gap:12px;">
           <div>
             <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
               <span style="color:var(--accent)">● 등</span>
-              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">9세트</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">23세트</span>
             </div>
-            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:39%;height:100%;background:var(--accent);border-radius:2px;"></div></div>
+            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:74%;height:100%;background:var(--accent);border-radius:2px;"></div></div>
           </div>
           <div>
             <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
               <span style="color:var(--accent2)">● 어깨</span>
-              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">23세트</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">31세트</span>
             </div>
             <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:100%;height:100%;background:var(--accent2);border-radius:2px;"></div></div>
           </div>
           <div>
             <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
               <span style="color:var(--accent3)">● 가슴</span>
-              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">9세트</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">24세트</span>
             </div>
-            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:39%;height:100%;background:var(--accent3);border-radius:2px;"></div></div>
+            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:77%;height:100%;background:var(--accent3);border-radius:2px;"></div></div>
           </div>
           <div>
             <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
               <span style="color:var(--red)">● 하체</span>
               <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">6세트</span>
             </div>
-            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:26%;height:100%;background:var(--red);border-radius:2px;"></div></div>
+            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:19%;height:100%;background:var(--red);border-radius:2px;"></div></div>
           </div>
           <div>
             <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
               <span style="color:#a78bfa">● 팔</span>
-              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">0세트</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">18세트</span>
             </div>
-            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:0%;height:100%;background:#a78bfa;border-radius:2px;"></div></div>
+            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:58%;height:100%;background:#a78bfa;border-radius:2px;"></div></div>
           </div>
         </div>
-        <div style="margin-top:16px;padding:12px;background:var(--surface2);border-radius:3px;border-left:3px solid var(--accent);">
-          <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:1px;margin-bottom:4px;">TODAY 추천</div>
-          <div style="font-size:12px;line-height:1.7;">팔 0세트 — 5일간 공백<br>하체 6세트 — 아직 부족<br>→ <strong style="color:var(--accent)">팔 메인 + 하체 보조</strong> 추천</div>
+        <div style="margin-top:16px;padding:12px;background:var(--surface2);border-radius:3px;border-left:3px solid var(--red);">
+          <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--red);letter-spacing:1px;margin-bottom:4px;">TODAY 추천</div>
+          <div style="font-size:12px;line-height:1.7;">하체 6세트 — 가장 부족<br>팔 18세트, 어깨 31세트 — 충분<br>→ <strong style="color:var(--red)">하체 메인 + 등 보조</strong> 추천</div>
         </div>
       </div>
     </div>
@@ -1476,14 +1479,25 @@ document.getElementById('lastUpdated').textContent =
 // 스트릭 그리드
 const workoutDays = [3,4,5,6,7,8,9,11,12,13,14,15,17,19,20,21,22];
 const today = 22;
+const currentMonth = 5; // 5월
+
+// 5월 그리드
 const grid = document.getElementById('streakGrid');
 for (let d=1; d<=31; d++) {
   const div = document.createElement('div');
   div.className = 'streak-day';
-  if (d === today) div.className += ' today';
+  if (d === today && currentMonth === 5) div.className += ' today';
   else if (workoutDays.includes(d)) div.className += ' done';
   else if (d < today) div.className += ' rest';
   grid.appendChild(div);
+}
+
+// 6월 그리드 (30일)
+const gridJune = document.getElementById('streakGridJune');
+for (let d=1; d<=30; d++) {
+  const div = document.createElement('div');
+  div.className = 'streak-day'; // 아직 미래
+  gridJune.appendChild(div);
 }
 
 // 부위별 누적 레이더 차트 (최근 5일 합계: 5/17~5/21)
@@ -1493,7 +1507,7 @@ new Chart(bCtx, {
   data: {
     labels: ['등', '어깨', '가슴', '하체', '팔'],
     datasets: [{
-      data: [9, 23, 9, 6, 0],
+      data: [23, 31, 24, 6, 18],
       backgroundColor: 'rgba(212,245,78,.15)',
       borderColor: 'rgba(212,245,78,.8)',
       borderWidth: 2,
