@@ -251,7 +251,10 @@ footer {
   <div class="header-right">
     <div class="season-badge">SEASON 9 ACTIVE</div>
     <div class="header-stats">
-      추적 <span>22일차</span> · 5/23 기준
+      남성 · 만43세 · 174cm · <span>74kg</span><br>
+      목표 — 리컴포지션<br>
+      체지방 감량 + 근비대<br>
+      마운틴독 스타일
     </div>
   </div>
 </header>
@@ -270,95 +273,80 @@ footer {
 
   <div class="banner">
     <div>
-      <div class="banner-text">DAY <span style="color:var(--accent2);">23</span></div>
-      <div class="banner-sub">5/23 · SEASON 9</div>
+      <div class="banner-text">기록이 몸을 만든다</div>
+      <div class="banner-sub">SEASON 9 — CONSISTENCY IS THE ONLY STRATEGY</div>
     </div>
     <div>
-      <div class="banner-streak">19</div>
+      <div class="banner-streak">15</div>
       <div class="banner-streak-label">DAY STREAK</div>
     </div>
   </div>
 
-  <!-- 지난 7일 누적 부위별 세트수 — 최상단 배치 -->
-  <div class="card span2">
-    <div class="card-label">지난 7일 누적 부위별 세트수 — 오늘 운동 결정용</div>
-    <div class="radar-wrap" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
-      <div style="position:relative;width:260px;height:260px;flex-shrink:0;min-width:200px;">
-        <canvas id="bodyPartChart"></canvas>
+  <!-- 오늘 단백질 — 크게 강조 -->
+  <div class="card span2" style="position:relative;overflow:hidden;">
+    <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle, rgba(78,245,167,.07) 0%, transparent 70%);pointer-events:none;"></div>
+    <div class="card-label">오늘 단백질 — 5/23</div>
+    <div class="protein-nums" style="display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap;">
+      <!-- 섭취량 -->
+      <div style="text-align:center;">
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:4px;">섭취</div>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--accent2);letter-spacing:2px;line-height:1;">138</span>
+        <span style="font-family:'Space Mono',monospace;font-size:14px;color:var(--muted);">g</span>
       </div>
-      <div style="flex:1;">
-        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:16px;letter-spacing:1px;">최근 7일 누적 (5/17~5/23)</div>
-        <div style="display:flex;flex-direction:column;gap:12px;">
-          <div>
-            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
-              <span style="color:var(--accent)">● 등</span>
-              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">23세트</span>
-            </div>
-            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:61%;height:100%;background:var(--accent);border-radius:2px;"></div></div>
-          </div>
-          <div>
-            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
-              <span style="color:var(--accent2)">● 어깨</span>
-              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">38세트</span>
-            </div>
-            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:100%;height:100%;background:var(--accent2);border-radius:2px;"></div></div>
-          </div>
-          <div>
-            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
-              <span style="color:var(--accent3)">● 가슴</span>
-              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">35세트</span>
-            </div>
-            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:92%;height:100%;background:var(--accent3);border-radius:2px;"></div></div>
-          </div>
-          <div>
-            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
-              <span style="color:var(--red)">● 하체</span>
-              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">13세트</span>
-            </div>
-            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:34%;height:100%;background:var(--red);border-radius:2px;"></div></div>
-          </div>
-          <div>
-            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
-              <span style="color:#a78bfa">● 팔</span>
-              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">25세트</span>
-            </div>
-            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:66%;height:100%;background:#a78bfa;border-radius:2px;"></div></div>
-          </div>
-        </div>
-        <div style="margin-top:16px;padding:12px;background:var(--surface2);border-radius:3px;border-left:3px solid var(--accent);">
-          <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:1px;margin-bottom:4px;">TODAY 추천</div>
-          <div style="font-size:12px;line-height:1.7;">하체 13세트 — 가장 부족<br>등 23세트 — 어깨 38 대비 적음<br>→ <strong style="color:var(--accent)">등 메인 + 하체 보조</strong> 추천</div>
-        </div>
+      <div class="divider" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--dim);">/</div>
+      <!-- 목표량 -->
+      <div style="text-align:center;">
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:4px;">목표</div>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--dim);letter-spacing:2px;line-height:1;">148</span>
+        <span style="font-family:'Space Mono',monospace;font-size:14px;color:var(--muted);">g</span>
+      </div>
+      <div style="margin-left:8px;">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent3);margin-bottom:4px;">▲ 10g 남음</div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">93% 달성</div>
       </div>
     </div>
+    <!-- 두꺼운 진행바 -->
+    <div style="margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:8px;">
+        <span>0g</span><span style="color:var(--accent2);font-weight:700;">138g (93%)</span><span>148g</span>
+      </div>
+      <div style="height:20px;background:var(--border);border-radius:4px;overflow:hidden;">
+        <div style="width:93%;height:100%;background:linear-gradient(90deg,var(--accent2),#2dd4a0);border-radius:4px;transition:width 1s ease;box-shadow:0 0 12px rgba(78,245,167,.4);"></div>
+      </div>
+    </div>
+    <div class="badge badge-ok">오늘 93% 달성 🟡</div>
   </div>
 
-  <!-- 오늘 단백질 — 가로 막대 -->
-  <div class="card">
-    <div class="card-label" style="font-size:11px;">오늘 단백질 — 5/23</div>
-    <div style="display:flex;align-items:baseline;gap:6px;margin:10px 0 6px;">
-      <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--accent2);line-height:1;">138</span>
-      <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--dim);">/ 148g</span>
-      <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent3);margin-left:auto;">93%</span>
+  <!-- 오늘 칼로리 -->
+  <div class="card" style="position:relative;overflow:hidden;">
+    <div style="position:absolute;top:0;right:0;width:150px;height:150px;background:radial-gradient(circle, rgba(245,169,78,.07) 0%, transparent 70%);pointer-events:none;"></div>
+    <div class="card-label">오늘 칼로리 — 5/23</div>
+    <div>
+      <span class="stat-val" style="color:var(--accent3);">1,560</span>
+      <span class="stat-unit">kcal</span>
     </div>
-    <div style="height:16px;background:var(--border);border-radius:3px;overflow:hidden;">
-      <div style="width:93%;height:100%;background:linear-gradient(90deg,var(--accent2),#2dd4a0);border-radius:3px;box-shadow:0 0 10px rgba(78,245,167,.3);"></div>
+    <div class="stat-sub" style="margin-top:8px;">목표 1,800 kcal (운동일)</div>
+    <div style="margin-top:12px;">
+      <div style="height:4px;background:var(--border);border-radius:2px;overflow:hidden;">
+        <div style="width:87%;height:100%;background:var(--accent3);border-radius:2px;"></div>
+      </div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;">87% · 오늘 마무리</div>
     </div>
-    <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-top:5px;">▲ 10g 남음</div>
+    <div class="badge badge-ok" style="margin-top:8px;">칼로리 목표 근접 ✅</div>
   </div>
 
-  <!-- 오늘 칼로리 — 가로 막대 -->
+  <!-- 이번 달 스트릭 -->
   <div class="card">
-    <div class="card-label" style="font-size:11px;">오늘 칼로리 — 5/23</div>
-    <div style="display:flex;align-items:baseline;gap:6px;margin:10px 0 6px;">
-      <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--accent3);line-height:1;">1,560</span>
-      <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--dim);">/ 1,800</span>
-      <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent3);margin-left:auto;">87%</span>
+    <div class="card-label">5월~6월 운동 스트릭</div>
+    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:8px;letter-spacing:1px;">5월</div>
+    <div class="streak-grid" id="streakGrid"></div>
+    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-top:12px;margin-bottom:8px;letter-spacing:1px;">6월</div>
+    <div class="streak-grid" id="streakGridJune"></div>
+    <div class="streak-legend">
+      <div><span style="background:var(--accent)"></span>운동</div>
+      <div><span style="background:var(--accent2)"></span>오늘</div>
+      <div><span style="background:var(--surface2)"></span>휴식</div>
     </div>
-    <div style="height:16px;background:var(--border);border-radius:3px;overflow:hidden;">
-      <div style="width:87%;height:100%;background:linear-gradient(90deg,var(--accent3),#f5c84e);border-radius:3px;"></div>
-    </div>
-    <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-top:5px;">운동일 목표 1,800 kcal</div>
   </div>
 
   <!-- 수면 정보 -->
@@ -557,6 +545,60 @@ footer {
     <div class="chart-wrap"><canvas id="proteinChart"></canvas></div>
   </div>
 
+  <!-- 지난 7일 부위별 세트수 — 레이더 -->
+  <div class="card span2">
+    <div class="card-label">지난 7일 누적 부위별 세트수 — 오늘 운동 결정용</div>
+    <div class="radar-wrap" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+      <div style="position:relative;width:260px;height:260px;flex-shrink:0;min-width:200px;">
+        <canvas id="bodyPartChart"></canvas>
+      </div>
+      <div style="flex:1;">
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:16px;letter-spacing:1px;">최근 7일 누적 (5/17~5/23)</div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
+              <span style="color:var(--accent)">● 등</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">23세트</span>
+            </div>
+            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:61%;height:100%;background:var(--accent);border-radius:2px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
+              <span style="color:var(--accent2)">● 어깨</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">38세트</span>
+            </div>
+            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:100%;height:100%;background:var(--accent2);border-radius:2px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
+              <span style="color:var(--accent3)">● 가슴</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">35세트</span>
+            </div>
+            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:92%;height:100%;background:var(--accent3);border-radius:2px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
+              <span style="color:var(--red)">● 하체</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">13세트</span>
+            </div>
+            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:34%;height:100%;background:var(--red);border-radius:2px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
+              <span style="color:#a78bfa">● 팔</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">25세트</span>
+            </div>
+            <div style="height:5px;background:var(--border);border-radius:2px;"><div style="width:66%;height:100%;background:#a78bfa;border-radius:2px;"></div></div>
+          </div>
+        </div>
+        <div style="margin-top:16px;padding:12px;background:var(--surface2);border-radius:3px;border-left:3px solid var(--accent);">
+          <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:1px;margin-bottom:4px;">TODAY 추천</div>
+          <div style="font-size:12px;line-height:1.7;">하체 13세트 — 가장 부족<br>등 23세트 — 어깨 38 대비 적음<br>→ <strong style="color:var(--accent)">등 메인 + 하체 보조</strong> 추천</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- 볼륨 차트 -->
   <div class="card span2">
     <div class="card-label">시즌9 운동 볼륨 추이</div>
@@ -570,20 +612,6 @@ footer {
     <div style="margin-top:8px;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">
       시작 75kg → 현재 <span style="color:var(--accent2);">72.2kg</span>
       <span style="color:var(--accent);margin-left:8px;">▼ 2.8kg</span>
-    </div>
-  </div>
-
-  <!-- 운동 스트릭 — 하단 배치 -->
-  <div class="card span2">
-    <div class="card-label">5월~6월 운동 스트릭</div>
-    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:8px;letter-spacing:1px;">5월</div>
-    <div class="streak-grid" id="streakGrid"></div>
-    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-top:12px;margin-bottom:8px;letter-spacing:1px;">6월</div>
-    <div class="streak-grid" id="streakGridJune"></div>
-    <div class="streak-legend">
-      <div><span style="background:var(--accent)"></span>운동</div>
-      <div><span style="background:var(--accent2)"></span>오늘</div>
-      <div><span style="background:var(--surface2)"></span>휴식</div>
     </div>
   </div>
 
@@ -630,6 +658,99 @@ footer {
       <span style="color:var(--accent2);margin-left:12px;">138g / 148g 🟡</span>
       <span style="color:var(--muted);margin-left:12px;">/</span>
       <span style="color:var(--accent3);margin-left:12px;">≈1,560kcal</span>
+    </div>
+  </div>
+    <div style="padding:6px 0;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">
+      수면 5h 23m ❌ / 깊은수면 45분 / 수업 9시간
+    </div>
+    <div class="meal-row">
+      <div class="meal-dot"></div>
+      <div class="meal-time">08:00</div>
+      <div>
+        <div class="meal-name">닭가슴살 + 계란 2개 + 공기밥 1/2<br>후라이팬 / 핫소스+후추</div>
+        <div class="meal-macro">≈480kcal · 45g</div>
+      </div>
+    </div>
+    <div class="meal-row">
+      <div class="meal-dot" style="background:var(--accent3)"></div>
+      <div class="meal-time">13:00</div>
+      <div>
+        <div class="meal-name">갈비탕 (국물 제외)<br>고기 100g + 공기밥 1/3 + 김치·깍두기</div>
+        <div class="meal-macro">≈380kcal · 28g</div>
+      </div>
+    </div>
+    <div class="meal-row">
+      <div class="meal-dot" style="background:var(--accent2)"></div>
+      <div class="meal-time">15:45</div>
+      <div>
+        <div class="meal-name">WPH + 크레아틴 (운동 후) ✅</div>
+        <div class="meal-macro">≈120kcal · 25g</div>
+      </div>
+    </div>
+    <div class="meal-row" style="opacity:.5">
+      <div class="meal-dot" style="background:var(--dim)"></div>
+      <div class="meal-time">22:00~</div>
+      <div>
+        <div class="meal-name">저녁 예정</div>
+        <div class="meal-macro">+50g 필요</div>
+      </div>
+    </div>
+    <div style="margin-top:12px;padding:10px 12px;background:var(--surface2);border-radius:3px;font-family:'Space Mono',monospace;font-size:10px;">
+      <span style="color:var(--muted);">누계</span>
+      <span style="color:var(--accent2);margin-left:12px;">98g / 148g</span>
+      <span style="color:var(--muted);margin-left:12px;">/</span>
+      <span style="color:var(--accent3);margin-left:12px;">980kcal</span>
+    </div>
+  </div>
+    <div style="padding:6px 0;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">
+      수면 6h 14m 🟡 / 깊은수면 50분 ★이번달 최고 / 잠든 01:13
+    </div>
+    <div class="meal-row">
+      <div class="meal-dot"></div>
+      <div class="meal-time">08:00</div>
+      <div>
+        <div class="meal-name">계란 후라이 4개 + 핫소스</div>
+        <div class="meal-macro">≈280kcal · 28g</div>
+      </div>
+    </div>
+    <div class="meal-row">
+      <div class="meal-dot" style="background:var(--accent)"></div>
+      <div class="meal-time">11:45</div>
+      <div>
+        <div class="meal-name">훈제연어 150g + 와사비</div>
+        <div class="meal-macro">≈276kcal · 23g</div>
+      </div>
+    </div>
+    <div class="meal-row">
+      <div class="meal-dot" style="background:var(--accent3)"></div>
+      <div class="meal-time">12:30</div>
+      <div>
+        <div class="meal-name">게살볶음밥</div>
+        <div class="meal-macro">≈480kcal · 22g</div>
+      </div>
+    </div>
+    <div class="meal-row">
+      <div class="meal-dot" style="background:var(--accent2)"></div>
+      <div class="meal-time">18:00~20:00</div>
+      <div>
+        <div class="meal-name">로티세리 샌드위치 (동일패티 추가)<br>올리브오일+식초+후추 / 천천히</div>
+        <div class="meal-macro">≈520kcal · 41g</div>
+      </div>
+    </div>
+    <div class="meal-row" style="opacity:.5">
+      <div class="meal-dot" style="background:var(--dim)"></div>
+      <div class="meal-time">운동후</div>
+      <div>
+        <div class="meal-name">WPH + 크레아틴 예정</div>
+        <div class="meal-macro">+25g 예정</div>
+      </div>
+    </div>
+    <div style="margin-top:12px;padding:10px 12px;background:var(--surface2);border-radius:3px;font-family:'Space Mono',monospace;font-size:10px;">
+      <span style="color:var(--muted);">누계</span>
+      <span style="color:var(--accent2);margin-left:12px;">114g / 148g</span>
+      <span style="color:var(--muted);margin-left:12px;">/</span>
+      <span style="color:var(--accent3);margin-left:12px;">1,556kcal</span>
+      <span style="color:var(--accent2);margin-left:8px;">→ WPH 후 139g</span>
     </div>
   </div>
 
@@ -686,9 +807,6 @@ footer {
   <div class="raw-block">운동직후에 wph원샷함
 오전11시16분 연어초밥 8피스 간장없이 와사비만
 오후: 서브웨이 로티세리 더블미트 샐러드</div>
-
-  <div class="raw-date">▶ 2026-05-04 (월)</div>
-  <div class="raw-block">식단 상세 기록 없음</div>
 
   <div class="raw-date">▶ 2026-05-05 (화) — 대전</div>
   <div class="raw-block">5시40분 딸기 여섯 개랑 포도 세알 정도 먹었다.
@@ -1035,32 +1153,7 @@ footer {
 잠든 시각 01:13 / 기상 07:46
 심박수: 63~87 BPM / 호흡수: 13.5~21 회/분
 
-08:00 계란 후라이 4개 + 핫소스
-09:30~10:00 목욕탕 온탕 15분 + 샤워
-11:45 훈제연어 150g + 와사비
-12:30 게살볶음밥
-15:30~16:15 낮잠 45분 (식곤증)
-17:30~20:30 수업
-18:00~20:00 로티세리 샌드위치 (동일패티 추가) / 올리브오일+레드와인식초+후추
-23:00 운동 후 WPH + 크레아틴 5g ✅
-단백질 합계: 139g / 148g 🟡</div>
-
-  <div class="raw-date">▶ 2026-05-23 (토)</div>
-  <div class="raw-block">수면: 5시간 23분 ❌
-[수면단계] 깊은수면 45분 / 코어 3시간 45분 / REM 53분 / 비수면 21분
-잠든 시각 약 01:15 / 기상 07:48
-심박수: 57~88 BPM / 호흡수: 15~21.5 회/분
-체중: 72.9kg / 01:15 / 집 (취침 전)
-체중: 72.1kg / 07:48 / 집 공복
-
-08:00 닭가슴살 한 덩이 + 계란 2개 + 공기밥 1/2 / 후라이팬 / 핫소스+후추
-10:00~13:00 / 16:00~22:00 수업 (9시간)
-13:00 갈비탕 (국물 제외) / 고기 100g / 공기밥 1/3 / 김치·깍두기
-15:45 운동 후 WPH + 크레아틴 5g ✅
-18:30~20:30 서브웨이 로스트치킨 (동일패티 추가) 수업 중 틈틈히
-위트빵 토스팅 / 치즈 제외 / 야채 전부 제외 / 올리브오일+레드와인식초+후추
-+ 아메리카노 350ml
-단백질 합계: 138g / 148g 🟡</div>
+[이후 기록 추가 예정]</div>
 
 </div>
 </div>
@@ -1429,43 +1522,6 @@ footer {
 
 총 51세트 / WPH + 크레아틴 ✅ / 레그 익스텐션 6세트 하체 공백 해소</div>
 
-  <div class="raw-date">▶ 2026-05-23 (토) — 어깨/가슴/팔/하체 | 대치헬스장 | 1시간</div>
-  <div class="raw-block">수면: 5시간 23분 ❌ (깊은 45분 / 코어 3h 45m / REM 53분)
-체중: 72.1kg / 07:48 / 집 공복
-
-⚠️ 장비 주의: 대치헬스장 ≠ 대전헬스장 — 토크 반지름 차이로 체감 부하 다름
-
-리어 델토이드 플라이 머신
-1세트: 30kg 20회 / 2세트: 35kg 15회 / 3세트: 35kg 10회 / 4세트: 35kg 9회
-5세트: 30kg 10회 / 6세트: 25kg 12회 / 7세트: 20kg 20회
-
-숄더 프레스 머신
-1세트: 40kg 15회 / 2세트: 40kg 11회 / 3세트: 40kg 8회
-4세트: 35kg 8회 / 5세트: 35kg 5회 / 6세트: 30kg 5회
-
-덤벨 레터럴 레이즈
-1세트: 5kg 20회 / 2세트: 5kg 20회 / 3세트: 5kg 20회
-4세트: 5kg 20회 / 5세트: 5kg 20회 / 6세트: 4kg 10회
-
-시티드 딥스 머신
-1세트: 75kg 15회 / 2세트: 75kg 10회 / 3세트: 82.5kg 10회
-4세트: 82.5kg 10회 / 5세트: 82.5kg 10회 / 6세트: 82.5kg 10회
-
-펙덱 플라이 머신
-1세트: 30kg 15회 / 2세트: 30kg 15회 / 3세트: 30kg 15회
-4세트: 30kg 20회 / 5세트: 40kg 10회
-
-이지바 컬 ↔ 라잉 트라이셉 익스텐션 (슈퍼세트)
-1~4라운드: 컬 15kg 15회 / 익스텐션 15kg 15회
-
-덤벨 해머 컬: 10kg × 4세트 (10회/10회/8회/8회)
-
-레그 익스텐션
-1세트: 25kg 21회 / 2세트: 25kg 20회 / 3세트: 25kg 20회
-4세트: 25kg 16회 / 5세트: 25kg 12회 / 6세트: 25kg 15회 / 7세트: 25kg 12회
-
-총 51세트 / WPH + 크레아틴 ✅ / 시티드 딥스 82.5kg ★신기록</div>
-
 </div>
 </div>
 
@@ -1488,16 +1544,7 @@ footer {
       <tr><td>5/11</td><td>≈112g</td><td class="warn">🟡 부족</td><td>≈1,400</td><td class="warn">부족</td></tr>
       <tr><td>5/12</td><td>≈125g</td><td class="warn">🟡 부족</td><td>≈1,500</td><td class="warn">설사 변수</td></tr>
       <tr><td>5/13</td><td>143g</td><td class="ok">✅ 97%</td><td>≈1,920</td><td class="ok">달성</td></tr>
-      <tr><td>5/14</td><td>153g</td><td class="ok">✅</td><td>≈1,450</td><td class="ok">달성</td></tr>
-      <tr><td>5/15</td><td>164g</td><td class="ok">✅</td><td>≈1,985</td><td class="ok">달성</td></tr>
-      <tr><td>5/16</td><td>134g</td><td class="warn">🟡</td><td>≈1,985</td><td class="warn">휴식일 칼로리 초과</td></tr>
-      <tr><td>5/17</td><td>~125g</td><td class="warn">🟡</td><td>≈1,200</td><td class="warn">근접</td></tr>
-      <tr><td>5/18</td><td>~68g</td><td class="bad">❌</td><td>≈640</td><td class="bad">부비동염</td></tr>
-      <tr><td>5/19</td><td>142g</td><td class="ok">✅</td><td>≈1,400</td><td class="ok">달성</td></tr>
-      <tr><td>5/20</td><td>142g</td><td class="ok">✅</td><td>≈1,500</td><td class="ok">달성</td></tr>
-      <tr><td>5/21</td><td>180g</td><td class="ok">✅ 최고</td><td>≈2,090</td><td class="ok">초과</td></tr>
-      <tr><td>5/22</td><td>139g</td><td class="warn">🟡 94%</td><td>≈1,676</td><td class="warn">근접</td></tr>
-      <tr><td>5/23</td><td>138g</td><td class="warn">🟡 93%</td><td>≈1,560</td><td class="warn">근접</td></tr>
+      <tr><td>5/14</td><td>128g+예정</td><td class="warn">진행중</td><td>≈1,350</td><td class="warn">풋살 후 WPI 예정</td></tr>
     </table>
   </div>
 
@@ -1511,16 +1558,7 @@ footer {
       <tr><td>5/9→10</td><td>미기록</td><td>08:00</td><td>?</td><td class="warn">미기록</td></tr>
       <tr><td>5/10→11</td><td>미기록</td><td>14:00</td><td>충분</td><td class="ok">✅ 충분</td></tr>
       <tr><td>5/12→13</td><td>02:30</td><td>08:10</td><td>5시간 40분</td><td class="bad">❌ 부족</td></tr>
-      <tr><td>5/13→14</td><td>00:40</td><td>07:50</td><td class="ok">7시간 10분 + 낮잠</td><td class="ok">✅ 충분</td></tr>
-      <tr><td>5/14→15</td><td>01:00</td><td>07:50</td><td>6시간 50분</td><td class="warn">🟡</td></tr>
-      <tr><td>5/15→16</td><td>02:00</td><td>07:00</td><td>5시간</td><td class="bad">❌</td></tr>
-      <tr><td>5/16→17</td><td>04:00 찜질방</td><td>06:00</td><td>2시간</td><td class="bad">❌❌</td></tr>
-      <tr><td>5/17→18</td><td>01:30</td><td>11:40</td><td class="ok">10시간 10분</td><td class="ok">✅</td></tr>
-      <tr><td>5/18→19</td><td>미기록</td><td>충분</td><td>충분</td><td class="ok">✅</td></tr>
-      <tr><td>5/19→20</td><td>02:00</td><td>08:17</td><td>5시간 7분 / 깊은 38분 / REM 39분</td><td class="bad">❌</td></tr>
-      <tr><td>5/20→21</td><td>~23:30</td><td>07:37</td><td>6시간 8분 / 깊은 40분 / REM 1h29m</td><td class="warn">🟡</td></tr>
-      <tr><td>5/21→22</td><td>01:13</td><td>07:46</td><td class="ok">6시간 14분 / 깊은 50분★ / REM 1h10m</td><td class="warn">🟡</td></tr>
-      <tr><td>5/22→23</td><td>~01:15</td><td>07:48</td><td>5시간 23분 / 깊은 45분 / REM 53분</td><td class="bad">❌</td></tr>
+      <tr><td>5/13→14</td><td>00:40</td><td>07:50</td><td class="ok">7시간 10분 + 낮잠 2.5h</td><td class="ok">✅ 충분</td></tr>
     </table>
   </div>
 
