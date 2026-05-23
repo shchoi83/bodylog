@@ -290,7 +290,7 @@ footer {
       <!-- 섭취량 -->
       <div style="text-align:center;">
         <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:4px;">섭취</div>
-        <span style="font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--accent2);letter-spacing:2px;line-height:1;">98</span>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--accent2);letter-spacing:2px;line-height:1;">138</span>
         <span style="font-family:'Space Mono',monospace;font-size:14px;color:var(--muted);">g</span>
       </div>
       <div class="divider" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--dim);">/</div>
@@ -301,20 +301,20 @@ footer {
         <span style="font-family:'Space Mono',monospace;font-size:14px;color:var(--muted);">g</span>
       </div>
       <div style="margin-left:8px;">
-        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--red);margin-bottom:4px;">▲ 50g 더 필요</div>
-        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">66% 달성</div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent3);margin-bottom:4px;">▲ 10g 남음</div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">93% 달성</div>
       </div>
     </div>
     <!-- 두꺼운 진행바 -->
     <div style="margin-bottom:10px;">
       <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:8px;">
-        <span>0g</span><span style="color:var(--accent2);font-weight:700;">98g (66%)</span><span>148g</span>
+        <span>0g</span><span style="color:var(--accent2);font-weight:700;">138g (93%)</span><span>148g</span>
       </div>
       <div style="height:20px;background:var(--border);border-radius:4px;overflow:hidden;">
-        <div style="width:66%;height:100%;background:linear-gradient(90deg,var(--accent2),#2dd4a0);border-radius:4px;transition:width 1s ease;box-shadow:0 0 12px rgba(78,245,167,.4);"></div>
+        <div style="width:93%;height:100%;background:linear-gradient(90deg,var(--accent2),#2dd4a0);border-radius:4px;transition:width 1s ease;box-shadow:0 0 12px rgba(78,245,167,.4);"></div>
       </div>
     </div>
-    <div class="badge badge-warn">저녁 식사로 50g 채우기</div>
+    <div class="badge badge-ok">오늘 93% 달성 🟡</div>
   </div>
 
   <!-- 오늘 칼로리 -->
@@ -322,17 +322,17 @@ footer {
     <div style="position:absolute;top:0;right:0;width:150px;height:150px;background:radial-gradient(circle, rgba(245,169,78,.07) 0%, transparent 70%);pointer-events:none;"></div>
     <div class="card-label">오늘 칼로리 — 5/23</div>
     <div>
-      <span class="stat-val" style="color:var(--accent3);">860</span>
+      <span class="stat-val" style="color:var(--accent3);">1,560</span>
       <span class="stat-unit">kcal</span>
     </div>
     <div class="stat-sub" style="margin-top:8px;">목표 1,800 kcal (운동일)</div>
     <div style="margin-top:12px;">
       <div style="height:4px;background:var(--border);border-radius:2px;overflow:hidden;">
-        <div style="width:48%;height:100%;background:var(--accent3);border-radius:2px;"></div>
+        <div style="width:87%;height:100%;background:var(--accent3);border-radius:2px;"></div>
       </div>
-      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;">48% · 저녁 식사 필요</div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;">87% · 오늘 마무리</div>
     </div>
-    <div class="badge badge-warn" style="margin-top:8px;">저녁 식사 필요</div>
+    <div class="badge badge-ok" style="margin-top:8px;">칼로리 목표 근접 ✅</div>
   </div>
 
   <!-- 이번 달 스트릭 -->
@@ -617,7 +617,49 @@ footer {
 
   <!-- 오늘 식단 -->
   <div class="card">
-    <div class="card-label">오늘 식단 — 5/23</div>
+    <div class="card-label">오늘 식단 — 5/23 최종</div>
+    <div style="padding:6px 0;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">
+      수면 5h 23m ❌ / 깊은수면 45분 / 수업 9시간
+    </div>
+    <div class="meal-row">
+      <div class="meal-dot"></div>
+      <div class="meal-time">08:00</div>
+      <div>
+        <div class="meal-name">닭가슴살 + 계란 2개 + 공기밥 1/2 / 핫소스+후추</div>
+        <div class="meal-macro">≈480kcal · 45g</div>
+      </div>
+    </div>
+    <div class="meal-row">
+      <div class="meal-dot" style="background:var(--accent3)"></div>
+      <div class="meal-time">13:00</div>
+      <div>
+        <div class="meal-name">갈비탕 (국물 제외) 고기 100g<br>공기밥 1/3 + 김치·깍두기</div>
+        <div class="meal-macro">≈380kcal · 28g</div>
+      </div>
+    </div>
+    <div class="meal-row">
+      <div class="meal-dot" style="background:var(--accent2)"></div>
+      <div class="meal-time">15:45</div>
+      <div>
+        <div class="meal-name">WPH + 크레아틴 (운동 후) ✅</div>
+        <div class="meal-macro">≈120kcal · 25g</div>
+      </div>
+    </div>
+    <div class="meal-row">
+      <div class="meal-dot" style="background:var(--accent)"></div>
+      <div class="meal-time">18:30~20:30</div>
+      <div>
+        <div class="meal-name">서브웨이 로스트치킨 (동일패티 추가)<br>위트 토스팅 / 올리브오일+식초+후추 / 수업 중</div>
+        <div class="meal-macro">≈580kcal · 40g</div>
+      </div>
+    </div>
+    <div style="margin-top:12px;padding:10px 12px;background:var(--surface2);border-radius:3px;font-family:'Space Mono',monospace;font-size:10px;">
+      <span style="color:var(--muted);">최종</span>
+      <span style="color:var(--accent2);margin-left:12px;">138g / 148g 🟡</span>
+      <span style="color:var(--muted);margin-left:12px;">/</span>
+      <span style="color:var(--accent3);margin-left:12px;">≈1,560kcal</span>
+    </div>
+  </div>
     <div style="padding:6px 0;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">
       수면 5h 23m ❌ / 깊은수면 45분 / 수업 9시간
     </div>
@@ -1746,7 +1788,7 @@ new Chart(pCtx, {
   data: {
     labels: ['5/3', '5/4', '5/5', '5/6', '5/7', '5/8', '5/9', '5/10', '5/11', '5/12', '5/13', '5/14', '5/15', '5/16', '5/17', '5/18', '5/19', '5/20', '5/21', '5/22', '5/23'],
     datasets: [
-      { label:'단백질', data:[75, null, 132, 164, 151, 164, 125, 122, 112, 125, 143, 153, 164, 134, 125, 68, 142, 142, 180, 139, 98],
+      { label:'단백질', data:[75, null, 132, 164, 151, 164, 125, 122, 112, 125, 143, 153, 164, 134, 125, 68, 142, 142, 180, 139, 138],
         borderColor:'#4ef5a7', backgroundColor:'rgba(78,245,167,.08)',
         borderWidth:2, pointBackgroundColor:'#4ef5a7', pointRadius:4,
         fill:true, tension:.4, spanGaps:true },
