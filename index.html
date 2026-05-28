@@ -265,6 +265,7 @@ footer {
   <button onclick="showPanel('workout')">운동 원문</button>
   <button onclick="showPanel('analysis')">분석</button>
   <button onclick="showPanel('rawlog')">전체 로그</button>
+  <button onclick="showPanel('rules')">기록 규칙</button>
 </nav>
 
 <!-- ===== DASHBOARD ===== -->
@@ -1437,6 +1438,120 @@ Day5 5/7: 가슴/이두 (홈)
 Day6 5/8: 어깨 워밍업 + 메인 예정 (홈)</div>
 </div>
 </div>
+
+<!-- ===== RULES PANEL ===== -->
+<div id="rules" class="panel">
+  <div class="grid">
+
+    <div class="card span3">
+      <div class="card-label">RECORDING RULES // 기록 규칙</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:2px;color:var(--accent);line-height:1.1;">데이터 기록·계산 기준</div>
+      <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);margin-top:8px;line-height:1.8;">모든 로그·볼륨·칼로리 계산은 아래 고정 규칙을 따른다. 대화 시작 시 이 기준을 그대로 적용.</div>
+    </div>
+
+    <!-- 덤벨 볼륨 규칙 -->
+    <div class="card span2">
+      <div class="card-label">① 덤벨 볼륨 // DUMBBELL VOLUME</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:1px;color:var(--accent);line-height:1.1;">한쪽 팔 기준 통일</div>
+      <span class="badge badge-ok">×2 안 함 · 번핏 앱과 동일</span>
+      <div style="margin-top:18px;font-size:13px;line-height:1.85;color:var(--text);">
+        <div style="padding:8px 0;border-bottom:1px solid var(--border);">중량 = <b style="color:var(--accent)">한손(편측) 무게</b></div>
+        <div style="padding:8px 0;border-bottom:1px solid var(--border);">기록 횟수 = <b style="color:var(--accent)">항상 한쪽 팔 횟수</b><br><span style="font-size:11px;color:var(--muted)">얼터네이트 · 양손동시 · 원암 모두 동일</span></div>
+        <div style="padding:8px 0;border-bottom:1px solid var(--border);">볼륨 = <b style="color:var(--accent)">표기kg × 기록횟수 × 세트</b> (그대로)</div>
+        <div style="padding:8px 0;">과거 전 기록도 이 기준으로 통일 (번핏과 숫자 일치)</div>
+      </div>
+      <div style="margin-top:14px;padding:12px 14px;background:var(--surface2);border-radius:3px;font-family:'Space Mono',monospace;font-size:10px;color:var(--dim);line-height:1.7;">
+        ※ 실제 양팔 총부하는 이 값의 2배이나, 추세 일관성·번핏 동기화를 위해 한쪽 팔 기준 유지
+      </div>
+    </div>
+
+    <!-- 보유 장비 -->
+    <div class="card">
+      <div class="card-label">② 보유 덤벨 // EQUIPMENT</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
+        <div style="flex:1;min-width:60px;text-align:center;padding:18px 6px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--accent);line-height:1;">8</div>
+          <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">KG</div>
+        </div>
+        <div style="flex:1;min-width:60px;text-align:center;padding:18px 6px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--accent);line-height:1;">10</div>
+          <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">KG</div>
+        </div>
+        <div style="flex:1;min-width:60px;text-align:center;padding:18px 6px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--accent);line-height:1;">14</div>
+          <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">KG</div>
+        </div>
+      </div>
+      <div class="stat-sub" style="margin-top:14px;">홈 트레이닝 가용 중량 3종뿐<br>점진적 과부하는 템포·정지수축으로 보완</div>
+    </div>
+
+    <!-- 단백질 흡수 원칙 -->
+    <div class="card span2">
+      <div class="card-label">③ 단백질 흡수 원칙 // PROTEIN</div>
+      <table style="margin-top:6px;">
+        <tr><th>항목</th><th>기준</th></tr>
+        <tr><td>한 끼 최대 흡수량</td><td class="ok">35~40g</td></tr>
+        <tr><td>식사 간격</td><td>3~4시간</td></tr>
+        <tr><td>하루 최적 횟수</td><td>4~5회</td></tr>
+        <tr><td>하루 최대 흡수량</td><td class="ok">35g × 4회 = 140g</td></tr>
+        <tr><td>섭취량 초과분</td><td class="warn">에너지/지방으로 전환</td></tr>
+      </table>
+      <div style="margin-top:14px;font-size:12px;line-height:1.8;color:var(--muted);">
+        WPH: 운동직후 + 크레아틴 5g · WPI: 일반보충/취침전 · 일일 단백질 목표 <b style="color:var(--accent)">148g</b> (체중×2g)
+      </div>
+    </div>
+
+    <!-- 칼로리 목표 -->
+    <div class="card">
+      <div class="card-label">④ 칼로리 목표 // CALORIES</div>
+      <div style="margin-top:10px;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--border);">
+          <span style="font-size:13px;">운동일</span>
+          <span><b style="font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--accent);">1,800</b><span class="stat-unit">kcal</span></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;">
+          <span style="font-size:13px;">휴식일</span>
+          <span><b style="font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--accent2);">1,500</b><span class="stat-unit">kcal</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 식단 원칙 -->
+    <div class="card span3">
+      <div class="card-label">⑤ 식단 원칙 // DIET RULES</div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px 28px;margin-top:12px;font-size:13px;line-height:1.7;">
+        <div style="padding:8px 0;border-bottom:1px solid var(--border);">국물류 — 붉은 국물 금지, <b style="color:var(--accent)">건더기만</b></div>
+        <div style="padding:8px 0;border-bottom:1px solid var(--border);">초밥 — 간장/초생강 제외, <b style="color:var(--accent)">와사비만</b></div>
+        <div style="padding:8px 0;border-bottom:1px solid var(--border);">서브웨이 — 올리브유/식초/후추, <b style="color:var(--accent)">마요·데리야끼 금지</b></div>
+        <div style="padding:8px 0;border-bottom:1px solid var(--border);">야간 탄수화물 — <b style="color:var(--red)">제로</b></div>
+        <div style="padding:8px 0;border-bottom:1px solid var(--border);">아보카도 — <b style="color:var(--accent3)">고활동일만</b> (칼로리 밀도)</div>
+        <div style="padding:8px 0;border-bottom:1px solid var(--border);">풋살 후 커피 — <b style="color:var(--red)">금지</b> (수면 방해 확인)</div>
+        <div style="padding:8px 0;">소스(마요/데리야끼) — 금지 / 견과류 — 매우 제한</div>
+        <div style="padding:8px 0;">크레아틴 5g/day · 마그네슘 2알 취침전</div>
+      </div>
+    </div>
+
+    <!-- 수면 / 무릎 제약 -->
+    <div class="card span2">
+      <div class="card-label">⑥ 수면 원칙 // SLEEP</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:1px;color:var(--accent);line-height:1.1;">7~9시간 목표</div>
+      <div style="margin-top:12px;font-size:13px;line-height:1.8;color:var(--text);">
+        근합성의 핵심 변수. 수면 부족은 근합성 효율·호르몬 상태를 의미있게 저하. <b style="color:var(--red)">3일 연속 부족 시 누적 데미지 심각.</b> 낮잠은 보완일 뿐 연속 수면 대체 불가.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">⑦ 관절 제약 // JOINT</div>
+      <span class="badge badge-bad">우측 무릎 관절염4기 + 류마티스4기</span>
+      <div style="margin-top:12px;font-size:13px;line-height:1.8;color:var(--text);">
+        스쿼트 · 레그프레스 <b style="color:var(--red)">불가</b>.<br>하체는 관절 부하 최소 머신만 (레그익스텐션·레그컬·힙어덕션).
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ===== END RULES PANEL ===== -->
+
 
 <footer>
   <div>BODY LOG — 시즌9 | 최성훈</div>
