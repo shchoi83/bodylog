@@ -118,6 +118,7 @@ nav button.active, nav button:hover {
 
 /* CHART */
 .chart-wrap { height:200px; margin-top:8px; position:relative; }
+.protein-chart-wrap { height:280px; }
 
 /* STREAK */
 .streak-grid {
@@ -212,6 +213,8 @@ tr:last-child td { border-bottom:none; }
   .banner-streak { font-size:40px; }
   .stat-val { font-size:44px; }
   .chart-wrap { height:160px; }
+  /* 단백질+칼로리 추이 — 모바일에서 가로세로 거의 1:1 */
+  .protein-chart-wrap { height:auto; aspect-ratio:1/1; }
   /* 단백질 카드 모바일 */
   .protein-nums { flex-direction:column; gap:8px; }
   .protein-nums .divider { display:none; }
@@ -434,7 +437,7 @@ footer {
   <!-- 단백질 추이 -->
   <div class="card span2">
     <div class="card-label">단백질 + 칼로리 달성 추이</div>
-    <div class="chart-wrap"><canvas id="proteinChart"></canvas></div>
+    <div class="chart-wrap protein-chart-wrap"><canvas id="proteinChart"></canvas></div>
   </div>
 
   <!-- 지난 7일 부위별 세트수 — 레이더 -->
@@ -1984,30 +1987,39 @@ new Chart(wCtx, {
 
 // 단백질 달성 추이 + 칼로리 추이 (듀얼 Y축)
 const pCtx = document.getElementById('proteinChart').getContext('2d');
+// 전체 데이터
+const _pLabels = ['5/3','5/4','5/5','5/6','5/7','5/8','5/9','5/10','5/11','5/12','5/13','5/14','5/15','5/16','5/17','5/18','5/19','5/20','5/21','5/22','5/23','5/24','5/25','5/26','5/27','5/28','5/29'];
+const _pProtein = [75, null, 132, 164, 151, 164, 125, 122, 112, 125, 143, 153, 164, 134, 125, 68, 142, 142, 180, 139, 138, 163, 117, 80, 126, 169, 40];
+const _pCal = [700, null, 1800, 1870, 1315, 1600, 1480, 1310, 1400, 1500, 1920, 1350, 1985, null, null, null, 1750, 1680, 1850, 1820, 1750, 1700, 1920, 1800, 2080, 2105, 405];
+// 최근 20일만 표시
+const _N = 20;
+const pLabels  = _pLabels.slice(-_N);
+const pProtein = _pProtein.slice(-_N);
+const pCal     = _pCal.slice(-_N);
 new Chart(pCtx, {
   type: 'line',
   data: {
-    labels: ['5/3','5/4','5/5','5/6','5/7','5/8','5/9','5/10','5/11','5/12','5/13','5/14','5/15','5/16','5/17','5/18','5/19','5/20','5/21','5/22','5/23','5/24','5/25','5/26','5/27','5/28','5/29'],
+    labels: pLabels,
     datasets: [
       { label:'단백질 (g)',
-        data:[75, null, 132, 164, 151, 164, 125, 122, 112, 125, 143, 153, 164, 134, 125, 68, 142, 142, 180, 139, 138, 163, 117, 80, 126, 169, 40],
+        data:pProtein,
         yAxisID:'y',
         borderColor:'#4ef5a7', backgroundColor:'rgba(78,245,167,.10)',
         borderWidth:2.5, pointBackgroundColor:'#4ef5a7', pointRadius:4, pointHoverRadius:6,
         fill:true, tension:.4, spanGaps:true, order:2 },
       { label:'단백질 목표 148g',
-        data:Array(27).fill(148),
+        data:Array(pLabels.length).fill(148),
         yAxisID:'y',
         borderColor:'rgba(78,245,167,.45)', borderWidth:1,
         borderDash:[6,4], pointRadius:0, fill:false, order:4 },
       { label:'칼로리 (kcal)',
-        data:[700, null, 1800, 1870, 1315, 1600, 1480, 1310, 1400, 1500, 1920, 1350, 1985, null, null, null, 1750, 1680, 1850, 1820, 1750, 1700, 1920, 1800, 2080, 2105, 405],
+        data:pCal,
         yAxisID:'y1',
         borderColor:'#f54e4e', backgroundColor:'rgba(245,78,78,.05)',
         borderWidth:2.5, pointBackgroundColor:'#f54e4e', pointRadius:4, pointHoverRadius:6,
         fill:true, tension:.4, spanGaps:true, order:1 },
       { label:'칼로리 목표 1,800',
-        data:Array(27).fill(1800),
+        data:Array(pLabels.length).fill(1800),
         yAxisID:'y1',
         borderColor:'rgba(245,78,78,.45)', borderWidth:1,
         borderDash:[6,4], pointRadius:0, fill:false, order:3 }
