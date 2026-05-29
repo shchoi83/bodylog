@@ -250,11 +250,10 @@ footer {
   </div>
   <div class="header-right">
     <div class="season-badge">SEASON 9 ACTIVE</div>
-    <div class="header-stats">
-      남성 · 만43세 · 174cm · <span>74kg</span><br>
-      목표 — 리컴포지션<br>
-      체지방 감량 + 근비대<br>
-      마운틴독 스타일
+    <div class="header-stats" style="text-align:right;line-height:1.7;font-size:11px;letter-spacing:0.3px;">
+      <div style="color:#ffffff;">웜업먼저, 중량업하고 힘빠지게,<br>중량낮춰서 실패지점에 반드시 도달<br>두번 도달 드랍세트</div>
+      <div style="color:var(--accent);margin-top:8px;">✅ 닭가슴살, 연어, 샐러드,<br>본죽, 키토김밥 가능</div>
+      <div style="color:var(--red);margin-top:8px;">❌ 중식전체, 부대찌개, 매운탕,<br>갈비탕, 버거 일절, 데리야끼, 마요,<br>떡볶이 라면 우동 파스타 등 밀가루 전체, 튀김 불가</div>
     </div>
   </div>
 </header>
@@ -274,8 +273,8 @@ footer {
 
   <div class="banner">
     <div>
-      <div class="banner-text">기록이 몸을 만든다</div>
-      <div class="banner-sub">SEASON 9 — CONSISTENCY IS THE ONLY STRATEGY</div>
+      <div class="banner-text" style="font-size:34px;">SEASON 9</div>
+      <div class="banner-sub">CONSISTENCY IS THE ONLY STRATEGY</div>
     </div>
     <div>
       <div class="banner-streak">15</div>
@@ -434,7 +433,7 @@ footer {
 
   <!-- 단백질 추이 -->
   <div class="card span2">
-    <div class="card-label">단백질 달성 추이</div>
+    <div class="card-label">단백질 + 칼로리 달성 추이</div>
     <div class="chart-wrap"><canvas id="proteinChart"></canvas></div>
   </div>
 
@@ -1983,30 +1982,65 @@ new Chart(wCtx, {
   }
 });
 
-// 단백질 달성 추이 차트
+// 단백질 달성 추이 + 칼로리 추이 (듀얼 Y축)
 const pCtx = document.getElementById('proteinChart').getContext('2d');
 new Chart(pCtx, {
   type: 'line',
   data: {
-    labels: ['5/3', '5/4', '5/5', '5/6', '5/7', '5/8', '5/9', '5/10', '5/11', '5/12', '5/13', '5/14', '5/15', '5/16', '5/17', '5/18', '5/19', '5/20', '5/21', '5/22', '5/23', '5/24', '5/25', '5/26', '5/27', '5/28'],
+    labels: ['5/3','5/4','5/5','5/6','5/7','5/8','5/9','5/10','5/11','5/12','5/13','5/14','5/15','5/16','5/17','5/18','5/19','5/20','5/21','5/22','5/23','5/24','5/25','5/26','5/27','5/28','5/29'],
     datasets: [
-      { label:'단백질', data:[75, null, 132, 164, 151, 164, 125, 122, 112, 125, 143, 153, 164, 134, 125, 68, 142, 142, 180, 139, 138, 163, null, null, 126, 64],
-        borderColor:'#4ef5a7', backgroundColor:'rgba(78,245,167,.08)',
-        borderWidth:2, pointBackgroundColor:'#4ef5a7', pointRadius:4,
-        fill:true, tension:.4, spanGaps:true },
-      { label:'목표 148g', data:[148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148],
-        borderColor:'rgba(212,245,78,.3)', borderWidth:1,
-        borderDash:[4,4], pointRadius:0, fill:false }
+      { label:'단백질 (g)',
+        data:[75, null, 132, 164, 151, 164, 125, 122, 112, 125, 143, 153, 164, 134, 125, 68, 142, 142, 180, 139, 138, 163, 117, 80, 126, 169, 40],
+        yAxisID:'y',
+        borderColor:'#4ef5a7', backgroundColor:'rgba(78,245,167,.10)',
+        borderWidth:2.5, pointBackgroundColor:'#4ef5a7', pointRadius:4, pointHoverRadius:6,
+        fill:true, tension:.4, spanGaps:true, order:2 },
+      { label:'단백질 목표 148g',
+        data:Array(27).fill(148),
+        yAxisID:'y',
+        borderColor:'rgba(78,245,167,.45)', borderWidth:1,
+        borderDash:[6,4], pointRadius:0, fill:false, order:4 },
+      { label:'칼로리 (kcal)',
+        data:[700, null, 1800, 1870, 1315, 1600, 1480, 1310, 1400, 1500, 1920, 1350, 1985, null, null, null, 1750, 1680, 1850, 1820, 1750, 1700, 1920, 1800, 2080, 2105, 405],
+        yAxisID:'y1',
+        borderColor:'#f54e4e', backgroundColor:'rgba(245,78,78,.05)',
+        borderWidth:2.5, pointBackgroundColor:'#f54e4e', pointRadius:4, pointHoverRadius:6,
+        fill:true, tension:.4, spanGaps:true, order:1 },
+      { label:'칼로리 목표 1,800',
+        data:Array(27).fill(1800),
+        yAxisID:'y1',
+        borderColor:'rgba(245,78,78,.45)', borderWidth:1,
+        borderDash:[6,4], pointRadius:0, fill:false, order:3 }
     ]
   },
   options: {
     responsive:true, maintainAspectRatio:false,
-    plugins:{ legend:{display:false},
-      tooltip:{backgroundColor:'#1c1c1c',titleColor:'#4ef5a7',bodyColor:'#888'}
+    interaction:{ mode:'index', intersect:false },
+    plugins:{
+      legend:{ display:true, position:'top', align:'end',
+        labels:{ color:'#888', font:{family:'Space Mono',size:10}, boxWidth:14, padding:10,
+          filter: item => !item.text.includes('목표') }
+      },
+      tooltip:{ backgroundColor:'#1c1c1c', titleColor:'#d4f54e', bodyColor:'#ccc',
+        callbacks:{ label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y?.toLocaleString() ?? '-'}` }
+      }
     },
     scales:{
-      x:{grid:{color:'#1c1c1c'},ticks:{color:'#444',font:{family:'Space Mono',size:10}}},
-      y:{grid:{color:'#1c1c1c'},ticks:{color:'#444',font:{family:'Space Mono',size:10}},min:0,max:200}
+      x:{ grid:{color:'#1c1c1c'}, ticks:{color:'#444',font:{family:'Space Mono',size:10}} },
+      y:{
+        position:'left',
+        title:{ display:true, text:'단백질 (g)', color:'#4ef5a7', font:{family:'Space Mono',size:11,weight:'bold'} },
+        grid:{ color:'#1c1c1c' },
+        ticks:{ color:'#4ef5a7', font:{family:'Space Mono',size:10}, callback: v => v+'g' },
+        min:0, max:220
+      },
+      y1:{
+        position:'right',
+        title:{ display:true, text:'칼로리 (kcal)', color:'#f54e4e', font:{family:'Space Mono',size:11,weight:'bold'} },
+        grid:{ drawOnChartArea:false },
+        ticks:{ color:'#f54e4e', font:{family:'Space Mono',size:10}, callback: v => v.toLocaleString() },
+        min:0, max:2500
+      }
     }
   }
 });
