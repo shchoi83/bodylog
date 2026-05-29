@@ -118,6 +118,7 @@ nav button.active, nav button:hover {
 
 /* CHART */
 .chart-wrap { height:200px; margin-top:8px; position:relative; }
+.protein-chart-wrap { height:280px; }
 
 /* STREAK */
 .streak-grid {
@@ -212,6 +213,8 @@ tr:last-child td { border-bottom:none; }
   .banner-streak { font-size:40px; }
   .stat-val { font-size:44px; }
   .chart-wrap { height:160px; }
+  /* 단백질+칼로리 추이 — 모바일에서 가로세로 거의 1:1 */
+  .protein-chart-wrap { height:auto; aspect-ratio:1/1; }
   /* 단백질 카드 모바일 */
   .protein-nums { flex-direction:column; gap:8px; }
   .protein-nums .divider { display:none; }
@@ -250,11 +253,10 @@ footer {
   </div>
   <div class="header-right">
     <div class="season-badge">SEASON 9 ACTIVE</div>
-    <div class="header-stats">
-      남성 · 만43세 · 174cm · <span>74kg</span><br>
-      목표 — 리컴포지션<br>
-      체지방 감량 + 근비대<br>
-      마운틴독 스타일
+    <div class="header-stats" style="text-align:right;line-height:1.7;font-size:11px;letter-spacing:0.3px;">
+      <div style="color:#ffffff;">웜업먼저, 중량업하고 힘빠지게,<br>중량낮춰서 실패지점에 반드시 도달<br>두번 도달 드랍세트</div>
+      <div style="color:var(--accent);margin-top:8px;">✅ 닭가슴살, 연어, 샐러드,<br>본죽, 키토김밥 가능</div>
+      <div style="color:var(--red);margin-top:8px;">❌ 중식전체, 부대찌개, 매운탕,<br>갈비탕, 버거 일절, 데리야끼, 마요,<br>떡볶이 라면 우동 파스타 등 밀가루 전체, 튀김 불가</div>
     </div>
   </div>
 </header>
@@ -274,8 +276,8 @@ footer {
 
   <div class="banner">
     <div>
-      <div class="banner-text">기록이 몸을 만든다</div>
-      <div class="banner-sub">SEASON 9 — CONSISTENCY IS THE ONLY STRATEGY</div>
+      <div class="banner-text" style="font-size:34px;">SEASON 9</div>
+      <div class="banner-sub">CONSISTENCY IS THE ONLY STRATEGY</div>
     </div>
     <div>
       <div class="banner-streak">15</div>
@@ -357,24 +359,26 @@ footer {
 
   <!-- 수면 정보 -->
   <div class="card span2">
-    <div class="card-label">수면 정보 — 5/27→28 (애플 건강 앱)</div>
+    <div class="card-label">수면 정보 — 5/28→29 (애플 건강 앱)</div>
     <div style="display:grid;grid-template-columns:3fr 7fr;gap:24px;">
       <div style="border-right:1px solid var(--border);padding-right:24px;">
         <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:12px;letter-spacing:1px;">지난밤</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--accent2);line-height:1;margin-bottom:4px;">9<span style="font-size:22px;">h</span>+</div>
-        <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:12px;">~22:30 → 07:40</div>
-        <div class="badge badge-ok" style="margin-bottom:14px;">목표 달성 ✅✅</div>
-        <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent2);">근합성 효율 100%<br>테스토스테론 100%</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--accent3);line-height:1;margin-bottom:4px;">7<span style="font-size:22px;">h</span> 3<span style="font-size:22px;">m</span></div>
+        <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:12px;">24:00 → 07:50</div>
+        <div class="badge badge-warn" style="margin-bottom:14px;">알코올 영향 ⚠️</div>
+        <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);line-height:1.8;">
+          깊은수면 <span style="color:var(--red);">44m</span><br>
+          REM 1h 14m<br>
+          코어 5h 5m<br>
+          비수면 26m
+        </div>
+        <div style="margin-top:10px;padding:8px 10px;background:var(--surface2);border-radius:3px;font-family:'Space Mono',monospace;font-size:9px;color:var(--red);line-height:1.5;">
+          정상 깊은수면 60m+ 대비 부족 — 5/27→28 9h40m 회복 사이클이 알코올로 갉아먹힘
+        </div>
       </div>
       <div>
         <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:12px;letter-spacing:1px;">최근 7일 수면 요약 및 평가</div>
         <div style="display:flex;flex-direction:column;gap:7px;">
-          <div style="display:grid;grid-template-columns:90px 1fr 60px 36px;align-items:center;gap:8px;padding:7px 10px;background:var(--surface2);border-radius:3px;">
-            <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">5/22→23</span>
-            <div style="height:4px;background:var(--border);border-radius:2px;"><div style="width:60%;height:100%;background:var(--red);border-radius:2px;"></div></div>
-            <span style="font-family:'Space Mono',monospace;font-size:10px;text-align:right;">5h 23m</span>
-            <span style="font-size:13px;text-align:center;">❌</span>
-          </div>
           <div style="display:grid;grid-template-columns:90px 1fr 60px 36px;align-items:center;gap:8px;padding:7px 10px;background:var(--surface2);border-radius:3px;">
             <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">5/23→24</span>
             <div style="height:4px;background:var(--border);border-radius:2px;"><div style="width:52%;height:100%;background:var(--red);border-radius:2px;"></div></div>
@@ -399,25 +403,31 @@ footer {
             <span style="font-family:'Space Mono',monospace;font-size:10px;text-align:right;">7h 30m</span>
             <span style="font-size:13px;text-align:center;">✅</span>
           </div>
-          <div style="display:grid;grid-template-columns:90px 1fr 60px 36px;align-items:center;gap:8px;padding:7px 10px;background:var(--surface2);border-radius:3px;border:1px solid var(--accent2);">
+          <div style="display:grid;grid-template-columns:90px 1fr 60px 36px;align-items:center;gap:8px;padding:7px 10px;background:var(--surface2);border-radius:3px;">
             <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent2);">5/27→28</span>
             <div style="height:4px;background:var(--border);border-radius:2px;"><div style="width:100%;height:100%;background:var(--accent2);border-radius:2px;"></div></div>
-            <span style="font-family:'Space Mono',monospace;font-size:10px;text-align:right;color:var(--accent2);">9h+</span>
+            <span style="font-family:'Space Mono',monospace;font-size:10px;text-align:right;color:var(--accent2);">9h 40m</span>
             <span style="font-size:13px;text-align:center;">✅✅</span>
+          </div>
+          <div style="display:grid;grid-template-columns:90px 1fr 60px 36px;align-items:center;gap:8px;padding:7px 10px;background:var(--surface2);border-radius:3px;border:1px solid var(--accent3);">
+            <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent3);">5/28→29</span>
+            <div style="height:4px;background:var(--border);border-radius:2px;"><div style="width:78%;height:100%;background:var(--accent3);border-radius:2px;"></div></div>
+            <span style="font-family:'Space Mono',monospace;font-size:10px;text-align:right;color:var(--accent3);">7h 3m</span>
+            <span style="font-size:13px;text-align:center;">🟡</span>
           </div>
         </div>
         <div style="margin-top:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
           <div style="padding:8px;background:var(--surface2);border-radius:3px;text-align:center;">
-            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:4px;">7일 평균</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--accent3);line-height:1;">6.1<span style="font-size:14px;">h</span></div>
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:4px;">6일 평균</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--accent3);line-height:1;">6.5<span style="font-size:14px;">h</span></div>
           </div>
           <div style="padding:8px;background:var(--surface2);border-radius:3px;text-align:center;">
             <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:4px;">7h+ 달성</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--accent2);line-height:1;">3<span style="font-size:14px;color:var(--muted);">/6</span></div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--accent2);line-height:1;">3<span style="font-size:14px;color:var(--muted);">/5</span></div>
           </div>
           <div style="padding:8px;background:var(--surface2);border-radius:3px;text-align:center;">
             <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:4px;">이번달</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--accent2);line-height:1;">5<span style="font-size:14px;color:var(--muted);">/28</span></div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--accent2);line-height:1;">5<span style="font-size:14px;color:var(--muted);">/29</span></div>
           </div>
         </div>
       </div>
@@ -426,8 +436,8 @@ footer {
 
   <!-- 단백질 추이 -->
   <div class="card span2">
-    <div class="card-label">단백질 달성 추이</div>
-    <div class="chart-wrap"><canvas id="proteinChart"></canvas></div>
+    <div class="card-label">단백질 + 칼로리 달성 추이</div>
+    <div class="chart-wrap protein-chart-wrap"><canvas id="proteinChart"></canvas></div>
   </div>
 
   <!-- 지난 7일 부위별 세트수 — 레이더 -->
@@ -504,7 +514,7 @@ footer {
   <div class="card">
     <div class="card-label">오늘 식단 — 5/29</div>
     <div style="padding:6px 0;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">
-      수면 8h+ ✅ (단, 5/28 23:30 알코올 후 수면질 저하 우려) / 휴식일 1,500kcal 목표
+      수면 7h 3m 🟡 (깊은수면 44분 — 알코올 영향 확인) / 휴식일 1,500kcal 목표
     </div>
     <div class="meal-row">
       <div class="meal-dot"></div>
@@ -951,13 +961,88 @@ footer {
 
 단백질 합계: 180g ✅</div>
 
-  <div class="raw-date">▶ 2026-05-22 (금)</div>
+  <div class="raw-date">▶ 2026-05-22 (금) — 운동일 ★시즌9 최다 세트</div>
   <div class="raw-block">수면: 6시간 14분 🟡
 [수면단계] 깊은수면 50분★이번달최고 / 코어 4시간 14분 / REM 1시간 10분 / 비수면 19분
 잠든 시각 01:13 / 기상 07:46
 심박수: 63~87 BPM / 호흡수: 13.5~21 회/분
 
-[이후 기록 추가 예정]</div>
+운동: 어깨/등/가슴/하체 51세트, 대치헬스장, 1시간 15분 (시즌9 최다 세트)
+WPH + 크레아틴 5g ✅ 운동 직후
+단백질 합계 ≈155g / 흡수 ≈148g ✅ / 칼로리 ≈1,820</div>
+
+  <div class="raw-date">▶ 2026-05-23 (토) — 운동일 ★딥스 82.5kg 신기록</div>
+  <div class="raw-block">운동: 어깨/가슴/팔/하체 51세트, 대치헬스장
+딥스 82.5kg 신기록 ★
+
+식단 ≈ 단백질 145g / 흡수 138g / 칼로리 1,750 ✅
+체중: 72.1kg (공복)</div>
+
+  <div class="raw-date">▶ 2026-05-24 (일) — 운동일 (대전)</div>
+  <div class="raw-block">수면: 4h 42m ❌❌ / 깊은수면 1h 5m ★ 이번달최고
+체중: 72.2kg (대전헬스장)
+
+05:10 연어150g + 케이퍼소스 + 삶은계란2개 | 섭취39g/흡수39g/370kcal
+08:55 바나나 | 섭취1g/흡수1g/90kcal
+09:35 WPH + 크레아틴 5g | 섭취25g/흡수25g/120kcal
+11:00~13:00 서브웨이 로스트치킨 동일패티 | 섭취40g/흡수35g/520kcal
+17:00 닭가슴살볶음밥 + 공기밥1/2 | 섭취33g/흡수33g/480kcal
+21:00 WPI | 섭취25g/흡수25g/120kcal
+
+운동: 등/어깨/팔 26세트, 대전헬스장 30분
+합계: 섭취163g / 흡수158g ✅ / 칼로리≈1,700kcal</div>
+
+  <div class="raw-date">▶ 2026-05-25 (월) — 운동일 (홈)</div>
+  <div class="raw-block">수면: ~4h ❌❌ / 낮잠 3h ✅
+운동: 등/가슴/팔/하체 45세트, 홈, 1시간 6분
+풋살 1시간
+
+13:30 뼈해장국 등뼈200g + 공기밥1/5 | 섭취42g/흡수35g/480kcal
+20:00 WPH + 크레아틴 5g | 섭취25g/흡수25g/120kcal
+21:00 떡볶이 1/2인분 | 섭취4g/흡수4g/250kcal
+24:00 라면1개 + 햄버거1개 (귀경 중) ⚠️야간탄수+심야식 | 섭취22g/흡수22g/950kcal
+
+합계: 섭취117g / 흡수110g 🟡 / 칼로리≈1,920kcal</div>
+
+  <div class="raw-date">▶ 2026-05-26 (화) — 휴식</div>
+  <div class="raw-block">운동 없음 / 식단 상세 기록 누락 ⚠️
+합계: 약 80g (기록 기준) / 1,800kcal (기록 기준)</div>
+
+  <div class="raw-date">▶ 2026-05-27 (수) — 휴식 (데이트)</div>
+  <div class="raw-block">수면: ~7h 30m ✅ (취침 23:00 / 기상 07:40 / 추가수면 09~11시)
+운동 없음
+
+12:30 닭가슴살볶음밥 + 멸치50g | 섭취50g/흡수35g/550kcal
+17:20 닭가슴살 에어프라이 1덩이 | 섭취28g/흡수28g/130kcal
+18:30 중식(짜장면+동파육100g+탕수육100g+크림새우1개) | 섭취45g/흡수35g/1,200kcal
+20:00 아이스크림 1개 | 섭취3g/흡수3g/200kcal
+22:00 취침
+
+합계: 섭취126g / 흡수101g 🟡 / 칼로리≈2,080kcal ⚠️(데이트 초과)</div>
+
+  <div class="raw-date">▶ 2026-05-28 (목) — 운동일 (홈)</div>
+  <div class="raw-block">수면: 9h 40m ✅✅ / 기상 07:40
+운동: 등/어깨/이두 35세트, 홈
+
+07:40 닭가슴살 에어프라이1덩이 + 바나나 + 멸치볶음(후추+핫소스) | 섭취39g/흡수39g/300kcal
+13:35 훈제닭½ + 쌀국수1/3 + 닭고기미트스파게티1/3 | 섭취57g/흡수40g(한도)/650kcal
+16:10 훈제연어150g + 케이퍼어니언소스20g ⚠️소스 과염분 | 섭취31g/흡수31g/320kcal
+17:10 치킨데리야끼덮밥(닭60g + 공기밥1/3) ⚠️데리야끼=금지소스 | 섭취15g/흡수15g/300kcal
+22:00~23:30 우럭회100g + 소주1병 + 매운탕(숟가락20번) ⚠️야간탄수+알코올+붉은국물(3중 위반) | 섭취27g/흡수27g/535kcal
+24:00 취침
+
+합계: 섭취169g / 흡수152g ✅(목표초과) / 칼로리≈2,105kcal ⚠️(+305 초과)</div>
+
+  <div class="raw-date">▶ 2026-05-29 (금) — 휴식일 (진행중)</div>
+  <div class="raw-block">수면: 7h 3m 🟡 (취침 24:00 → 기상 07:50)
+[수면단계] 깊은수면 44분 / 코어 5h 5m / REM 1h 14m / 비수면 26분
+심박수: 58~77 BPM / 호흡수: 15~20.5 회/분
+※ 5/27→28 9h 40m 회복 사이클을 알코올이 사실상 무효화 (깊은수면 44분 — 본인 정상 60분+ 대비 부족)
+
+08:00 공기밥1/4 + 닭가슴살1덩이(100g) + 계란후라이1개 + 멸치볶음50g | 섭취40g/흡수40g/405kcal
+
+[이후 기록 추가 예정]
+현재까지: 섭취40g / 흡수40g / 칼로리≈405kcal (목표 1,500kcal 휴식일)</div>
 
 </div>
 </div>
@@ -1326,6 +1411,74 @@ footer {
 
 총 51세트 / WPH + 크레아틴 ✅ / 레그 익스텐션 6세트 하체 공백 해소</div>
 
+  <div class="raw-date">▶ 2026-05-23 (토) — 어깨/가슴/팔/하체 | 대치헬스장 | ★딥스 82.5kg 신기록</div>
+  <div class="raw-block">시즌9 누적 2일 연속 51세트 / 가슴+팔 메인 + 어깨·하체 보조
+
+★ 시티드 딥스 머신 82.5kg ★시즌9 신기록 (이전 75kg → +7.5kg)
+체스트 프레스 머신 / 펙덱 플라이 머신
+레터럴 레이즈 / 리어 델트 플라이
+케이블 트라이셉스 / 인클라인 컬
+레그 익스텐션 / 레그 컬 (관절 보호 유지)
+
+총 51세트 / WPH + 크레아틴 5g ✅ / 체중 72.1kg (공복)</div>
+
+  <div class="raw-date">▶ 2026-05-24 (일) — 등/어깨/팔 | 대전헬스장 | 30분</div>
+  <div class="raw-block">시간 제약 30분 단축 세션 / 고밀도 운영
+
+랫풀다운 / 시티드 케이블 로우 / 케이블 암 풀다운
+사이드 레터럴 레이즈 / 리어 델트 플라이
+EZ바 컬 / 케이블 트라이셉스 푸시다운
+
+총 26세트 / 볼륨 13,077kg (한쪽팔 기준)
+체중 72.2kg / WPH + 크레아틴 5g ✅</div>
+
+  <div class="raw-date">▶ 2026-05-25 (월) — 등/가슴/팔/하체 | 홈 | 1시간 6분</div>
+  <div class="raw-block">홈 종합 세션 / 덤벨 8/10/14kg + 이지바 활용 (덤벨 한쪽 팔 기준 기록)
+
+원암 덤벨 로우 / 인클라인 덤벨 로우
+덤벨 벤치 프레스 / 덤벨 플라이
+해머컬 / 덤벨컬 / 트라이셉스 익스텐션
+레그 익스텐션 / 레그 컬 / 힙 어덕션
+
+총 45세트 / 볼륨 14,847kg (한쪽팔 기준)
+풋살 1시간 별도 / WPH + 크레아틴 5g ✅</div>
+
+  <div class="raw-date">▶ 2026-05-26 (화) — 휴식</div>
+  <div class="raw-block">운동 없음 / 5일 연속 운동(5/22~25) 후 회복</div>
+
+  <div class="raw-date">▶ 2026-05-27 (수) — 휴식</div>
+  <div class="raw-block">운동 없음 / 데이트 일정</div>
+
+  <div class="raw-date">▶ 2026-05-28 (목) — 등/어깨/이두 | 홈 | 인버티드로우 체중제외</div>
+  <div class="raw-block">※ 모든 덤벨 볼륨 = 한쪽 팔 기준 (표기kg × 기록횟수, ×2 없음 / 번핏 동일)
+
+인버티드 로우 (체중제외, 볼륨0) — 6세트
+1세트: 12회 / 2세트: 12회 / 3세트: 12회
+4세트: 11회 / 5세트: 12회 / 6세트: 10회
+
+원암 덤벨 로우 14kg — 5세트
+1세트: 14kg 14회 / 2세트: 14kg 20회 / 3세트: 14kg 20회
+4세트: 14kg 20회 / 5세트: 14kg 20회 → 볼륨 1,316kg
+
+덤벨 인클라인 로우 14kg — 4세트
+1세트: 14kg 14회 / 2세트: 14kg 14회 / 3세트: 14kg 14회 / 4세트: 14kg 14회
+→ 볼륨 784kg
+
+덤벨 인클라인 리어 레터럴 레이즈 8kg — 4세트
+1~4세트: 8kg 20회 → 볼륨 640kg
+
+시티드 덤벨 레터럴 레이즈 8kg — 6세트
+1~6세트: 8kg 14회 → 볼륨 672kg
+
+덤벨 해머 컬 — 6세트
+1~4세트: 14kg 6회 / 5~6세트: 10kg 12회 → 볼륨 576kg
+
+덤벨 컬 10kg — 4세트
+1세트: 10회 / 2세트: 10회 / 3세트: 10회 / 4세트: 12회 → 볼륨 420kg
+
+세션 합계: 35세트 / 4,408kg (한쪽 팔 기준, 체중부하 인버티드로우 제외)
+수면 9h 40m ✅✅ / 회복 컨디션 최상</div>
+
 </div>
 </div>
 
@@ -1349,6 +1502,18 @@ footer {
       <tr><td>5/12</td><td>≈125g</td><td class="warn">🟡 부족</td><td>≈1,500</td><td class="warn">설사 변수</td></tr>
       <tr><td>5/13</td><td>143g</td><td class="ok">✅ 97%</td><td>≈1,920</td><td class="ok">달성</td></tr>
       <tr><td>5/14</td><td>128g+예정</td><td class="warn">진행중</td><td>≈1,350</td><td class="warn">풋살 후 WPI 예정</td></tr>
+      <tr><td>5/15</td><td>≈145g</td><td class="ok">✅ 달성</td><td>≈1,600</td><td class="ok">운동일</td></tr>
+      <tr><td>5/19</td><td>≈158g</td><td class="ok">✅ 초과</td><td>≈1,750</td><td class="ok">대전헬스장</td></tr>
+      <tr><td>5/20</td><td>≈140g</td><td class="ok">✅ 95%</td><td>≈1,680</td><td class="ok">홈+풋살80분</td></tr>
+      <tr><td>5/21</td><td>180g</td><td class="ok">✅ 초과</td><td>≈1,850</td><td class="ok">+풋살60분 후 와퍼½ ⚠️</td></tr>
+      <tr><td>5/22</td><td>≈155g</td><td class="ok">✅ 달성</td><td>≈1,820</td><td class="ok">★시즌9 최다세트</td></tr>
+      <tr><td>5/23</td><td>≈145g</td><td class="ok">✅ 달성</td><td>≈1,750</td><td class="ok">★딥스82.5신기록</td></tr>
+      <tr><td>5/24</td><td>섭163g/흡158g</td><td class="ok">✅ 초과</td><td>≈1,700</td><td class="ok">대전 30분</td></tr>
+      <tr><td>5/25</td><td>섭117g/흡110g</td><td class="warn">🟡 부족</td><td>≈1,920</td><td class="warn">야간탄수⚠️</td></tr>
+      <tr><td>5/26</td><td>≈80g(기록부실)</td><td class="warn">🟡 미달</td><td>≈1,800</td><td class="warn">휴식일 기록누락</td></tr>
+      <tr><td>5/27</td><td>섭126g/흡101g</td><td class="warn">🟡 부족</td><td>≈2,080</td><td class="warn">데이트 초과</td></tr>
+      <tr><td>5/28</td><td>섭169g/흡152g</td><td class="ok">✅ 초과</td><td>≈2,105</td><td class="warn">⚠️ 야간 알코올+붉은국물 3중위반</td></tr>
+      <tr><td>5/29</td><td>섭40g+/흡40g+</td><td class="warn">진행중</td><td>≈405+</td><td class="warn">휴식일 진행중</td></tr>
     </table>
   </div>
 
@@ -1363,6 +1528,14 @@ footer {
       <tr><td>5/10→11</td><td>미기록</td><td>14:00</td><td>충분</td><td class="ok">✅ 충분</td></tr>
       <tr><td>5/12→13</td><td>02:30</td><td>08:10</td><td>5시간 40분</td><td class="bad">❌ 부족</td></tr>
       <tr><td>5/13→14</td><td>00:40</td><td>07:50</td><td class="ok">7시간 10분 + 낮잠 2.5h</td><td class="ok">✅ 충분</td></tr>
+      <tr><td>5/21→22</td><td>01:13</td><td>07:46</td><td>6시간 14분</td><td class="warn">🟡 깊은수면 50분★</td></tr>
+      <tr><td>5/22→23</td><td>미기록</td><td>미기록</td><td>5시간 23분</td><td class="bad">❌ 부족</td></tr>
+      <tr><td>5/23→24</td><td>미기록</td><td>미기록</td><td>4시간 42분 + 깊은수면 1h5m★</td><td class="bad">❌❌ 매우 부족</td></tr>
+      <tr><td>5/24→25</td><td>미기록</td><td>미기록</td><td>~4시간 + 낮잠 3h</td><td class="bad">❌❌ 매우 부족</td></tr>
+      <tr><td>5/25→26</td><td>미기록</td><td>미기록</td><td>미기록</td><td class="warn">- 기록누락</td></tr>
+      <tr><td>5/26→27</td><td>23:00</td><td>07:40</td><td class="ok">7시간 30분 + 09~11시 추가수면</td><td class="ok">✅ 충분</td></tr>
+      <tr><td>5/27→28</td><td>22:00</td><td>07:40</td><td class="ok">9시간 40분</td><td class="ok">✅✅ 회복최상</td></tr>
+      <tr><td>5/28→29</td><td>24:00</td><td>07:50</td><td>7시간 3분 (깊은 44분)</td><td class="warn">🟡 알코올 후 수면질 저하 확인</td></tr>
     </table>
   </div>
 
@@ -1375,6 +1548,12 @@ footer {
     <div class="fb-item"><span class="fb-tag fb-workout">운동</span>집 바벨 25/15kg 두 가지뿐 — 드롭폭 큼. 짐에서 18~20kg 활용 권장</div>
     <div class="fb-item"><span class="fb-tag fb-workout">운동</span>5/7 16세트 — 풋살 후 피로 감안한 자연 조절. 현명한 판단 ✅</div>
     <div class="fb-item"><span class="fb-tag fb-sleep">수면</span>취침 시각 기록 누락 다수 — 수면 추적을 위해 취침/기상 시각 매일 기록 필요</div>
+    <div class="fb-item"><span class="fb-tag fb-workout">운동</span>5/22 시즌9 최다 51세트 + 5/23 딥스 82.5kg 신기록 — 2일 연속 고볼륨, 마운틴독 완성형</div>
+    <div class="fb-item"><span class="fb-tag fb-workout">운동</span>5/28 35세트 / 4,408kg — 세트당 평균 126kg. 14kg 상한 장비에서 20회 반복 = 강도 부족. 다음 세션 템포·정지수축으로 자극 밀도 끌어올릴 것</div>
+    <div class="fb-item"><span class="fb-tag fb-diet">식단</span>5/25 24:00 라면+햄버거 — 야간탄수+심야식 명백한 위반. 귀경 길 식사 패턴 재검토 필요</div>
+    <div class="fb-item"><span class="fb-tag fb-diet">식단</span>5/27 데이트 식단 2,080kcal — 외식 통제력 떨어짐. 정해진 칼로리 내 외식 옵션 확보 필요</div>
+    <div class="fb-item"><span class="fb-tag fb-diet">식단</span>5/28 22:00 우럭회+소주1병+매운탕 — <strong style="color:var(--red);">알코올+붉은국물+야간탄수 3중 위반</strong>. 알코올은 MPS 30~37% 저하시키며 그날 단백질 152g 달성을 무효화함</div>
+    <div class="fb-item"><span class="fb-tag fb-sleep">수면</span>5/23~25 3일 연속 5시간 미만 — 누적 데미지 심각 구간 진입. 5/27~28 회복했으나 5/28 알코올로 회복 사이클 다시 손상</div>
   </div>
 
   <div class="card span3">
@@ -1384,6 +1563,10 @@ footer {
     <div class="fb-item">③ 가슴 전담 날 구성 — 현재 보조 역할, 별도 세션 필요</div>
     <div class="fb-item">④ 단백질 80g 이하 날 없애기 — 운동일엔 WPH + 본식 단백질 반드시 확보</div>
     <div class="fb-item">⑤ 5/4 식단 기록 공백 — 번핏 운동 기록 있을 때 식단도 같이 기록</div>
+    <div class="fb-item">⑥ <strong style="color:var(--red);">야간 알코올 차단 — 1순위 과제</strong>. 운동일 단백질 152g 달성을 알코올 1병이 사실상 무효화. 5/30부터 절주/금주 강제 적용</div>
+    <div class="fb-item">⑦ 외식 옵션 확정 — 데이트·귀경·야간 식사 시 칼로리 1,800 이내 + 단백질 흡수 40g 이내 메뉴 5종 미리 정해두기</div>
+    <div class="fb-item">⑧ 덤벨 14kg 상한 한계 보완 — 템포(이심성 3~4초)+정지수축으로 점진적 과부하 확보, 또는 짐 세션 활용</div>
+    <div class="fb-item">⑨ 휴식일 80g 미만 사태 차단 — 5/26 같은 기록 누락 0으로. 휴식일도 단백질 148g 목표 동일 적용</div>
   </div>
 
 </div>
@@ -1396,7 +1579,7 @@ footer {
   <p style="font-family:'Space Mono',monospace;font-size:10px;color:var(--dim);margin-bottom:24px;">새 대화창에서 이 섹션의 내용을 Claude에게 주면 맥락을 이어갈 수 있습니다.</p>
 
   <div class="raw-block">## 프로필
-이름: 최성훈 | 1983년생 만43세 | 남성 | 174cm | 74kg
+이름: 최성훈 | 1983년생 만43세 | 남성 | 174cm | 시작 75kg → 현재 72.2kg
 목표: 리컴포지션 (체지방 감량 + 근비대)
 운동 스타일: 마운틴독 (존 메도우즈) — 선피로, 고볼륨, 근육 고립
 직업: 물리학 강사 (서울↔대전 정기 이동)
@@ -1407,9 +1590,9 @@ footer {
 스쿼트/레그프레스 완전 불가
 하체 운동: 레그익스텐션, 레그컬, 힙어덕션만 가능
 
-## 집 장비
-덤벨: 5, 8, 10, 14kg
-이지바: 15kg / 25kg (중간 무게 없음)
+## 집 장비 (확정)
+덤벨: 5kg / 8kg / 10kg / 14kg — 4종 (홈 가용 중량)
+이지바: 15kg / 25kg
 바벨: 20kg / 40kg
 벤치: 30/45/60/90도
 
@@ -1419,21 +1602,70 @@ WPI: 일반 보충 / 취침 전
 크레아틴: 5g/day
 마그네슘: 2알 취침 전
 
+## 운동 기록 규칙 (확정)
+덤벨 볼륨 = 한쪽 팔 기준으로 통일 (×2 안 함, 번핏 앱과 동일)
+- 덤벨 중량 = 한손(편측) 무게
+- 기록 횟수 = 항상 한쪽 팔 횟수 (얼터네이트·양손동시·원암 모두 동일)
+- 볼륨 = 표기kg × 기록횟수 × 세트 (그대로)
+- 과거 전 기록도 이 기준으로 통일 (번핏과 숫자 일치)
+- 실제 양팔 총부하는 이 값의 2배이나, 추세 일관성·번핏 동기화를 위해 한쪽 팔 기준 유지
+
 ## 식단 원칙
+- 일일 목표: 운동일 1,800kcal / 휴식일 1,500kcal
+- 단백질 목표: 148g/day (체중 × 2g)
+- 단백질 흡수 한도: 한 끼 35~40g / 식사 간격 3~4시간 / 하루 4~5회
 - 국물류: 붉은 국물 금지, 건더기만
 - 초밥: 간장/초생강 제외, 와사비만
 - 서브웨이: 로티세리 샐러드 + 동일패티 + 피클/올리브 제외 + 소금/식초/후추
 - 야간 탄수화물: 제로
 - 견과류: 매우 제한
 - 소스(마요/데리야끼 등): 금지
+- 풋살 후 커피: 금지 (수면 방해 확인)
+- 아보카도: 고활동일만 (칼로리 밀도)
+- 알코올: <strong>피드백 후 1순위 차단 과제</strong>
 
-## 시즌9 현황 (5/3~)
-Day1 5/3: 등 (대전 짐)
-Day2 5/4: 어깨/이두 (홈)
-Day3 5/5: 가슴/하체/팔 36세트 역대최고 (대전 짐)
+## 시즌9 전체 흐름 (5/3~5/29)
+Day1 5/3: 등 (대전 짐) 28세트 / 7,917kg
+Day2 5/4: 어깨/이두 (홈) 24세트 / 3,432kg
+Day3 5/5: 가슴/하체/팔 36세트 / 14,130kg (대전 짐)
 Day4 5/6: 후면어깨/이두/삼두 (홈) + 풋살 78분
-Day5 5/7: 가슴/이두 (홈)
-Day6 5/8: 어깨 워밍업 + 메인 예정 (홈)</div>
+Day5 5/7: 가슴/이두 (홈) 16세트
+Day6 5/8: 어깨/삼두 (홈+대치) 26세트 + 풋살
+Day7 5/9: 어깨/이두/가슴 (홈) 16세트
+Day8 5/10: 휴식
+Day9 5/11: 어깨/삼두/이두/등 (대치) 36세트
+Day10 5/12: 등/어깨/하체 (대전) 35세트 ★랫풀다운 55kg 신기록
+Day11 5/13: 어깨 (홈) 11세트
+Day12 5/14: 풋살 / 처방약 시작
+Day13 5/15: 등/어깨/이두 (홈) 24세트 + 풋살 60분
+Day14 5/16: 휴식
+Day15 5/17: 풋살
+Day16 5/18: 휴식 (부비동염 진단)
+Day17 5/19: 어깨/삼두/이두 (대전) 17세트 / 6,700kg ★최저체중 71.6kg
+Day18 5/20: 어깨/등/이두 (홈) 18세트 + 풋살 80분
+Day19 5/21: 가슴/팔 (홈) 25세트 + 풋살 60분
+Day20 5/22: 어깨/등/가슴/하체 (대치) <strong>51세트 / 23,975kg ★시즌9 최다세트</strong>
+Day21 5/23: 어깨/가슴/팔/하체 (대치) 51세트 / 16,530kg <strong>★딥스 82.5kg 신기록</strong>
+Day22 5/24: 등/어깨/팔 (대전) 26세트 / 13,077kg / 30분
+Day23 5/25: 등/가슴/팔/하체 (홈) 45세트 / 14,847kg / 1h6m + 풋살 1h
+Day24 5/26: 휴식
+Day25 5/27: 휴식 (데이트 — 식단 초과 ⚠️)
+Day26 5/28: 등/어깨/이두 (홈) 35세트 / 4,408kg / 인버티드로우 체중제외
+Day27 5/29: 휴식일 (진행중)
+
+## 누적 통계 (5/29 기준)
+- 총 운동 세션: 22일 (5/26·5/27 제외)
+- 시즌9 최다 세트: 5/22 51세트 (대치)
+- 시즌9 최다 볼륨: 5/22 23,975kg
+- 신기록: 5/12 랫풀다운 55kg / 5/23 딥스 82.5kg
+- 체중 변화: 75kg → 72.2kg (▼ 2.8kg)
+- 최저 체중: 71.6kg (5/19)
+
+## 최근 주요 이슈
+1. 5/22~5/24 3일 연속 수면 부족 (5h 미만) — 누적 데미지 구간 진입했으나 5/27~28 회복
+2. 5/28 야간 알코올 사건 — 우럭회+소주1병+매운탕 야간 3중 원칙 위반
+3. 단백질 흡수 152g 달성에도 알코올로 MPS 저해 → 그날 효과 사실상 무효화
+4. 5/29 휴식일 진입 — 알코올 회복 + 단백질 패턴 정상화 필요</div>
 </div>
 </div>
 
@@ -1466,21 +1698,25 @@ Day6 5/8: 어깨 워밍업 + 메인 예정 (홈)</div>
     <!-- 보유 장비 -->
     <div class="card">
       <div class="card-label">② 보유 덤벨 // EQUIPMENT</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
-        <div style="flex:1;min-width:60px;text-align:center;padding:18px 6px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;">
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--accent);line-height:1;">8</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;">
+        <div style="flex:1;min-width:48px;text-align:center;padding:18px 4px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--accent);line-height:1;">5</div>
           <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">KG</div>
         </div>
-        <div style="flex:1;min-width:60px;text-align:center;padding:18px 6px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;">
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--accent);line-height:1;">10</div>
+        <div style="flex:1;min-width:48px;text-align:center;padding:18px 4px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--accent);line-height:1;">8</div>
           <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">KG</div>
         </div>
-        <div style="flex:1;min-width:60px;text-align:center;padding:18px 6px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;">
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--accent);line-height:1;">14</div>
+        <div style="flex:1;min-width:48px;text-align:center;padding:18px 4px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--accent);line-height:1;">10</div>
+          <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">KG</div>
+        </div>
+        <div style="flex:1;min-width:48px;text-align:center;padding:18px 4px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--accent);line-height:1;">14</div>
           <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">KG</div>
         </div>
       </div>
-      <div class="stat-sub" style="margin-top:14px;">홈 트레이닝 가용 중량 3종뿐<br>점진적 과부하는 템포·정지수축으로 보완</div>
+      <div class="stat-sub" style="margin-top:14px;">홈 트레이닝 가용 중량 4종<br>점진적 과부하는 템포·정지수축 + 14kg→고반복으로 보완</div>
     </div>
 
     <!-- 단백질 흡수 원칙 -->
@@ -1749,30 +1985,74 @@ new Chart(wCtx, {
   }
 });
 
-// 단백질 달성 추이 차트
+// 단백질 달성 추이 + 칼로리 추이 (듀얼 Y축)
 const pCtx = document.getElementById('proteinChart').getContext('2d');
+// 전체 데이터
+const _pLabels = ['5/3','5/4','5/5','5/6','5/7','5/8','5/9','5/10','5/11','5/12','5/13','5/14','5/15','5/16','5/17','5/18','5/19','5/20','5/21','5/22','5/23','5/24','5/25','5/26','5/27','5/28','5/29'];
+const _pProtein = [75, null, 132, 164, 151, 164, 125, 122, 112, 125, 143, 153, 164, 134, 125, 68, 142, 142, 180, 139, 138, 163, 117, 80, 126, 169, 40];
+const _pCal = [700, null, 1800, 1870, 1315, 1600, 1480, 1310, 1400, 1500, 1920, 1350, 1985, null, null, null, 1750, 1680, 1850, 1820, 1750, 1700, 1920, 1800, 2080, 2105, 405];
+// 최근 20일만 표시
+const _N = 20;
+const pLabels  = _pLabels.slice(-_N);
+const pProtein = _pProtein.slice(-_N);
+const pCal     = _pCal.slice(-_N);
 new Chart(pCtx, {
   type: 'line',
   data: {
-    labels: ['5/3', '5/4', '5/5', '5/6', '5/7', '5/8', '5/9', '5/10', '5/11', '5/12', '5/13', '5/14', '5/15', '5/16', '5/17', '5/18', '5/19', '5/20', '5/21', '5/22', '5/23', '5/24', '5/25', '5/26', '5/27', '5/28'],
+    labels: pLabels,
     datasets: [
-      { label:'단백질', data:[75, null, 132, 164, 151, 164, 125, 122, 112, 125, 143, 153, 164, 134, 125, 68, 142, 142, 180, 139, 138, 163, null, null, 126, 64],
-        borderColor:'#4ef5a7', backgroundColor:'rgba(78,245,167,.08)',
-        borderWidth:2, pointBackgroundColor:'#4ef5a7', pointRadius:4,
-        fill:true, tension:.4, spanGaps:true },
-      { label:'목표 148g', data:[148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148,148],
-        borderColor:'rgba(212,245,78,.3)', borderWidth:1,
-        borderDash:[4,4], pointRadius:0, fill:false }
+      { label:'단백질 (g)',
+        data:pProtein,
+        yAxisID:'y',
+        borderColor:'#4ef5a7', backgroundColor:'rgba(78,245,167,.10)',
+        borderWidth:2.5, pointBackgroundColor:'#4ef5a7', pointRadius:4, pointHoverRadius:6,
+        fill:true, tension:.4, spanGaps:true, order:2 },
+      { label:'단백질 목표 148g',
+        data:Array(pLabels.length).fill(148),
+        yAxisID:'y',
+        borderColor:'rgba(78,245,167,.45)', borderWidth:1,
+        borderDash:[6,4], pointRadius:0, fill:false, order:4 },
+      { label:'칼로리 (kcal)',
+        data:pCal,
+        yAxisID:'y1',
+        borderColor:'#f54e4e', backgroundColor:'rgba(245,78,78,.05)',
+        borderWidth:2.5, pointBackgroundColor:'#f54e4e', pointRadius:4, pointHoverRadius:6,
+        fill:true, tension:.4, spanGaps:true, order:1 },
+      { label:'칼로리 목표 1,800',
+        data:Array(pLabels.length).fill(1800),
+        yAxisID:'y1',
+        borderColor:'rgba(245,78,78,.45)', borderWidth:1,
+        borderDash:[6,4], pointRadius:0, fill:false, order:3 }
     ]
   },
   options: {
     responsive:true, maintainAspectRatio:false,
-    plugins:{ legend:{display:false},
-      tooltip:{backgroundColor:'#1c1c1c',titleColor:'#4ef5a7',bodyColor:'#888'}
+    interaction:{ mode:'index', intersect:false },
+    plugins:{
+      legend:{ display:true, position:'top', align:'end',
+        labels:{ color:'#888', font:{family:'Space Mono',size:10}, boxWidth:14, padding:10,
+          filter: item => !item.text.includes('목표') }
+      },
+      tooltip:{ backgroundColor:'#1c1c1c', titleColor:'#d4f54e', bodyColor:'#ccc',
+        callbacks:{ label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y?.toLocaleString() ?? '-'}` }
+      }
     },
     scales:{
-      x:{grid:{color:'#1c1c1c'},ticks:{color:'#444',font:{family:'Space Mono',size:10}}},
-      y:{grid:{color:'#1c1c1c'},ticks:{color:'#444',font:{family:'Space Mono',size:10}},min:0,max:200}
+      x:{ grid:{color:'#1c1c1c'}, ticks:{color:'#444',font:{family:'Space Mono',size:10}} },
+      y:{
+        position:'left',
+        title:{ display:true, text:'단백질 (g)', color:'#4ef5a7', font:{family:'Space Mono',size:11,weight:'bold'} },
+        grid:{ color:'#1c1c1c' },
+        ticks:{ color:'#4ef5a7', font:{family:'Space Mono',size:10}, callback: v => v+'g' },
+        min:0, max:220
+      },
+      y1:{
+        position:'right',
+        title:{ display:true, text:'칼로리 (kcal)', color:'#f54e4e', font:{family:'Space Mono',size:11,weight:'bold'} },
+        grid:{ drawOnChartArea:false },
+        ticks:{ color:'#f54e4e', font:{family:'Space Mono',size:10}, callback: v => v.toLocaleString() },
+        min:0, max:2500
+      }
     }
   }
 });
