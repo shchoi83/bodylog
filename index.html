@@ -274,12 +274,12 @@ footer {
 
   <div class="banner">
     <div>
-      <div class="banner-text">기록이 몸을 만든다</div>
-      <div class="banner-sub">SEASON 9 — CONSISTENCY IS THE ONLY STRATEGY</div>
+      <div class="banner-text">SEASON 9 회복기 Day 1</div>
+      <div class="banner-sub">6/4~6/8 — RECOVERY MODE / 73.3 → 72.0kg</div>
     </div>
     <div>
-      <div class="banner-streak">15</div>
-      <div class="banner-streak-label">DAY STREAK</div>
+      <div class="banner-streak">23</div>
+      <div class="banner-streak-label">SEASON 9 / 33일 중</div>
     </div>
   </div>
 
@@ -446,7 +446,7 @@ footer {
 
   <!-- 지난 7일 부위별 세트수 — 레이더 -->
   <div class="card span2">
-    <div class="card-label">지난 7일 누적 부위별 세트수 — 오늘 운동 결정용</div>
+    <div class="card-label">최근 7일 부위별 세트수 — 5/29~6/4 (오늘 기준)</div>
     <div class="radar-wrap" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
       <div style="position:relative;width:260px;height:260px;flex-shrink:0;min-width:200px;">
         <canvas id="bodyPartChart"></canvas>
@@ -492,7 +492,7 @@ footer {
         </div>
         <div style="margin-top:16px;padding:12px;background:var(--surface2);border-radius:3px;border-left:3px solid var(--accent3);">
           <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent3);letter-spacing:1px;margin-bottom:4px;">NEXT SESSION 추천</div>
-          <div style="font-size:12px;line-height:1.7;">하체 35 · 가슴 37 — 상대적으로 부족<br>등 49 · 어깨 45 · 팔 42 — 충분<br>→ <strong style="color:var(--accent3);">하체 메인 + 가슴 보조</strong> 추천 (5/29 휴식일)</div>
+          <div style="font-size:12px;line-height:1.7;">5/30~6/3 5일 휴식 → 5/29 1회만 반영<br>가슴 15 · 팔 14 · 등 9 — 적정 / 어깨 5 · 하체 5 — 부족<br>→ <strong style="color:var(--accent3);">회복기 Day1 = 등 + 어깨 메인</strong> 추천 (6/4 16:20 출발)</div>
         </div>
       </div>
     </div>
@@ -2046,15 +2046,21 @@ document.getElementById('lastUpdated').textContent =
 // 스트릭 그리드
 // 시즌9 시작: 2026-05-03, 오늘: 2026-05-28
 // workoutDays: 5월 운동한 날짜 (일 기준)
-const workoutDays = [3,4,5,6,7,8,9,11,12,13,14,15,17,19,20,21,22,23,24,25,28];
-const today = 28;
+// 5월 운동일 (시즌9 5/3 시작, 5/29 마지막 운동)
+const workoutDaysMay = [3,4,5,6,7,8,9,11,12,13,14,15,17,19,20,21,22,23,24,25,28,29];
+// 6월 운동일 (6/4 회복기 Day1 진행 중 = today)
+const workoutDaysJun = [];
+// today date moved to todayDate below
 const seasonStart = new Date('2026-05-03');
-const todayDate = new Date('2026-05-28');
+const todayDate = new Date('2026-06-04');
 
 // 날짜→운동여부 맵 (5월 기준)
 function isDone(dateObj) {
   if (dateObj.getMonth() === 4) { // 5월
-    return workoutDays.includes(dateObj.getDate());
+    return workoutDaysMay.includes(dateObj.getDate());
+  }
+  if (dateObj.getMonth() === 5) { // 6월
+    return workoutDaysJun.includes(dateObj.getDate());
   }
   return false;
 }
@@ -2113,7 +2119,7 @@ document.getElementById('streakToggleBtn').textContent = `전체 ${allDays.lengt
 
 // 부위별 누적 레이더 차트 (최근 7일 합계: 5/22~5/28)
 const bCtx = document.getElementById('bodyPartChart').getContext('2d');
-const bodyPartData = [49, 45, 37, 35, 42];  // 등/어깨/가슴/하체/팔
+const bodyPartData = [9, 5, 15, 5, 14];  // 등/어깨/가슴/하체/팔 — 5/29~6/4 누적
 // 데이터 최댓값 기준 자동 스케일: 10단위 올림 + 최소 10 보장
 // 시간이 지나 데이터가 줄어들면 max도 자동으로 줄어듦
 const _bpDataMax = Math.max(...bodyPartData);
