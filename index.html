@@ -257,12 +257,12 @@ footer {
 </header>
 
 <nav>
-  <button class="active" onclick="showPanel('dashboard')">대시보드</button>
-  <button onclick="showPanel('diet')">식단 원문</button>
-  <button onclick="showPanel('workout')">운동 원문</button>
-  <button onclick="showPanel('analysis')">분석</button>
-  <button onclick="showPanel('rawlog')">전체 로그</button>
-  <button onclick="showPanel('rules')">기록 규칙</button>
+  <button class="active" onclick="showPanel('dashboard', this)">대시보드</button>
+  <button onclick="showPanel('diet', this)">식단 원문</button>
+  <button onclick="showPanel('workout', this)">운동 원문</button>
+  <button onclick="showPanel('analysis', this)">분석</button>
+  <button onclick="showPanel('rawlog', this)">전체 로그</button>
+  <button onclick="showPanel('rules', this)">기록 규칙</button>
 </nav>
 
 <!-- ===== DASHBOARD ===== -->
@@ -2168,11 +2168,12 @@ Day37 6/8: 회복기 Day5 마지막 메인 ★ / 27세트 12,456kg / ★시티�
 </footer>
 
 <script>
-function showPanel(id) {
+function showPanel(id, btn) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  event.target.classList.add('active');
+  var target = document.getElementById(id);
+  if (target) target.classList.add('active');
+  if (btn) btn.classList.add('active');
 }
 
 // 날짜 업데이트
