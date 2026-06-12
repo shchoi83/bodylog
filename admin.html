@@ -718,7 +718,11 @@ async function analyzeSleep() {
   try {
     const res = await fetch('https://bodylog-proxy.shchoi83.workers.dev/', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01'
+      },
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
         max_tokens: 600,
