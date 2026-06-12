@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BODYLOG — 관리</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap');
+:root {
+  --bg:#0a0a0a; --surface:#111; --surface2:#181818; --border:#222;
+  --text:#e0e0e0; --muted:#555; --dim:#2a2a2a;
+  --accent:#d4f54e; --green:#4ef5a7; --orange:#f5a94e; --red:#f54e4e; --blue:#4e9ff5;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:13px;min-height:100vh;padding-bottom:60px;}
+
+header{padding:20px;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:12px;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--accent);letter-spacing:2px;}
+.logo-sub{font-size:10px;color:var(--muted);letter-spacing:2px;}
+.date-pill{margin-left:auto;font-size:11px;color:var(--accent);background:rgba(212,245,78,.08);border:1px solid rgba(212,245,78,.2);border-radius:3px;padding:4px 10px;}
+
+/* 설정 바 */
+.cfg-bar{padding:8px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.cfg-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:'Space Mono',monospace;font-size:10px;padding:4px 10px;border-radius:2px;cursor:pointer;letter-spacing:1px;}
+.cfg-btn:hover{border-color:var(--accent);color:var(--accent);}
+.cfg-btn.danger{border-color:var(--red);color:var(--red);}
+.cfg-btn.danger:hover{background:rgba(245,78,78,.08);}
+.status-dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;}
+.dot-ok{background:var(--green);}
+.dot-warn{background:var(--orange);}
+.dot-bad{background:var(--red);}
+
+/* 설정 패널 */
+.cfg-panel{display:none;padding:16px 20px;background:var(--surface);border-bottom:1px solid var(--border);gap:12px;flex-direction:column;}
+.cfg-panel.open{display:flex;}
+.cfg-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.cfg-field label{font-size:10px;color:var(--muted);letter-spacing:1px;display:block;margin-bottom:4px;}
+.cfg-field input{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);font-family:'Space Mono',monospace;font-size:11px;padding:8px 10px;border-radius:2px;outline:none;}
+.cfg-field input:focus{border-color:var(--accent);}
+.save-btn{align-self:flex-start;background:var(--accent);color:#000;border:none;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;padding:7px 16px;border-radius:2px;cursor:pointer;}
+
+/* 오늘 누적 */
+main{padding:16px 20px;display:flex;flex-direction:column;gap:14px;max-width:800px;}
+.summary{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:14px 16px;}
+.summary-title{font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:12px;}
+.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.sum-item{background:var(--surface2);border-radius:3px;padding:10px 12px;text-align:center;}
+.sum-label{font-size:9px;color:var(--muted);margin-bottom:4px;}
+.sum-val{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1;}
+.sum-bar{height:3px;background:var(--dim);border-radius:2px;margin-top:6px;overflow:hidden;}
+.sum-fill{height:100%;border-radius:2px;transition:width .4s;}
+.sum-meta{margin-top:10px;font-size:10px;color:var(--muted);display:flex;gap:20px;flex-wrap:wrap;}
+
+/* 로그 */
+.log-section{background:var(--surface);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.log-header{padding:10px 14px;border-bottom:1px solid var(--border);font-size:10px;color:var(--muted);letter-spacing:2px;}
+.log-body{padding:12px 14px;display:flex;flex-direction:column;gap:6px;}
+.log-item{padding:7px 10px;border-radius:2px;font-size:11px;line-height:1.6;border-left:2px solid var(--dim);}
+.log-item.diet{border-left-color:var(--green);}
+.log-item.workout{border-left-color:var(--orange);}
+.log-item.weight{border-left-color:var(--blue);}
+.log-time{color:var(--muted);font-size:10px;margin-bottom:2px;}
+
+/* 입력 섹션 */
+.section{background:var(--surface);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.sec-header{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.sec-icon{font-family:'Bebas Neue',sans-serif;font-size:12px;color:var(--accent);letter-spacing:1px;min-width:64px;}
+.sec-title{font-size:11px;color:var(--text);letter-spacing:1px;}
+.sec-body{padding:13px 14px;}
+textarea,input[type=text]{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);font-family:'Space Mono',monospace;font-size:12px;padding:9px 11px;border-radius:2px;outline:none;line-height:1.7;}
+textarea{resize:vertical;}
+textarea:focus,input[type=text]:focus{border-color:var(--accent);}
+textarea::placeholder,input[type=text]::placeholder{color:var(--muted);}
+
+.btn-row{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap;}
+.send-btn{background:var(--accent);color:#000;border:none;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;padding:8px 18px;border-radius:2px;cursor:pointer;letter-spacing:1px;transition:opacity .15s;}
+.send-btn:hover{opacity:.85;}
+.send-btn:disabled{opacity:.4;cursor:not-allowed;}
+.push-btn{background:none;border:1px solid var(--green);color:var(--green);font-family:'Space Mono',monospace;font-size:11px;padding:8px 16px;border-radius:2px;cursor:pointer;letter-spacing:1px;}
+.push-btn:hover{background:rgba(78,245,167,.08);}
+.push-btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* 결과 */
+.result{display:none;margin-top:11px;padding:11px 13px;background:var(--surface2);border:1px solid var(--dim);border-radius:3px;}
+.result.show{display:block;}
+.r-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--dim);font-size:11px;}
+.r-row:last-child{border:none;}
+.r-label{color:var(--muted);}
+.r-val{color:var(--green);font-weight:700;}
+.r-val.warn{color:var(--orange);}
+.feedback{margin-top:9px;padding:9px 11px;background:rgba(212,245,78,.04);border-left:3px solid var(--accent);border-radius:0 2px 2px 0;font-size:11px;line-height:1.8;white-space:pre-wrap;}
+
+/* 체중 */
+.wt-row{display:flex;gap:8px;}
+.wt-row input{flex:1;}
+.wt-row .send-btn{margin-top:0;white-space:nowrap;}
+
+/* GitHub 푸시 상태 */
+.push-status{font-size:10px;color:var(--muted);margin-top:6px;min-height:16px;}
+.push-status.ok{color:var(--green);}
+.push-status.err{color:var(--red);}
+
+/* 페이지 네비 */
+.page-nav {
+  display:flex; align-items:center; gap:8px;
+  padding:8px 20px; background:#050505; border-bottom:1px solid #1a1a1a;
+}
+.page-nav a {
+  font-family:'Space Mono',monospace; font-size:10px; letter-spacing:2px;
+  padding:5px 14px; border-radius:2px; text-decoration:none;
+  border:1px solid #222; color:#555; transition:all .15s;
+}
+.page-nav a:hover { border-color:#d4f54e; color:#d4f54e; }
+.page-nav a.current { background:#d4f54e; color:#000; border-color:#d4f54e; font-weight:700; }
+.page-nav .nav-sep { color:#333; font-size:12px; }
+</style>
+</head>
+<body>
+
+<div class="page-nav">
+  <a href="./index.html">대시보드</a>
+  <span class="nav-sep">·</span>
+  <a href="./admin.html" class="current">관리 / 입력</a>
+</div>
+<header>
+  <span class="logo">BODYLOG</span>
+  <span class="logo-sub">ADMIN</span>
+  <span class="date-pill" id="datePill"></span>
+</header>
+
+<div class="cfg-bar">
+  <button class="cfg-btn" onclick="toggleCfg()">⚙ 설정</button>
+  <span id="apiStatus"><span class="status-dot dot-bad"></span>API 키 없음</span>
+  <span id="ghStatus"><span class="status-dot dot-bad"></span>GitHub 토큰 없음</span>
+  <span style="margin-left:auto;display:flex;gap:8px;">
+    <button class="cfg-btn" onclick="pushAll()" id="pushAllBtn">▲ GitHub 전체 푸시</button>
+    <button class="cfg-btn danger" onclick="resetDay()">🗑 오늘 리셋</button>
+  </span>
+</div>
+
+<div class="cfg-panel" id="cfgPanel">
+  <div class="cfg-row">
+    <div class="cfg-field">
+      <label>ANTHROPIC API KEY</label>
+      <input type="text" id="inApiKey" placeholder="sk-ant-..." />
+    </div>
+    <div class="cfg-field">
+      <label>GITHUB TOKEN</label>
+      <input type="text" id="inGhToken" placeholder="ghp_..." />
+    </div>
+  </div>
+  <div class="cfg-row">
+    <div class="cfg-field">
+      <label>GITHUB REPO (owner/repo)</label>
+      <input type="text" id="inGhRepo" placeholder="shchoi83/bodylog" />
+    </div>
+    <div class="cfg-field">
+      <label>GITHUB BRANCH</label>
+      <input type="text" id="inGhBranch" placeholder="main" />
+    </div>
+  </div>
+  <button class="save-btn" onclick="saveCfg()">저장</button>
+</div>
+
+<main>
+
+  <!-- 누적 요약 -->
+  <div class="summary">
+    <div class="summary-title">TODAY — <span id="todayLabel"></span></div>
+    <div class="summary-grid">
+      <div class="sum-item">
+        <div class="sum-label">단백질 섭취</div>
+        <div class="sum-val" id="s_intake" style="color:var(--green);">0<span style="font-size:14px;">g</span></div>
+        <div style="font-size:9px;color:var(--muted);">목표 148g</div>
+        <div class="sum-bar"><div class="sum-fill" id="b_intake" style="background:var(--green);width:0%"></div></div>
+      </div>
+      <div class="sum-item">
+        <div class="sum-label">단백질 흡수</div>
+        <div class="sum-val" id="s_absorb" style="color:var(--orange);">0<span style="font-size:14px;">g</span></div>
+        <div style="font-size:9px;color:var(--muted);">목표 140g</div>
+        <div class="sum-bar"><div class="sum-fill" id="b_absorb" style="background:var(--orange);width:0%"></div></div>
+      </div>
+      <div class="sum-item">
+        <div class="sum-label">칼로리</div>
+        <div class="sum-val" id="s_kcal" style="color:var(--accent);">0<span style="font-size:14px;">kcal</span></div>
+        <div style="font-size:9px;color:var(--muted);">목표 1,800</div>
+        <div class="sum-bar"><div class="sum-fill" id="b_kcal" style="background:var(--accent);width:0%"></div></div>
+      </div>
+    </div>
+    <div class="sum-meta">
+      <span>체중 <strong id="s_weight" style="color:var(--green);">미입력</strong></span>
+      <span>크레아틴 <span id="s_creatine">❓</span></span>
+      <span>WPH <span id="s_wph">❓</span></span>
+    </div>
+  </div>
+
+  <!-- 오늘 로그 -->
+  <div class="log-section" id="logSection" style="display:none;">
+    <div class="log-header">TODAY LOG</div>
+    <div class="log-body" id="logList"></div>
+  </div>
+
+  <!-- 식단 입력 -->
+  <div class="section">
+    <div class="sec-header">
+      <span class="sec-icon">DIET</span>
+      <span class="sec-title">식사 타이밍과 내용</span>
+    </div>
+    <div class="sec-body">
+      <textarea id="dietInput" rows="3" placeholder="예) 오후 1시 — 닭가슴살 100g, 공기밥 1/5, 계란 2개. 국물 안 마심. 크레아틴 복용."></textarea>
+      <div class="btn-row">
+        <button class="send-btn" id="dietBtn" onclick="analyzeDiet()">분석</button>
+      </div>
+      <div class="result" id="dietResult">
+        <div class="r-row"><span class="r-label">단백질 섭취</span><span class="r-val" id="r_intake">—</span></div>
+        <div class="r-row"><span class="r-label">단백질 흡수</span><span class="r-val" id="r_absorb">—</span></div>
+        <div class="r-row"><span class="r-label">칼로리</span><span class="r-val" id="r_kcal">—</span></div>
+        <div class="feedback" id="r_fb"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 체중 입력 -->
+  <div class="section">
+    <div class="sec-header">
+      <span class="sec-icon">WEIGHT</span>
+      <span class="sec-title">어디서, 몇 시, 몇 kg?</span>
+    </div>
+    <div class="sec-body">
+      <div class="wt-row">
+        <input type="text" id="wtInput" placeholder="예) 집 08:10 공복 72.4kg" />
+        <button class="send-btn" id="wtBtn" onclick="logWeight()">기록</button>
+      </div>
+      <div class="result" id="wtResult">
+        <div class="feedback" id="wt_fb"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 운동 입력 -->
+  <div class="section">
+    <div class="sec-header">
+      <span class="sec-icon">WORKOUT</span>
+      <span class="sec-title">운동 내용 (번핏 일지 붙여넣기 가능)</span>
+    </div>
+    <div class="sec-body">
+      <textarea id="wkInput" rows="6" placeholder="랫풀다운&#10;1세트: 60kg 8회&#10;2세트: 60kg 8회&#10;..."></textarea>
+      <div class="btn-row">
+        <button class="send-btn" id="wkBtn" onclick="analyzeWorkout()">분석</button>
+      </div>
+      <div class="result" id="wkResult">
+        <div class="r-row"><span class="r-label">총 세트</span><span class="r-val" id="w_sets">—</span></div>
+        <div class="r-row"><span class="r-label">총 볼륨</span><span class="r-val" id="w_vol">—</span></div>
+        <div class="r-row"><span class="r-label">부위 분포</span><span class="r-val" id="w_parts">—</span></div>
+        <div class="feedback" id="w_fb"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 수면 사진 업로드 -->
+  <div class="section">
+    <div class="sec-header">
+      <span class="sec-icon">SLEEP</span>
+      <span class="sec-title">수면 정보 — 사진 업로드</span>
+    </div>
+    <div class="sec-body">
+      <div style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.8;">
+        애플 건강 앱 수면 화면 캡처를 업로드하면 AI가 자동으로 수면 데이터를 읽습니다.
+      </div>
+      <!-- 드래그앤드롭 영역 -->
+      <div id="sleepDropZone" onclick="document.getElementById('sleepFileInput').click()"
+        style="border:2px dashed var(--border);border-radius:4px;padding:24px;text-align:center;cursor:pointer;transition:border-color .2s;">
+        <div style="font-size:28px;margin-bottom:8px;">📷</div>
+        <div style="font-size:11px;color:var(--muted);">클릭하거나 사진을 여기에 드롭하세요</div>
+        <div style="font-size:10px;color:#333;margin-top:4px;">PNG / JPG</div>
+      </div>
+      <input type="file" id="sleepFileInput" accept="image/*" style="display:none;" onchange="handleSleepImage(event)">
+      <!-- 미리보기 -->
+      <div id="sleepPreview" style="display:none;margin-top:10px;">
+        <img id="sleepImg" style="max-width:100%;border-radius:3px;border:1px solid var(--border);" />
+      </div>
+      <div class="btn-row">
+        <button class="send-btn" id="sleepBtn" onclick="analyzeSleep()" style="display:none;">분석</button>
+      </div>
+      <div class="result" id="sleepResult">
+        <div class="r-row"><span class="r-label">총 수면</span><span class="r-val" id="sl_total">—</span></div>
+        <div class="r-row"><span class="r-label">깊은 수면</span><span class="r-val" id="sl_deep">—</span></div>
+        <div class="r-row"><span class="r-label">REM</span><span class="r-val" id="sl_rem">—</span></div>
+        <div class="r-row"><span class="r-label">코어</span><span class="r-val" id="sl_core">—</span></div>
+        <div class="feedback" id="sl_fb"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GitHub 푸시 -->
+  <div class="section">
+    <div class="sec-header">
+      <span class="sec-icon">PUSH</span>
+      <span class="sec-title">GitHub에 오늘 데이터 반영</span>
+    </div>
+    <div class="sec-body">
+      <div style="font-size:11px;color:var(--muted);line-height:1.8;margin-bottom:12px;">
+        오늘 입력한 식단·체중·운동을 <strong style="color:var(--text);">data.json</strong>에 반영하고<br>
+        GitHub에 커밋합니다. index.html이 자동으로 최신 데이터를 표시합니다.
+      </div>
+      <div class="btn-row">
+        <button class="push-btn" id="pushBtn" onclick="pushAll()">▲ data.json 푸시</button>
+      </div>
+      <div class="push-status" id="pushStatus"></div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ═══════════════════════════════
+// 날짜
+// ═══════════════════════════════
+function todayStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function fmtKR(s) {
+  const [y,m,d] = s.split('-');
+  const days = ['일','월','화','수','목','금','토'];
+  return `${m}월 ${d}일 (${days[new Date(s).getDay()]})`;
+}
+const TODAY = todayStr();
+document.getElementById('datePill').textContent = fmtKR(TODAY);
+document.getElementById('todayLabel').textContent = fmtKR(TODAY);
+
+// ═══════════════════════════════
+// 설정
+// ═══════════════════════════════
+function toggleCfg() { document.getElementById('cfgPanel').classList.toggle('open'); }
+
+function saveCfg() {
+  const apiKey   = document.getElementById('inApiKey').value.trim();
+  const ghToken  = document.getElementById('inGhToken').value.trim();
+  const ghRepo   = document.getElementById('inGhRepo').value.trim() || 'shchoi83/bodylog';
+  const ghBranch = document.getElementById('inGhBranch').value.trim() || 'main';
+  if (apiKey)  localStorage.setItem('bl_api_key', apiKey);
+  if (ghToken) localStorage.setItem('bl_gh_token', ghToken);
+  localStorage.setItem('bl_gh_repo', ghRepo);
+  localStorage.setItem('bl_gh_branch', ghBranch);
+  updateStatusDots();
+  document.getElementById('cfgPanel').classList.remove('open');
+}
+
+function updateStatusDots() {
+  const api = localStorage.getItem('bl_api_key');
+  const gh  = localStorage.getItem('bl_gh_token');
+  document.getElementById('apiStatus').innerHTML =
+    api ? '<span class="status-dot dot-ok"></span>API 키 설정됨'
+        : '<span class="status-dot dot-bad"></span>API 키 없음';
+  document.getElementById('ghStatus').innerHTML =
+    gh  ? '<span class="status-dot dot-ok"></span>GitHub 토큰 설정됨'
+        : '<span class="status-dot dot-bad"></span>GitHub 토큰 없음';
+}
+
+// 저장된 값 복원
+['inApiKey','inGhToken','inGhRepo','inGhBranch'].forEach(id => {
+  const map = {inApiKey:'bl_api_key', inGhToken:'bl_gh_token', inGhRepo:'bl_gh_repo', inGhBranch:'bl_gh_branch'};
+  const v = localStorage.getItem(map[id]);
+  if (v) document.getElementById(id).value = v;
+});
+// repo/branch 기본값
+if (!localStorage.getItem('bl_gh_repo'))    localStorage.setItem('bl_gh_repo','shchoi83/bodylog');
+if (!localStorage.getItem('bl_gh_branch'))  localStorage.setItem('bl_gh_branch','main');
+updateStatusDots();
+
+// ═══════════════════════════════
+// 로컬 스토리지 (당일 데이터)
+// ═══════════════════════════════
+function load() {
+  const raw = localStorage.getItem('bl_day_' + TODAY);
+  return raw ? JSON.parse(raw) : {
+    protein_intake:0, protein_absorb:0, kcal:0,
+    weight:null, creatine:false, wph:false,
+    weights:[], logs:[]
+  };
+}
+function save(d) { localStorage.setItem('bl_day_' + TODAY, JSON.stringify(d)); }
+
+function refreshUI() {
+  const d = load();
+  document.getElementById('s_intake').innerHTML  = `${d.protein_intake}<span style="font-size:14px;">g</span>`;
+  document.getElementById('s_absorb').innerHTML  = `${d.protein_absorb}<span style="font-size:14px;">g</span>`;
+  document.getElementById('s_kcal').innerHTML    = `${d.kcal}<span style="font-size:14px;">kcal</span>`;
+  document.getElementById('b_intake').style.width = Math.min(d.protein_intake/148*100,100)+'%';
+  document.getElementById('b_absorb').style.width = Math.min(d.protein_absorb/140*100,100)+'%';
+  document.getElementById('b_kcal').style.width   = Math.min(d.kcal/1800*100,100)+'%';
+  document.getElementById('s_weight').textContent = d.weight || '미입력';
+  document.getElementById('s_creatine').textContent = d.creatine ? '✅' : '❓';
+  document.getElementById('s_wph').textContent      = d.wph     ? '✅' : '❓';
+
+  const logList = document.getElementById('logList');
+  logList.innerHTML = '';
+  if (d.logs.length) {
+    document.getElementById('logSection').style.display = 'block';
+    d.logs.forEach(l => {
+      const el = document.createElement('div');
+      el.className = `log-item ${l.type}`;
+      el.innerHTML = `<div class="log-time">${l.time} · ${{diet:'식사',workout:'운동',weight:'체중'}[l.type]}</div>${l.summary}`;
+      logList.appendChild(el);
+    });
+  }
+}
+refreshUI();
+
+// ═══════════════════════════════
+// Claude API 호출
+// ═══════════════════════════════
+async function claude(system, user) {
+  const key = localStorage.getItem('bl_api_key');
+  if (!key) { alert('API 키를 설정해주세요.'); return null; }
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({
+      model:'claude-sonnet-4-6', max_tokens:800,
+      system, messages:[{role:'user',content:user}]
+    })
+  });
+  const data = await res.json();
+  const text = data.content?.[0]?.text || '';
+  return text.replace(/```json|```/g,'').trim();
+}
+
+function setLoading(btnId, on) {
+  const btn = document.getElementById(btnId);
+  btn.disabled = on;
+  btn.textContent = on ? '처리 중...' : (btnId==='wtBtn'?'기록':'분석');
+}
+
+// ═══════════════════════════════
+// 식단 분석
+// ═══════════════════════════════
+async function analyzeDiet() {
+  const input = document.getElementById('dietInput').value.trim();
+  if (!input) return;
+  setLoading('dietBtn', true);
+  const d = load();
+  const prev = d.logs.filter(l=>l.type==='diet').map(l=>l.raw).join('\n');
+
+  const sys = `당신은 운동하는 43세 남성의 식단 분석 전문가입니다.
+프로필: 체중 ~72kg, 단백질 목표 148g/일, 칼로리 운동일 1800/휴식일 1500kcal.
+단백질 흡수 원칙: 한 끼 최대 35~40g, 식사 간격 3~4시간, 초과분은 에너지 전환.
+크레아틴 5g/일 아침.
+금지: 버거/밀가루/튀김/알코올/붉은국물/중식.
+오늘 이전 식사: ${prev||'없음'}
+JSON만 반환 (마크다운 없이):
+{"protein":숫자,"absorb":숫자,"kcal":숫자,"creatine":불리언,"wph":불리언,"feedback":"짧고 직설적 한국어 피드백 2~3줄. 이모지 활용.","summary":"한줄 요약"}`;
+
+  try {
+    const raw = await claude(sys, input);
+    const p = JSON.parse(raw);
+    document.getElementById('r_intake').textContent = p.protein + 'g';
+    document.getElementById('r_absorb').textContent = p.absorb + 'g';
+    document.getElementById('r_kcal').textContent   = p.kcal + 'kcal';
+    document.getElementById('r_fb').textContent     = p.feedback;
+    document.getElementById('dietResult').classList.add('show');
+
+    d.protein_intake += p.protein;
+    d.protein_absorb += p.absorb;
+    d.kcal           += p.kcal;
+    if (p.creatine) d.creatine = true;
+    if (p.wph)      d.wph = true;
+    d.logs.push({ type:'diet', time: nowHHMM(), summary: p.summary, raw: input });
+    save(d); refreshUI();
+    document.getElementById('dietInput').value = '';
+  } catch(e) { alert('오류: ' + e.message); }
+  setLoading('dietBtn', false);
+}
+
+// ═══════════════════════════════
+// 체중 기록
+// ═══════════════════════════════
+async function logWeight() {
+  const input = document.getElementById('wtInput').value.trim();
+  if (!input) return;
+  setLoading('wtBtn', true);
+
+  const sys = `체중 입력을 파싱합니다. JSON만 반환:
+{"kg":숫자,"location":"장소","time":"시간","note":"공복여부 등","feedback":"1줄 코멘트"}`;
+
+  try {
+    const raw = await claude(sys, input);
+    const p = JSON.parse(raw);
+    document.getElementById('wt_fb').textContent = `${p.time} ${p.location} ${p.kg}kg (${p.note})\n${p.feedback}`;
+    document.getElementById('wtResult').classList.add('show');
+
+    const d = load();
+    d.weight = `${p.kg}kg (${p.time} ${p.location})`;
+    d.weights.push({ date: TODAY, kg: p.kg });
+    d.logs.push({ type:'weight', time: p.time||nowHHMM(), summary:`${p.kg}kg — ${p.location} ${p.note}`, raw: input });
+    save(d); refreshUI();
+    document.getElementById('wtInput').value = '';
+  } catch(e) { alert('오류: ' + e.message); }
+  setLoading('wtBtn', false);
+}
+
+// ═══════════════════════════════
+// 운동 분석
+// ═══════════════════════════════
+async function analyzeWorkout() {
+  const input = document.getElementById('wkInput').value.trim();
+  if (!input) return;
+  setLoading('wkBtn', true);
+
+  const sys = `운동 분석 전문가. 마운틴독 스타일. 덤벨 볼륨=한쪽 팔 기준(×2 안함). 무릎 관절염(스쿼트/레그프레스 불가).
+JSON만 반환:
+{"sets":숫자,"volume":숫자,"parts":"부위분포 요약","feedback":"짧고 직설적 한국어 피드백 2~4줄. 이모지 활용.","summary":"한줄요약"}`;
+
+  try {
+    const raw = await claude(sys, input);
+    const p = JSON.parse(raw);
+    document.getElementById('w_sets').textContent  = p.sets + '세트';
+    document.getElementById('w_vol').textContent   = p.volume.toLocaleString() + 'kg';
+    document.getElementById('w_parts').textContent = p.parts;
+    document.getElementById('w_fb').textContent    = p.feedback;
+    document.getElementById('wkResult').classList.add('show');
+
+    const d = load();
+    d.wph = true; // 운동 후 WPH 체크 (별도 입력으로 처리 가능)
+    d.logs.push({ type:'workout', time: nowHHMM(), summary: p.summary, raw: input });
+    d.workout = { sets: p.sets, volume: p.volume, parts: p.parts };
+    save(d); refreshUI();
+    document.getElementById('wkInput').value = '';
+  } catch(e) { alert('오류: ' + e.message); }
+  setLoading('wkBtn', false);
+}
+
+// ═══════════════════════════════
+// GitHub 푸시
+// ═══════════════════════════════
+async function pushAll() {
+  const token  = localStorage.getItem('bl_gh_token');
+  const repo   = localStorage.getItem('bl_gh_repo')   || 'shchoi83/bodylog';
+  const branch = localStorage.getItem('bl_gh_branch') || 'main';
+  if (!token) { alert('GitHub 토큰을 설정해주세요.'); return; }
+
+  const btn = document.getElementById('pushBtn');
+  const btn2 = document.getElementById('pushAllBtn');
+  const status = document.getElementById('pushStatus');
+  btn.disabled = btn2.disabled = true;
+  btn.textContent = '푸시 중...';
+  status.className = 'push-status';
+  status.textContent = '⏳ data.json 업데이트 중...';
+
+  try {
+    // 1. 오늘 로컬 데이터 가져오기
+    const day = load();
+
+    // 2. 현재 data.json SHA 가져오기
+    const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/data.json?ref=${branch}`, {
+      headers:{ 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (!getRes.ok) throw new Error(`data.json 조회 실패: ${getRes.status}`);
+    const getJson = await getRes.json();
+    const sha = getJson.sha;
+    const currentData = JSON.parse(atob(getJson.content.replace(/\n/g,'')));
+
+    // 3. 오늘 데이터로 data.json 업데이트
+    currentData.meta.today = TODAY;
+    currentData.meta.lastUpdated = new Date().toISOString().slice(0,19);
+
+    // today 블록 업데이트
+    currentData.today = {
+      protein_intake: day.protein_intake,
+      protein_absorb: day.protein_absorb,
+      kcal: day.kcal,
+      kcal_target: 1800,
+      weight: day.weights.length ? day.weights[day.weights.length-1].kg : currentData.today.weight,
+      creatine: day.creatine,
+      wph: day.wph
+    };
+
+    // 오늘 체중 추가 (중복 방지)
+    if (day.weights.length > 0) {
+      day.weights.forEach(w => {
+        const exists = currentData.weights.some(e => e.date === w.date && e.kg === w.kg);
+        if (!exists) currentData.weights.push(w);
+      });
+    }
+
+    // 오늘 protein_log 업데이트 (있으면 교체, 없으면 추가)
+    const todayShort = `${parseInt(TODAY.slice(5,7))}/${parseInt(TODAY.slice(8,10))}`;
+    const pIdx = currentData.protein_log.findIndex(p => p.date === todayShort);
+    const newPEntry = {
+      date: todayShort,
+      intake: day.protein_intake,
+      absorb: day.protein_absorb,
+      kcal: day.kcal
+    };
+    if (pIdx >= 0) currentData.protein_log[pIdx] = newPEntry;
+    else currentData.protein_log.push(newPEntry);
+    // 최근 15일만 유지
+    if (currentData.protein_log.length > 15) currentData.protein_log = currentData.protein_log.slice(-15);
+
+    // 오늘 streak 업데이트 (운동 볼륨)
+    const vol = day.workout?.volume || 0;
+    const sIdx = currentData.streak.findIndex(s => s.date === TODAY);
+    if (sIdx >= 0) currentData.streak[sIdx].vol = vol;
+    else currentData.streak.push({ date: TODAY, vol });
+
+    // 수면 데이터 반영 (사진 분석 시)
+    if (day.sleep) {
+      const todayShortDate = `${parseInt(TODAY.slice(5,7))}/${parseInt(TODAY.slice(8,10))}`;
+      const yesterday = new Date(TODAY); yesterday.setDate(yesterday.getDate()-1);
+      const yStr = `${yesterday.getMonth()+1}/${yesterday.getDate()}`;
+      const sleepEntry = {
+        date: `${yStr}→${todayShortDate}`,
+        total: day.sleep.total,
+        deep: day.sleep.deep_min,
+        ok: day.sleep.deep_min !== null ? (day.sleep.deep_min >= 60 ? true : null) : null
+      };
+      // 오늘 수면 항목 교체 또는 추가
+      const slIdx = currentData.sleep_log.findIndex(s => s.date === sleepEntry.date);
+      if (slIdx >= 0) currentData.sleep_log[slIdx] = sleepEntry;
+      else currentData.sleep_log.push(sleepEntry);
+      // 최근 7개만 유지
+      if (currentData.sleep_log.length > 7) currentData.sleep_log = currentData.sleep_log.slice(-7);
+    }
+
+    // 4. GitHub API로 커밋
+    status.textContent = '⏳ GitHub 커밋 중...';
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(currentData, null, 2))));
+    const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/data.json`, {
+      method: 'PUT',
+      headers:{
+        'Authorization': `token ${token}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/vnd.github.v3+json'
+      },
+      body: JSON.stringify({
+        message: `📊 ${TODAY} 데이터 업데이트 (단백질 ${day.protein_intake}g / ${day.kcal}kcal)`,
+        content,
+        sha,
+        branch
+      })
+    });
+    if (!putRes.ok) {
+      const err = await putRes.json();
+      throw new Error(err.message || `푸시 실패: ${putRes.status}`);
+    }
+
+    status.className = 'push-status ok';
+    status.textContent = `✅ 완료! ${new Date().toLocaleTimeString('ko-KR')} — GitHub Pages 반영까지 1~2분 소요`;
+  } catch(e) {
+    status.className = 'push-status err';
+    status.textContent = '❌ 실패: ' + e.message;
+  }
+
+  btn.disabled = btn2.disabled = false;
+  btn.textContent = '▲ data.json 푸시';
+}
+
+// ═══════════════════════════════
+// 유틸
+// ═══════════════════════════════
+function nowHHMM() {
+  const d = new Date();
+  return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+}
+
+
+// ═══════════════════════════════
+// 수면 사진 분석
+// ═══════════════════════════════
+let sleepImageBase64 = null;
+
+// 드래그앤드롭
+const dropZone = document.getElementById('sleepDropZone');
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.style.borderColor='var(--accent)'; });
+dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor='var(--border)'; });
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.style.borderColor = 'var(--border)';
+  const file = e.dataTransfer.files[0];
+  if (file) loadSleepFile(file);
+});
+
+function handleSleepImage(e) {
+  const file = e.target.files[0];
+  if (file) loadSleepFile(file);
+}
+
+function loadSleepFile(file) {
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const dataUrl = ev.target.result;
+    sleepImageBase64 = dataUrl.split(',')[1];
+    document.getElementById('sleepImg').src = dataUrl;
+    document.getElementById('sleepPreview').style.display = 'block';
+    document.getElementById('sleepBtn').style.display = 'inline-block';
+    document.getElementById('sleepResult').classList.remove('show');
+  };
+  reader.readAsDataURL(file);
+}
+
+async function analyzeSleep() {
+  if (!sleepImageBase64) return;
+  const key = localStorage.getItem('bl_api_key');
+  if (!key) { alert('API 키를 설정해주세요.'); return; }
+
+  const btn = document.getElementById('sleepBtn');
+  btn.disabled = true; btn.textContent = '분석 중...';
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 600,
+        messages: [{
+          role: 'user',
+          content: [
+            {
+              type: 'image',
+              source: { type: 'base64', media_type: 'image/jpeg', data: sleepImageBase64 }
+            },
+            {
+              type: 'text',
+              text: `이 애플 건강 앱 수면 화면에서 데이터를 읽어주세요.
+JSON만 반환 (마크다운 없이):
+{"total":"예)7h41m","deep_min":숫자또는null,"rem":"예)2h5m","core":"예)5h36m","awake":"예)15분","date_range":"예)6/11→12","feedback":"짧은 한국어 평가 1~2줄. 깊은수면 40분 이상이면 좋음. 이모지 활용."}`
+            }
+          ]
+        }]
+      })
+    });
+
+    const data = await res.json();
+    const text = data.content?.[0]?.text || '';
+    const p = JSON.parse(text.replace(/```json|```/g,'').trim());
+
+    document.getElementById('sl_total').textContent = p.total || '—';
+    document.getElementById('sl_deep').textContent  = p.deep_min !== null ? p.deep_min + '분' : '미측정';
+    document.getElementById('sl_rem').textContent   = p.rem  || '—';
+    document.getElementById('sl_core').textContent  = p.core || '—';
+    document.getElementById('sl_fb').textContent    = p.feedback || '';
+    document.getElementById('sleepResult').classList.add('show');
+
+    // 로컬 저장
+    const d = load();
+    d.sleep = { total: p.total, deep_min: p.deep_min, rem: p.rem, core: p.core, date_range: p.date_range };
+    d.logs.push({
+      type: 'weight',  // sleep 타입으로 표시 (weight 색상 재활용)
+      time: nowHHMM(),
+      summary: `수면 ${p.total} / 깊은수면 ${p.deep_min !== null ? p.deep_min+'분' : '미측정'}`,
+      raw: '수면 사진 분석'
+    });
+    save(d); refreshUI();
+
+  } catch(e) { alert('분석 오류: ' + e.message); }
+
+  btn.disabled = false; btn.textContent = '분석';
+}
+
+function resetDay() {
+  if (!confirm('오늘 데이터를 모두 삭제할까요?')) return;
+  localStorage.removeItem('bl_day_' + TODAY);
+  ['dietResult','wtResult','wkResult'].forEach(id => document.getElementById(id).classList.remove('show'));
+  document.getElementById('logSection').style.display = 'none';
+  document.getElementById('pushStatus').textContent = '';
+  refreshUI();
+}
+</script>
+</body>
+</html>
