@@ -415,7 +415,7 @@ refreshUI();
 async function claude(system, user) {
   const key = localStorage.getItem('bl_api_key');
   if (!key) { alert('API 키를 설정해주세요.'); return null; }
-  const res = await fetch('https://bodylog-proxy.shchoi83.workers.dev/', {
+  const res = await fetch('https://gateway.ai.cloudflare.com/v1/a97869b5cedf61df0dc23a2cd83ce1c0/bodylog/anthropic/v1/messages', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -716,7 +716,7 @@ async function analyzeSleep() {
   btn.disabled = true; btn.textContent = '분석 중...';
 
   try {
-    const res = await fetch('https://bodylog-proxy.shchoi83.workers.dev/', {
+    const res = await fetch('https://gateway.ai.cloudflare.com/v1/a97869b5cedf61df0dc23a2cd83ce1c0/bodylog/anthropic/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
