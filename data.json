@@ -4,12 +4,12 @@
     "season": 10,
     "dayCount": 42,
     "seasonStart": "2026-05-03",
-    "lastUpdated": "2026-06-13T13:30:00"
+    "lastUpdated": "2026-06-13T18:27:00"
   },
   "today": {
-    "protein_intake": 137,
-    "protein_absorb": 104,
-    "kcal": 1270,
+    "protein_intake": 183,
+    "protein_absorb": 144,
+    "kcal": 1715,
     "kcal_target": 1800,
     "weight": null,
     "creatine": true,
@@ -146,9 +146,9 @@
     },
     {
       "date": "6/13",
-      "intake": 137,
-      "absorb": 104,
-      "kcal": 1270
+      "intake": 183,
+      "absorb": 144,
+      "kcal": 1715
     }
   ],
   "weights": [
