@@ -277,9 +277,9 @@ footer {
     </div>
   </div>
   <div class="header-right">
-    <div class="season-badge">SEASON 9 ACTIVE</div>
+    <div class="season-badge" id="seasonBadge">SEASON 10 ACTIVE</div>
     <div class="header-stats">
-      추적 <span>41일차</span> · 6/12 기준
+      추적 <span id="dayCount">—</span>일차 · <span id="todayLabel">—</span> 기준
     </div>
   </div>
 </header>
@@ -2125,6 +2125,11 @@ document.getElementById('lastUpdated').textContent =
 // 대시보드 초기화 (data.json 로드 후 실행)
 // ══════════════════════════════════════════
 function initDashboard() {
+
+// 헤더 업데이트
+document.getElementById('seasonBadge').textContent = `SEASON ${DATA.meta.season} ACTIVE`;
+document.getElementById('dayCount').textContent = DATA.meta.dayCount;
+document.getElementById('todayLabel').textContent = DATA.meta.today.slice(5).replace('-', '/');
 
 // 단백질 카드
 (function() {
