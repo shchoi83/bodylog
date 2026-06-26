@@ -1,19 +1,19 @@
 {
   "meta": {
-    "today": "2026-06-20",
+    "today": "2026-06-26",
     "season": 10,
-    "dayCount": 49,
+    "dayCount": 55,
     "seasonStart": "2026-05-03",
-    "lastUpdated": "2026-06-20T13:24:00"
+    "lastUpdated": "2026-06-26T16:41:00"
   },
   "today": {
-    "protein_intake": 73,
-    "protein_absorb": 73,
-    "kcal": 925,
+    "protein_intake": 149,
+    "protein_absorb": 143,
+    "kcal": 1485,
     "kcal_target": 1800,
-    "weight": 72.4,
+    "weight": null,
     "creatine": true,
-    "wph": false
+    "wph": true
   },
   "sleep_log": [
     {
@@ -54,18 +54,12 @@
     },
     {
       "date": "6/19→20",
-      "total": "6h12m",
-      "deep": 30,
-      "ok": null
+      "total": "9h2m",
+      "deep": 39,
+      "ok": true
     }
   ],
   "protein_log": [
-    {
-      "date": "6/6",
-      "intake": 159,
-      "absorb": 140,
-      "kcal": 1275
-    },
     {
       "date": "6/7",
       "intake": 128,
@@ -146,9 +140,15 @@
     },
     {
       "date": "6/20",
-      "intake": 73,
-      "absorb": 73,
-      "kcal": 925
+      "intake": 130,
+      "absorb": 113,
+      "kcal": 1725
+    },
+    {
+      "date": "6/26",
+      "intake": 149,
+      "absorb": 143,
+      "kcal": 1485
     }
   ],
   "weights": [
@@ -465,14 +465,38 @@
     {
       "date": "2026-06-20",
       "vol": 0
+    },
+    {
+      "date": "2026-06-21",
+      "vol": 0
+    },
+    {
+      "date": "2026-06-22",
+      "vol": 0
+    },
+    {
+      "date": "2026-06-23",
+      "vol": 0
+    },
+    {
+      "date": "2026-06-24",
+      "vol": 0
+    },
+    {
+      "date": "2026-06-25",
+      "vol": 0
+    },
+    {
+      "date": "2026-06-26",
+      "vol": 5502
     }
   ],
   "body_parts": {
-    "등": 0,
-    "어깨": 1,
-    "가슴+삼두": 5,
+    "등": 7,
+    "어깨": 7,
+    "가슴+삼두": 0,
     "하체": 0,
-    "팔(이두)": 5
+    "팔(이두)": 4
   },
   "records": [
     "랫풀다운 60kg × 8회 ★ (6/12)",
