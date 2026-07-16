@@ -1,19 +1,19 @@
 {
   "meta": {
-    "today": "2026-07-15",
+    "today": "2026-07-16",
     "season": 10,
-    "dayCount": 1,
+    "dayCount": 2,
     "seasonStart": "2026-07-15",
-    "lastUpdated": "2026-07-15T11:30:00",
+    "lastUpdated": "2026-07-16T17:00:00",
     "season9Start": "2026-05-03",
     "season9End": "2026-06-26"
   },
   "today": {
-    "protein_intake": 66,
-    "protein_absorb": 65,
-    "kcal": 565,
+    "protein_intake": 107,
+    "protein_absorb": 107,
+    "kcal": 1055,
     "kcal_target": 1800,
-    "weight": 74.7,
+    "weight": 74.6,
     "creatine": true,
     "wph": true
   },
@@ -62,12 +62,6 @@
     }
   ],
   "protein_log": [
-    {
-      "date": "6/11",
-      "intake": 187,
-      "absorb": 163,
-      "kcal": 1990
-    },
     {
       "date": "6/12",
       "intake": 180,
@@ -148,9 +142,15 @@
     },
     {
       "date": "7/15",
-      "intake": 66,
-      "absorb": 65,
-      "kcal": 565
+      "intake": 135,
+      "absorb": 134,
+      "kcal": 1345
+    },
+    {
+      "date": "7/16",
+      "intake": 107,
+      "absorb": 107,
+      "kcal": 1055
     }
   ],
   "weights": [
@@ -281,6 +281,10 @@
     {
       "date": "2026-07-15",
       "kg": 74.7
+    },
+    {
+      "date": "2026-07-16",
+      "kg": 74.6
     }
   ],
   "streak": [
@@ -579,11 +583,15 @@
     {
       "date": "2026-07-15",
       "vol": 2986
+    },
+    {
+      "date": "2026-07-16",
+      "vol": 10475
     }
   ],
   "body_parts": {
-    "등": 0,
-    "어깨": 5,
+    "등": 14,
+    "어깨": 14,
     "가슴+삼두": 0,
     "하체": 0,
     "팔(이두)": 11
