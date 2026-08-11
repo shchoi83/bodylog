@@ -247,40 +247,16 @@ footer {
   font-family:'Space Mono',monospace; font-size:10px; color:var(--dim);
 }
 
-/* 페이지 네비 */
-.page-nav {
-  display:flex; align-items:center; gap:8px;
-  padding:8px 20px; background:#050505; border-bottom:1px solid #1a1a1a;
-}
-.page-nav a {
-  font-family:'Space Mono',monospace; font-size:10px; letter-spacing:2px;
-  padding:5px 14px; border-radius:2px; text-decoration:none;
-  border:1px solid #222; color:#555; transition:all .15s;
-}
-.page-nav a:hover { border-color:#d4f54e; color:#d4f54e; }
-.page-nav a.current { background:#d4f54e; color:#000; border-color:#d4f54e; font-weight:700; }
-.page-nav .nav-sep { color:#333; font-size:12px; }
+
 </style>
 </head>
 <body>
 
-<div class="page-nav">
-  <a href="./index.html" class="current">대시보드</a>
-  <span class="nav-sep">·</span>
-  <a href="./admin.html">관리 / 입력</a>
-</div>
-<header>
-  <div>
-    <div class="logo">
-      <div class="logo-main">BODY LOG</div>
-      <div class="logo-sub">시즌 10 — 더 프로스럽게</div>
-    </div>
-  </div>
-  <div class="header-right">
-    <div class="season-badge" id="seasonBadge">SEASON 10 ACTIVE</div>
-    <div class="header-stats">
-      추적 <span id="dayCount">—</span>일차 · <span id="todayLabel">—</span> 기준
-    </div>
+
+<header style="padding:20px 24px 16px;border-bottom:1px solid var(--border);">
+  <div style="display:flex;align-items:center;justify-content:space-between;">
+    <div class="logo-main" style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--muted);letter-spacing:3px;">BODY LOG</div>
+    <div id="todayBig" style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--accent);letter-spacing:2px;line-height:1;">—</div>
   </div>
 </header>
 
@@ -297,86 +273,8 @@ footer {
 <div id="dashboard" class="panel active">
 <div class="grid">
 
-  <!-- ① 단백질 카드 -->
-  <div class="card">
-    <div class="card-label">단백질 — 섭취 / 흡수</div>
-    <div style="margin-bottom:14px;">
-      <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:6px;">
-        <span>섭취 <span id="d_intake" style="color:var(--text);">—</span>g</span>
-        <span>흡수 <span id="d_absorb" style="color:var(--accent3);">—</span>g</span>
-        <span>목표 148g</span>
-      </div>
-      <!-- 단백질 복합 막대 -->
-      <div style="position:relative;height:20px;background:var(--surface2);border-radius:3px;overflow:visible;">
-        <!-- 목표 점선 -->
-        <div id="proteinTargetLine" style="position:absolute;top:-4px;bottom:-4px;width:2px;background:transparent;border-left:2px dashed rgba(255,255,255,.25);z-index:3;left:82.2%;"></div>
-        <!-- 섭취 막대 (흰색) -->
-        <div id="proteinIntakeBar" style="position:absolute;left:0;top:0;bottom:0;background:rgba(255,255,255,.75);border-radius:3px;transition:width .5s;width:0%;"></div>
-        <!-- 흡수 막대 (주황, 위에 겹침) -->
-        <div id="proteinAbsorbBar" style="position:absolute;left:0;top:0;bottom:0;background:var(--accent3);border-radius:3px;transition:width .5s;width:0%;"></div>
-      </div>
-      <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-top:4px;">
-        <span>0g</span><span style="opacity:.5;">← 목표 148g</span><span>180g</span>
-      </div>
-    </div>
-    <div style="display:flex;gap:12px;font-family:'Space Mono',monospace;font-size:10px;">
-      <span style="color:rgba(255,255,255,.75);">■ 섭취</span>
-      <span style="color:var(--accent3);">■ 흡수</span>
-      <span style="color:rgba(255,255,255,.2);">■ 목표</span>
-    </div>
-  </div>
-
-  <!-- ② 칼로리 카드 -->
-  <div class="card">
-    <div class="card-label">오늘 칼로리</div>
-    <div>
-      <span class="stat-val" id="d_kcal" style="color:var(--accent3);">—</span>
-      <span class="stat-unit">kcal</span>
-    </div>
-    <div class="stat-sub" id="d_kcal_sub" style="margin-top:8px;">운동일 목표 1,800</div>
-    <div style="margin-top:12px;">
-      <div style="height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;">
-        <div id="kcalBar" style="height:100%;background:var(--accent3);border-radius:2px;transition:width .5s;width:0%;"></div>
-      </div>
-    </div>
-    <div style="margin-top:10px;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">
-      크레아틴 <span id="d_creatine">—</span> · WPH <span id="d_wph">—</span>
-    </div>
-  </div>
-
-  <!-- ③ 체중 카드 -->
-  <div class="card">
-    <div class="card-label">체중 추이 — 최근 2개월</div>
-    <div style="position:relative;height:160px;">
-      <canvas id="weightChart"></canvas>
-    </div>
-    <div style="margin-top:8px;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">
-      시작 75kg → 현재 <span id="d_weight" style="color:var(--accent2);">—</span>
-    </div>
-  </div>
-
-  <!-- ④ 수면 — 최근 7일 -->
-  <div class="card span2">
-    <div class="card-label">수면 — 최근 7일 요약</div>
-    <div id="sleepTable" style="display:flex;flex-direction:column;gap:6px;"></div>
-  </div>
-
-  <!-- ⑤ 신기록 -->
-  <div class="card">
-    <div class="card-label">시즌 신기록</div>
-    <div id="recordList" style="display:flex;flex-direction:column;gap:6px;font-family:'Space Mono',monospace;font-size:10px;"></div>
-  </div>
-
-  <!-- ⑥ 단백질+칼로리 달성 추이 -->
+  <!-- ① 운동 스트릭 (최상단) -->
   <div class="card span3">
-    <div class="card-label">단백질 · 칼로리 달성 추이 — 최근 2주</div>
-    <div style="position:relative;height:220px;">
-      <canvas id="proteinChart"></canvas>
-    </div>
-  </div>
-
-  <!-- ⑦ 운동 스트릭 -->
-  <div class="card span2">
     <div class="card-label" id="streakLabel">운동 스트릭 — 최근 50일
       <button id="streakToggleBtn" onclick="toggleStreakView()" style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:3px;padding:4px 8px;cursor:pointer;margin-left:12px;">전체 보기</button>
     </div>
@@ -384,14 +282,39 @@ footer {
     <div id="streakFull" class="streak-grid" style="display:none;"></div>
   </div>
 
-  <!-- ⑧ 부위별 레이더 -->
-  <div class="card">
-    <div class="card-label">최근 7일 부위별 세트</div>
+  <!-- ② 부위별 레이더 (14일) -->
+  <div class="card span2">
+    <div class="card-label">최근 14일 부위별 세트</div>
     <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
       <div style="position:relative;width:180px;height:180px;flex-shrink:0;">
         <canvas id="bodyPartChart"></canvas>
       </div>
       <div id="bodyBarList" style="flex:1;display:flex;flex-direction:column;gap:8px;font-family:'Space Mono',monospace;font-size:10px;"></div>
+    </div>
+  </div>
+
+  <!-- ③ 신기록 -->
+  <div class="card">
+    <div class="card-label">시즌 신기록</div>
+    <div id="recordList" style="display:flex;flex-direction:column;gap:6px;font-family:'Space Mono',monospace;font-size:10px;"></div>
+  </div>
+
+  <!-- ④ 단백질+칼로리 달성 추이 -->
+  <div class="card span3">
+    <div class="card-label">단백질 · 칼로리 달성 추이 — 최근 2주</div>
+    <div style="position:relative;height:220px;">
+      <canvas id="proteinChart"></canvas>
+    </div>
+  </div>
+
+  <!-- ⑤ 체중 추이 -->
+  <div class="card span3">
+    <div class="card-label">체중 추이 — 최근 2개월</div>
+    <div style="position:relative;height:200px;">
+      <canvas id="weightChart"></canvas>
+    </div>
+    <div style="margin-top:8px;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">
+      현재 <span id="d_weight" style="color:var(--accent2);">—</span>
     </div>
   </div>
 
@@ -2126,53 +2049,32 @@ document.getElementById('lastUpdated').textContent =
 // ══════════════════════════════════════════
 function initDashboard() {
 
-// 헤더 업데이트
-document.getElementById('seasonBadge').textContent = `SEASON ${DATA.meta.season} ACTIVE`;
-document.getElementById('dayCount').textContent = DATA.meta.dayCount;
-document.getElementById('todayLabel').textContent = DATA.meta.today.slice(5).replace('-', '/');
-
-// 단백질 카드
+// 오늘 날짜 크게 표시
 (function() {
-  const MAX = 180, TARGET = 148;
-  const { protein_intake: intake, protein_absorb: absorb } = DATA.today;
-  document.getElementById('d_intake').textContent = intake;
-  document.getElementById('d_absorb').textContent = absorb;
-  document.getElementById('proteinIntakeBar').style.width = Math.min(intake/MAX*100,100)+'%';
-  document.getElementById('proteinAbsorbBar').style.width = Math.min(absorb/MAX*100,100)+'%';
-  document.getElementById('proteinTargetLine').style.left  = (TARGET/MAX*100)+'%';
+  const t = DATA.meta.today; // YYYY-MM-DD
+  const d = new Date(t);
+  const days = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  const el = document.getElementById('todayBig');
+  if (el) el.textContent = `${d.getDate()} ${months[d.getMonth()]}`;
+  // 요일 작게
+  const header = document.querySelector('header');
+  if (header) {
+    let dayEl = document.getElementById('todayDay');
+    if (!dayEl) {
+      dayEl = document.createElement('div');
+      dayEl.id = 'todayDay';
+      dayEl.style.cssText = "font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:3px;text-align:right;";
+      header.querySelector('div').appendChild(dayEl);
+    }
+    dayEl.textContent = days[d.getDay()];
+  }
 })();
 
-// 칼로리 카드
+// 체중 표시 (헤더)
 (function() {
-  const { kcal, kcal_target, creatine, wph, weight } = DATA.today;
-  document.getElementById('d_kcal').textContent     = kcal.toLocaleString();
-  document.getElementById('kcalBar').style.width    = Math.min(kcal/kcal_target*100,100)+'%';
-  const diff = kcal - kcal_target;
-  document.getElementById('d_kcal_sub').textContent = `목표 ${kcal_target.toLocaleString()}kcal / ${diff>=0?'+'+diff:diff}kcal`;
-  document.getElementById('d_creatine').textContent = creatine ? '✅' : '❌';
-  document.getElementById('d_wph').textContent      = wph      ? '✅' : '—';
-  document.getElementById('d_weight').textContent   = (weight || '—') + 'kg';
-})();
-
-// 수면 테이블
-(function() {
-  const wrap = document.getElementById('sleepTable');
-  DATA.sleep_log.forEach((s, i) => {
-    const isLast = i === DATA.sleep_log.length - 1;
-    const deepTxt   = s.deep !== null ? s.deep+'분' : '미측정';
-    const deepColor = s.deep === null ? '#555' : s.deep < 40 ? '#f54e4e' : s.deep < 60 ? '#f5a94e' : '#4ef5a7';
-    const totalColor= s.ok === true   ? '#4ef5a7' : s.ok === false ? '#f54e4e' : '#f5a94e';
-    const row = document.createElement('div');
-    row.style.cssText = `display:grid;grid-template-columns:90px 1fr 60px 70px 30px;align-items:center;gap:8px;padding:6px 10px;background:${isLast?'rgba(212,245,78,.05)':'var(--surface2)'};border-radius:3px;${isLast?'border:1px solid rgba(212,245,78,.15);':''}`;
-    row.innerHTML = `
-      <span style="font-family:'Space Mono',monospace;font-size:10px;color:${isLast?'var(--accent)':'var(--muted)'}">${s.date}</span>
-      <div style="height:4px;background:var(--border);border-radius:2px;"><div style="width:${Math.min(parseFloat(s.total)/9*100,100)}%;height:100%;background:${totalColor};border-radius:2px;"></div></div>
-      <span style="font-family:'Space Mono',monospace;font-size:10px;text-align:right;color:${totalColor}">${s.total}</span>
-      <span style="font-family:'Space Mono',monospace;font-size:10px;text-align:right;color:${deepColor}">깊은 ${deepTxt}</span>
-      <span style="font-size:12px;text-align:center;">${s.ok===true?'✅':s.ok===false?'❌':'🟡'}</span>
-    `;
-    wrap.appendChild(row);
-  });
+  const el = document.getElementById('d_weight');
+  if (el) el.textContent = (DATA.today.weight || '—') + 'kg';
 })();
 
 // 신기록
@@ -2290,7 +2192,7 @@ document.getElementById('todayLabel').textContent = DATA.meta.today.slice(5).rep
   };
 })();
 
-// 부위별 레이더 + 막대
+// 부위별 레이더 + 막대 (14일 기준)
 (function() {
   const parts  = DATA.body_parts;
   const labels = Object.keys(parts);
@@ -2362,7 +2264,7 @@ document.getElementById('todayLabel').textContent = DATA.meta.today.slice(5).rep
         x:{type:'linear',grid:{color:'#1c1c1c'},
           ticks:{color:'#444',font:{family:'Space Mono',size:9},
             callback:v=>{const d=new Date(v);return `${d.getMonth()+1}/${d.getDate()}`;},
-            maxTicksLimit:8}},
+            maxTicksLimit:10}},
         y:{min:minKg,max:maxKg,grid:{color:'#1c1c1c'},
           ticks:{color:'#555',font:{family:'Space Mono',size:10},callback:v=>v+'kg'}}
       }
